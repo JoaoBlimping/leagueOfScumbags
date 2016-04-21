@@ -3,8 +3,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Castlevania;
-(function (Castlevania) {
+var Scumbag;
+(function (Scumbag) {
     var Boot = (function (_super) {
         __extends(Boot, _super);
         function Boot() {
@@ -16,52 +16,57 @@ var Castlevania;
         Boot.prototype.create = function () {
             this.input.maxPointers = 1;
             this.stage.disableVisibilityChange = true;
-            if (this.game.device.desktop) {
-                this.scale.pageAlignHorizontally = true;
-            }
-            else {
-            }
+            this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            this.scale.pageAlignHorizontally = true;
             this.game.state.start('Preloader', true, false);
         };
         return Boot;
     }(Phaser.State));
-    Castlevania.Boot = Boot;
-})(Castlevania || (Castlevania = {}));
-var Castlevania;
-(function (Castlevania) {
+    Scumbag.Boot = Boot;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Fight = (function (_super) {
+        __extends(Fight, _super);
+        function Fight() {
+            _super.apply(this, arguments);
+        }
+        Fight.prototype.create = function () {
+            this.background = this.add.sprite(0, 0, 'titlepage');
+            this.music = this.add.audio('music', 1, false);
+            this.music.play();
+            this.tilemap = this.add.tilemap('map1');
+            this.tilemap.addTilesetImage('combatTiles', 'combatTiles');
+            var background = this.tilemap.createLayer("background");
+            background.scrollFactorX = 0.5;
+            background.scrollFactorY = 0.5;
+            var layer = this.tilemap.createLayer("collisions");
+            this.tilemap.setLayer(layer);
+            this.tilemap.setCollisionBetween(0, 6569);
+            layer.resizeWorld();
+        };
+        return Fight;
+    }(Phaser.State));
+    Scumbag.Fight = Fight;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
     var Game = (function (_super) {
         __extends(Game, _super);
         function Game() {
-            _super.call(this, 800, 600, Phaser.AUTO, 'content', null);
-            this.state.add('Boot', Castlevania.Boot, false);
-            this.state.add('Preloader', Castlevania.Preloader, false);
-            this.state.add('MainMenu', Castlevania.MainMenu, false);
-            this.state.add('Level1', Castlevania.Level1, false);
+            _super.call(this, 1152, 528, Phaser.AUTO, 'content', null);
+            this.state.add('Boot', Scumbag.Boot, false);
+            this.state.add('Preloader', Scumbag.Preloader, false);
+            this.state.add('MainMenu', Scumbag.MainMenu, false);
+            this.state.add('Fight', Scumbag.Fight, false);
             this.state.start('Boot');
         }
         return Game;
     }(Phaser.Game));
-    Castlevania.Game = Game;
-})(Castlevania || (Castlevania = {}));
-var Castlevania;
-(function (Castlevania) {
-    var Level1 = (function (_super) {
-        __extends(Level1, _super);
-        function Level1() {
-            _super.apply(this, arguments);
-        }
-        Level1.prototype.create = function () {
-            this.background = this.add.sprite(0, 0, 'level1');
-            this.music = this.add.audio('music', 1, false);
-            this.music.play();
-            this.player = new Castlevania.Player(this.game, 130, 284);
-        };
-        return Level1;
-    }(Phaser.State));
-    Castlevania.Level1 = Level1;
-})(Castlevania || (Castlevania = {}));
-var Castlevania;
-(function (Castlevania) {
+    Scumbag.Game = Game;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
     var MainMenu = (function (_super) {
         __extends(MainMenu, _super);
         function MainMenu() {
@@ -82,14 +87,14 @@ var Castlevania;
             tween.onComplete.add(this.startGame, this);
         };
         MainMenu.prototype.startGame = function () {
-            this.game.state.start('Level1', true, false);
+            this.game.state.start('Fight', true, false);
         };
         return MainMenu;
     }(Phaser.State));
-    Castlevania.MainMenu = MainMenu;
-})(Castlevania || (Castlevania = {}));
-var Castlevania;
-(function (Castlevania) {
+    Scumbag.MainMenu = MainMenu;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
     var Player = (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
@@ -120,10 +125,10 @@ var Castlevania;
         };
         return Player;
     }(Phaser.Sprite));
-    Castlevania.Player = Player;
-})(Castlevania || (Castlevania = {}));
-var Castlevania;
-(function (Castlevania) {
+    Scumbag.Player = Player;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
     var Preloader = (function (_super) {
         __extends(Preloader, _super);
         function Preloader() {
@@ -131,12 +136,9 @@ var Castlevania;
         }
         Preloader.prototype.preload = function () {
             this.preloadBar = this.add.sprite(200, 250, 'preloadBar');
+            this.background = this.add.sprite(0, 0, 'preloadBackground');
             this.load.setPreloadSprite(this.preloadBar);
-            this.load.image('titlepage', 'assets/titlepage.jpg');
-            this.load.image('logo', 'assets/logo.png');
-            this.load.audio('music', 'assets/title.mp3', true);
-            this.load.spritesheet('simon', 'assets/simon.png', 58, 96, 5);
-            this.load.image('level1', 'assets/level1.png');
+            this.game.load.pack("main", "pack.json");
         };
         Preloader.prototype.create = function () {
             var tween = this.add.tween(this.preloadBar).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
@@ -147,6 +149,6 @@ var Castlevania;
         };
         return Preloader;
     }(Phaser.State));
-    Castlevania.Preloader = Preloader;
-})(Castlevania || (Castlevania = {}));
+    Scumbag.Preloader = Preloader;
+})(Scumbag || (Scumbag = {}));
 //# sourceMappingURL=game.js.map

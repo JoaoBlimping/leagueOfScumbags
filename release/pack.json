@@ -1,0 +1,22 @@
+{
+  "main":
+  [
+    {
+      "type": "image",
+      "key": "titlepage",
+      "url": "images/menu.jpg"
+    },
+    {
+      "type": "image",
+      "key": "combatTiles",
+      "url": "images/combatTiles.png"
+    },
+    {
+        "type": "tilemap",
+        "key": "map1",
+        "url": "maps/map1.json",
+        "data": null,
+        "format": "TILED_JSON"
+    }
+  ]
+}
