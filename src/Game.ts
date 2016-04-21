@@ -1,6 +1,6 @@
 ///<reference path="phaser/phaser.d.ts"/>
 
-module Castlevania
+module Scumbag
 {
   export class Game extends Phaser.Game
   {

@@ -1,13 +1,13 @@
 ///<reference path="phaser/phaser.d.ts"/>
 
 
-module Castlevania {
+module Scumbag {
 
     export class Level1 extends Phaser.State {
 
         background: Phaser.Sprite;
         music: Phaser.Sound;
-        player: Castlevania.Player;
+        player: Scumbag.Player;
 
         create() {
 

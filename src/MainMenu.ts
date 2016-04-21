@@ -1,7 +1,7 @@
 ///<reference path="phaser/phaser.d.ts"/>
 
 
-module Castlevania {
+module Scumbag {
 
     export class MainMenu extends Phaser.State {
 
