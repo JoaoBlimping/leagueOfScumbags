@@ -21,10 +21,13 @@ module Scumbag {
 
             this.input.onDown.addOnce(this.fadeOut, this);
 
+            //turn on the keyboard
+            this.game.input.keyboard.createCursorKeys();
+            this.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
         }
 
-        fadeOut() {
-
+        fadeOut()
+        {
             this.add.tween(this.background).to({ alpha: 0 }, 2000, Phaser.Easing.Linear.None, true);
             var tween = this.add.tween(this.logo).to({ y: 800 }, 2000, Phaser.Easing.Linear.None, true);
 
@@ -32,10 +35,9 @@ module Scumbag {
 
         }
 
-        startGame() {
-
+        startGame()
+        {
             this.game.state.start('Fight', true, false);
-
         }
 
     }

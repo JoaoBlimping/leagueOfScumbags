@@ -12,6 +12,13 @@
       "url": "images/combatTiles.png"
     },
     {
+      "type": "spritesheet",
+      "key": "dude",
+      "url": "images/dude.png",
+      "frameWidth": 32,
+      "frameHeight": 64
+      },
+    {
         "type": "tilemap",
         "key": "map1",
         "url": "maps/map1.json",

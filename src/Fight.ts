@@ -8,8 +8,9 @@ module Scumbag
     background: Phaser.Sprite;
     music: Phaser.Sound;
     tilemap: Phaser.Tilemap;
-    niceGroup: Phaser.Group;
-    player: Phaser.Sprite;
+    collisionLayer: Phaser.TilemapLayer;
+    fighters: Phaser.Group;
+    player: Fighter;
 
     create()
     {
@@ -20,30 +21,35 @@ module Scumbag
       this.music = this.add.audio('music', 1, false);
       this.music.play();
 
+      //turn on phyysics
+      this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
       //create the tilemap
       this.tilemap = this.add.tilemap('map1');
       this.tilemap.addTilesetImage('combatTiles','combatTiles');
-      let background = this.tilemap.createLayer("background");
-      background.scrollFactorX = 0.5;
-      background.scrollFactorY = 0.5;
-      let layer = this.tilemap.createLayer("collisions");
-      this.tilemap.setLayer(layer);
+      this.tilemap.createLayer("background");
+      this.collisionLayer = this.tilemap.createLayer("collisions");
+      this.tilemap.setLayer(this.collisionLayer);
       this.tilemap.setCollisionBetween(0, 6569);
-      layer.resizeWorld();
+      this.collisionLayer.resizeWorld();
 
       //add the player and stuff
-      this.niceGroup = this.game.add.group();
-      this.player = this.game.add.sprite(this.game.camera.width / 2,
+      this.fighters = this.game.add.group();
+      this.player = new Fighter(this.game,this.game.camera.width / 2,
                                          this.game.world.height / 2,'dude');
       this.game.camera.follow(this.player);
 
-      //  We need to enable physics on the player
-      this.game.physics.arcade.enable(this.player);
+    }
 
-      //  make this fiend bounce
-      this.player.body.bounce.y = 0.3;
-      this.player.body.gravity.y = 200;
-      this.player.body.collideWorldBounds = true;
+    update()
+    {
+      //check collisions between the player and the level
+      this.game.physics.arcade.collide(this.player,this.collisionLayer);
+    }
+
+    render()
+    {
+      this.game.debug.bodyInfo(this.player,10,10);
     }
   }
 }
