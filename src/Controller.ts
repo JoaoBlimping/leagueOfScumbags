@@ -4,7 +4,7 @@ module Scumbag
    * just taking controls from the player */
   export abstract class Controller
   {
-    game:Phaser.Game;
+    game: Phaser.Game;
 
     constructor(game:Phaser.Game)
     {

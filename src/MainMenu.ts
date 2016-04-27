@@ -5,8 +5,8 @@ module Scumbag {
 
     export class MainMenu extends Phaser.State {
 
-        background: Phaser.Sprite;
-        logo: Phaser.Sprite;
+        background:   Phaser.Sprite;
+        logo:         Phaser.Sprite;
 
         create() {
 

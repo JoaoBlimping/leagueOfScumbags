@@ -12,6 +12,11 @@
       "url": "images/combatTiles.png"
     },
     {
+      "type": "image",
+      "key": "bullet1",
+      "url": "images/bullet1.png"
+    },
+    {
       "type": "spritesheet",
       "key": "dude",
       "url": "images/dude.png",

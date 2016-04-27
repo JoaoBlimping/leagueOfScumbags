@@ -6,16 +6,17 @@ module Scumbag
   /** a fighter that will jump about and all that in the battle system */
   export class Fighter extends Phaser.Sprite implements Controllable
   {
-    moveSpeed:number;
-    jumpHeight:number;
-    controller:Controller;
-    angle:number;
+    moveSpeed:  number;
+    jumpHeight: number;
+    angle:      number;
+    controller: Controller;
+    weapon:     Weapon;
 
 
     /** create it just like you would a sprite, at least at the moment.
      * TODO: It will probably need some kind of id so it can build itself from
      * some data file */
-    constructor(game:Phaser.Game,x:number,y:number,key:string)
+    constructor(game:Phaser.Game,x:number,y:number,key:string,weapon:Weapon)
     {
       //run superconstructor
       super(game,x,y,key);
@@ -37,6 +38,9 @@ module Scumbag
       this.moveSpeed = 200;
       this.jumpHeight = 400;
       this.controller = new PlayerController(this.game);
+
+      //add weapon
+      this.weapon = weapon;
 
       //add it to the scene
       game.add.existing(this);
@@ -107,7 +111,7 @@ module Scumbag
 
     attack()
     {
-      console.log("bang!");
+      this.weapon.fire(this);
     }
   }
 }

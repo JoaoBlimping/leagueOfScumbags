@@ -1,2 +1,2 @@
 tsc
-uglifyjs release/game.js -o release/game.js
+#uglifyjs release/game.js -o release/game.js
