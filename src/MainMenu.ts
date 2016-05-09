@@ -37,7 +37,7 @@ module Scumbag {
 
         startGame()
         {
-            this.game.state.start('Fight', true, false);
+            this.game.state.start('Overworld', true, false);
         }
 
     }

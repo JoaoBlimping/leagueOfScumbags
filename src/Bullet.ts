@@ -3,11 +3,15 @@ module Scumbag
   /** a bullet that gets shot about the place and stuff */
   export class Bullet extends Phaser.Sprite
   {
-    tracking:   boolean;
-    scaleSpeed: number;
+    tracking    = false;
+    collide     = true;
+    scaleSpeed  = 0;
+    power      = 1;
+
+    deathGun:   Weapon;
 
     /** constructs the bullet */
-    constructor(game:Phaser.Game,key:string)
+    constructor(game:Phaser.Game,key:string,deathGun?:Weapon)
     {
       super(game,0,0,key);
 
@@ -18,8 +22,8 @@ module Scumbag
       this.outOfBoundsKill = true;
       this.exists = false;
 
-      this.tracking = false;
-      this.scaleSpeed = 0;
+      this.deathGun = deathGun;
+
     }
 
 
@@ -29,7 +33,7 @@ module Scumbag
      * speed is the speed it moves at
      * gx and gy are the gravity that affect it
      */
-    fire(x:number,y:number,angle:number,speed:number,gx:number,gy:number)
+    fire(x:number,y:number,angle:number,speed:number,gx:number,gy:number,lifespan:number)
     {
       gx = gx || 0;
       gy = gy || 0;
@@ -40,6 +44,8 @@ module Scumbag
       this.game.physics.arcade.velocityFromRotation(angle, speed, this.body.velocity);
       this.angle = angle;
       this.body.gravity.set(gx, gy);
+
+      this.lifespan = lifespan;
     }
 
 
@@ -56,19 +62,12 @@ module Scumbag
         this.scale.y += this.scaleSpeed;
       }
     }
-  }
 
-  /** this gets called when a bullet hits the level */
-  export function hitLevel(bullet:Bullet)
-  {
-    bullet.kill();
-  }
 
-/** this gets called when a bullet hits a fighter */
-  export function hitFighter(bullet:Bullet,fighter:Fighter)
-  {
-    bullet.kill();
-    /* TODO: it should just hurt them */
-    fighter.kill();
+    kill()
+    {
+      if (this.deathGun != undefined) this.deathGun.fire(this);
+      return super.kill();
+    }
   }
 }

@@ -6,11 +6,24 @@ module Scumbag
   /** a fighter that will jump about and all that in the battle system */
   export class Fighter extends Phaser.Sprite implements Controllable
   {
-    moveSpeed:  number;
-    jumpHeight: number;
-    angle:      number;
-    controller: Controller;
-    weapon:     Weapon;
+    moveSpeed:      number;
+    jumpHeight:     number;
+    angle:          number;
+    controller:     Controller;
+    weapon:         Weapon;
+
+    maxHealth:      number;
+    maxMana:        number;
+    mana:           number;
+    healthRegenRate:number;
+    healthRegen:    number;
+    manaRegenRate:  number;
+    manaRegen:      number;
+    canFireTime:    number;
+
+    prevTime:       number;
+
+
 
 
     /** create it just like you would a sprite, at least at the moment.
@@ -42,6 +55,18 @@ module Scumbag
       //add weapon
       this.weapon = weapon;
 
+      //set health and max health
+      this.maxHealth = 10;
+      this.health = 10;
+      this.healthRegen = 0;
+      this.healthRegenRate = 1000;
+      this.maxMana = 10;
+      this.mana = 10;
+      this.manaRegen = 0;
+      this.manaRegenRate = 1000;
+
+      this.prevTime = this.game.time.time;
+
       //add it to the scene
       game.add.existing(this);
     }
@@ -49,6 +74,25 @@ module Scumbag
 
     update()
     {
+      //mana and health regen
+      let newTime = this.game.time.time;
+      let elapsedTime = newTime - this.prevTime;
+      this.healthRegen += elapsedTime;
+      this.manaRegen += elapsedTime;
+      while (this.healthRegen > this.healthRegenRate)
+      {
+        if (this.health < this.maxHealth) this.health++;
+        this.healthRegen -= this.healthRegenRate;
+      }
+      while (this.manaRegen > this.manaRegenRate)
+      {
+        if (this.mana < this.maxMana) this.mana++;
+        this.manaRegen -= this.manaRegenRate;
+      }
+      this.prevTime = newTime;
+
+
+      //control the dude
       this.body.velocity.x = 0;
       this.controller.control(this);
 
@@ -103,7 +147,7 @@ module Scumbag
 
       if (this.body.blocked.right)
       {
-        this.body.velocity.x += this.jumpHeight / 2;
+        this.body.velocity.x -= this.jumpHeight / 2;
         this.body.velocity.y = 0 - this.jumpHeight;
       }
     }
@@ -111,7 +155,12 @@ module Scumbag
 
     attack()
     {
+      let currentTime = this.game.time.time;
+
+      if (currentTime < this.canFireTime || this.mana < this.weapon.manaCost) return;
       this.weapon.fire(this);
+      this.canFireTime = currentTime + this.weapon.wait;
+      this.mana -= this.weapon.manaCost;
     }
   }
 }

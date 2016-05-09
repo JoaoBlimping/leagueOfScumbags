@@ -10,8 +10,10 @@ module Scumbag
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
     fighters:         Phaser.Group;
-    player:           Fighter;
     bullets:          Phaser.Group;
+    player:           Fighter;
+    healthBar:        Phaser.Image;
+    manaBar:          Phaser.Image;
 
 
     create()
@@ -35,6 +37,7 @@ module Scumbag
       this.tilemap.setCollisionBetween(0, 6569);
       this.collisionLayer.resizeWorld();
 
+
       //make group for all the bullets
       this.bullets = this.game.add.group();
 
@@ -42,9 +45,15 @@ module Scumbag
       this.fighters = this.game.add.group();
       this.player = new Fighter(this.game,this.game.camera.width / 2,
                                 this.game.world.height / 2,'dude',
-                                new Gun(this.game,this.bullets));
+                                new Nuke(this.game,this.bullets));
       this.fighters.add(this.player);
       this.game.camera.follow(this.player);
+
+      //create the health bar for the plauer and also the mana bar
+      this.healthBar = this.game.add.image(0,0,'healthBar');
+      this.manaBar = this.game.add.image(0,16,'manaBar');
+      this.healthBar.fixedToCamera = true;
+      this.manaBar.fixedToCamera = true;
     }
 
 
@@ -58,16 +67,48 @@ module Scumbag
       {
         if (child instanceof Phaser.Group)
         {
-          this.game.physics.arcade.collide(child,this.collisionLayer,hitLevel);
+          this.game.physics.arcade.collide(child,this.collisionLayer,hitLevel,null,this);
           this.game.physics.arcade.collide(child,this.fighters,hitFighter);
         }
       }
+
+      //make the health bar right
+      this.healthBar.scale.x = this.player.health / this.player.maxHealth;
+      this.manaBar.scale.x = this.player.mana / this.player.maxMana;
     }
 
 
     render()
     {
-      this.game.debug.bodyInfo(this.player,10,10);
+      //this.game.debug.bodyInfo(this.player,0,32);
     }
+  }
+
+  /** this gets called when a bullet hits the level */
+  function hitLevel(bullet:Bullet,tile:Phaser.Tile)
+  {
+    if (bullet.collide)
+    {
+      bullet.kill();
+
+      if (tile.properties.destructible == 1)
+      {
+        this.tilemap.removeTile(tile.x,tile.y,this.collisionLayer);
+        //tile.layer.dirty = true;
+      }
+      return false;
+    }
+    return true;
+  }
+
+
+  /** this gets called when a bullet hits a fighter */
+  function hitFighter(bullet:Bullet,fighter:Fighter)
+  {
+    if (!bullet.collide) return false;
+
+    fighter.damage(bullet.power);
+    bullet.kill();
+    return true;
   }
 }

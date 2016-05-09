@@ -5,6 +5,97 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Scumbag;
 (function (Scumbag) {
+    (function (Direction) {
+        Direction[Direction["up"] = 0] = "up";
+        Direction[Direction["down"] = 1] = "down";
+        Direction[Direction["left"] = 2] = "left";
+        Direction[Direction["right"] = 3] = "right";
+        Direction[Direction["static"] = 4] = "static";
+    })(Scumbag.Direction || (Scumbag.Direction = {}));
+    var Direction = Scumbag.Direction;
+    function directionToPoint(direction) {
+        if (direction == 0)
+            return { x: 0, y: -1 };
+        else if (direction == 1)
+            return { x: 0, y: 1 };
+        else if (direction == 2)
+            return { x: -1, y: 0 };
+        else if (direction == 3)
+            return { x: 1, y: 0 };
+        else
+            return { x: 0, y: 0 };
+    }
+    Scumbag.directionToPoint = directionToPoint;
+    function logDirection(direction) {
+        if (direction == 0)
+            console.log("up");
+        else if (direction == 1)
+            console.log("down");
+        else if (direction == 2)
+            console.log("left");
+        else if (direction == 3)
+            console.log("right");
+        else
+            console.log("static");
+    }
+    Scumbag.logDirection = logDirection;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Actor = (function (_super) {
+        __extends(Actor, _super);
+        function Actor(game, x, y, key) {
+            _super.call(this, game, x, y, key);
+            this.targetX = -1;
+            this.targetY = -1;
+            this.game.physics.arcade.enable(this);
+            this.body.collideWorldBounds = true;
+            this.body.height = this.body.halfHeight;
+            this.anchor.setTo(0.5, 1);
+            this.animations.add('down', [0, 1, 2, 3], 10, true);
+            this.animations.add('right', [4, 5, 6, 7], 10, true);
+            this.animations.add('left', [8, 9, 10, 11], 10, true);
+            this.animations.add('up', [12, 13, 14, 15], 10, true);
+            this.moveSpeed = 80;
+            this.directions = [1, 3];
+            game.add.existing(this);
+        }
+        Actor.prototype.update = function () {
+            var inTileX = this.body.x / 32;
+            var inTileY = this.body.y / 32;
+            var directionPoint = Scumbag.directionToPoint(this.directions[0]);
+            if (this.targetX == -1 || this.targetY == -1) {
+                this.targetX = Math.round(inTileX) + directionPoint.x;
+                this.targetY = Math.round(inTileY) + directionPoint.y;
+            }
+            this.body.velocity.x = directionPoint.x * this.moveSpeed;
+            this.body.velocity.y = directionPoint.y * this.moveSpeed;
+            console.log(this.targetX + ',' + inTileX + ' ' + this.targetY + ',' + inTileY);
+            if (inTileX - this.targetX > -0.10 && inTileX - this.targetX < 0.10 &&
+                inTileY - this.targetY > -0.10 && inTileY - this.targetY < 0.10) {
+                this.changeDirection();
+            }
+            if (this.directions[0] == 0)
+                this.animations.play("up");
+            if (this.directions[0] == 2)
+                this.animations.play("left");
+            if (this.directions[0] == 3)
+                this.animations.play("right");
+            if (this.directions[0] == 1)
+                this.animations.play("down");
+        };
+        Actor.prototype.changeDirection = function () {
+            this.directions = this.directions.slice(1).concat(this.directions[0]);
+            this.directions = this.directions.concat(this.directions.pop());
+            this.targetX = -1;
+            this.targetY = -1;
+        };
+        return Actor;
+    }(Phaser.Sprite));
+    Scumbag.Actor = Actor;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
     var Boot = (function (_super) {
         __extends(Boot, _super);
         function Boot() {
@@ -28,17 +119,20 @@ var Scumbag;
 (function (Scumbag) {
     var Bullet = (function (_super) {
         __extends(Bullet, _super);
-        function Bullet(game, key) {
+        function Bullet(game, key, deathGun) {
             _super.call(this, game, 0, 0, key);
+            this.tracking = false;
+            this.collide = true;
+            this.scaleSpeed = 0;
+            this.power = 1;
             this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
             this.anchor.set(0.5);
             this.checkWorldBounds = true;
             this.outOfBoundsKill = true;
             this.exists = false;
-            this.tracking = false;
-            this.scaleSpeed = 0;
+            this.deathGun = deathGun;
         }
-        Bullet.prototype.fire = function (x, y, angle, speed, gx, gy) {
+        Bullet.prototype.fire = function (x, y, angle, speed, gx, gy, lifespan) {
             gx = gx || 0;
             gy = gy || 0;
             this.reset(x, y);
@@ -46,6 +140,7 @@ var Scumbag;
             this.game.physics.arcade.velocityFromRotation(angle, speed, this.body.velocity);
             this.angle = angle;
             this.body.gravity.set(gx, gy);
+            this.lifespan = lifespan;
         };
         Bullet.prototype.update = function () {
             if (this.tracking) {
@@ -56,18 +151,14 @@ var Scumbag;
                 this.scale.y += this.scaleSpeed;
             }
         };
+        Bullet.prototype.kill = function () {
+            if (this.deathGun != undefined)
+                this.deathGun.fire(this);
+            return _super.prototype.kill.call(this);
+        };
         return Bullet;
     }(Phaser.Sprite));
     Scumbag.Bullet = Bullet;
-    function hitLevel(bullet) {
-        bullet.kill();
-    }
-    Scumbag.hitLevel = hitLevel;
-    function hitFighter(bullet, fighter) {
-        bullet.kill();
-        fighter.kill();
-    }
-    Scumbag.hitFighter = hitFighter;
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
@@ -100,26 +191,48 @@ var Scumbag;
             this.collisionLayer.resizeWorld();
             this.bullets = this.game.add.group();
             this.fighters = this.game.add.group();
-            this.player = new Scumbag.Fighter(this.game, this.game.camera.width / 2, this.game.world.height / 2, 'dude', new Scumbag.Gun(this.game, this.bullets));
+            this.player = new Scumbag.Fighter(this.game, this.game.camera.width / 2, this.game.world.height / 2, 'dude', new Scumbag.Nuke(this.game, this.bullets));
             this.fighters.add(this.player);
             this.game.camera.follow(this.player);
+            this.healthBar = this.game.add.image(0, 0, 'healthBar');
+            this.manaBar = this.game.add.image(0, 16, 'manaBar');
+            this.healthBar.fixedToCamera = true;
+            this.manaBar.fixedToCamera = true;
         };
         Fight.prototype.update = function () {
             this.game.physics.arcade.collide(this.fighters, this.collisionLayer);
             for (var _i = 0, _a = this.bullets.children; _i < _a.length; _i++) {
                 var child = _a[_i];
                 if (child instanceof Phaser.Group) {
-                    this.game.physics.arcade.collide(child, this.collisionLayer, Scumbag.hitLevel);
-                    this.game.physics.arcade.collide(child, this.fighters, Scumbag.hitFighter);
+                    this.game.physics.arcade.collide(child, this.collisionLayer, hitLevel, null, this);
+                    this.game.physics.arcade.collide(child, this.fighters, hitFighter);
                 }
             }
+            this.healthBar.scale.x = this.player.health / this.player.maxHealth;
+            this.manaBar.scale.x = this.player.mana / this.player.maxMana;
         };
         Fight.prototype.render = function () {
-            this.game.debug.bodyInfo(this.player, 10, 10);
         };
         return Fight;
     }(Phaser.State));
     Scumbag.Fight = Fight;
+    function hitLevel(bullet, tile) {
+        if (bullet.collide) {
+            bullet.kill();
+            if (tile.properties.destructible == 1) {
+                this.tilemap.removeTile(tile.x, tile.y, this.collisionLayer);
+            }
+            return false;
+        }
+        return true;
+    }
+    function hitFighter(bullet, fighter) {
+        if (!bullet.collide)
+            return false;
+        fighter.damage(bullet.power);
+        bullet.kill();
+        return true;
+    }
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
@@ -140,9 +253,33 @@ var Scumbag;
             this.jumpHeight = 400;
             this.controller = new Scumbag.PlayerController(this.game);
             this.weapon = weapon;
+            this.maxHealth = 10;
+            this.health = 10;
+            this.healthRegen = 0;
+            this.healthRegenRate = 1000;
+            this.maxMana = 10;
+            this.mana = 10;
+            this.manaRegen = 0;
+            this.manaRegenRate = 1000;
+            this.prevTime = this.game.time.time;
             game.add.existing(this);
         }
         Fighter.prototype.update = function () {
+            var newTime = this.game.time.time;
+            var elapsedTime = newTime - this.prevTime;
+            this.healthRegen += elapsedTime;
+            this.manaRegen += elapsedTime;
+            while (this.healthRegen > this.healthRegenRate) {
+                if (this.health < this.maxHealth)
+                    this.health++;
+                this.healthRegen -= this.healthRegenRate;
+            }
+            while (this.manaRegen > this.manaRegenRate) {
+                if (this.mana < this.maxMana)
+                    this.mana++;
+                this.manaRegen -= this.manaRegenRate;
+            }
+            this.prevTime = newTime;
             this.body.velocity.x = 0;
             this.controller.control(this);
             if (this.body.velocity.x != 0) {
@@ -185,12 +322,17 @@ var Scumbag;
                 this.body.velocity.y = 0 - this.jumpHeight;
             }
             if (this.body.blocked.right) {
-                this.body.velocity.x += this.jumpHeight / 2;
+                this.body.velocity.x -= this.jumpHeight / 2;
                 this.body.velocity.y = 0 - this.jumpHeight;
             }
         };
         Fighter.prototype.attack = function () {
+            var currentTime = this.game.time.time;
+            if (currentTime < this.canFireTime || this.mana < this.weapon.manaCost)
+                return;
             this.weapon.fire(this);
+            this.canFireTime = currentTime + this.weapon.wait;
+            this.mana -= this.weapon.manaCost;
         };
         return Fighter;
     }(Phaser.Sprite));
@@ -206,48 +348,12 @@ var Scumbag;
             this.state.add('Preloader', Scumbag.Preloader, false);
             this.state.add('MainMenu', Scumbag.MainMenu, false);
             this.state.add('Fight', Scumbag.Fight, false);
+            this.state.add('Overworld', Scumbag.Overworld, false);
             this.state.start('Boot');
         }
         return Game;
     }(Phaser.Game));
     Scumbag.Game = Game;
-})(Scumbag || (Scumbag = {}));
-var Scumbag;
-(function (Scumbag) {
-    var num = 0;
-    var Weapon = (function (_super) {
-        __extends(Weapon, _super);
-        function Weapon(game, parent) {
-            _super.call(this, game, parent, 'G' + (num++), false, true, Phaser.Physics.ARCADE);
-        }
-        return Weapon;
-    }(Phaser.Group));
-    Scumbag.Weapon = Weapon;
-})(Scumbag || (Scumbag = {}));
-var Scumbag;
-(function (Scumbag) {
-    var Gun = (function (_super) {
-        __extends(Gun, _super);
-        function Gun(game, parent) {
-            _super.call(this, game, parent);
-            this.nextFire = 0;
-            this.bulletSpeed = 600;
-            this.fireRate = 100;
-            for (var i = 0; i < 64; i++)
-                this.add(new Scumbag.Bullet(game, 'bullet1'), true);
-            this.setAll('tracking', true);
-        }
-        Gun.prototype.fire = function (source) {
-            if (this.game.time.time < this.nextFire)
-                return;
-            var x = source.x + 10;
-            var y = source.y + 10;
-            this.getFirstExists(false).fire(x, y, source.angle, this.bulletSpeed, 0, 500);
-            this.nextFire = this.game.time.time + this.fireRate;
-        };
-        return Gun;
-    }(Scumbag.Weapon));
-    Scumbag.Gun = Gun;
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
@@ -273,11 +379,52 @@ var Scumbag;
             tween.onComplete.add(this.startGame, this);
         };
         MainMenu.prototype.startGame = function () {
-            this.game.state.start('Fight', true, false);
+            this.game.state.start('Overworld', true, false);
         };
         return MainMenu;
     }(Phaser.State));
     Scumbag.MainMenu = MainMenu;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Overworld = (function (_super) {
+        __extends(Overworld, _super);
+        function Overworld() {
+            _super.apply(this, arguments);
+        }
+        Overworld.prototype.create = function () {
+            this.background = this.add.sprite(0, 0, 'titlepage');
+            this.music = this.add.audio('music', 1, false);
+            this.music.play();
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
+            this.tilemap = this.add.tilemap('map2');
+            this.tilemap.addTilesetImage('outsideTiles', 'outsideTiles');
+            this.tilemap.createLayer("background");
+            this.collisionLayer = this.tilemap.createLayer('collisions');
+            this.tilemap.setLayer(this.collisionLayer);
+            this.tilemap.setCollisionBetween(0, 6569);
+            this.collisionLayer.resizeWorld();
+            this.actors = this.game.add.group();
+            this.player = new Scumbag.Actor(this.game, 144, 144, 'chad');
+            this.actors.add(this.player);
+        };
+        Overworld.prototype.update = function () {
+            this.game.physics.arcade.collide(this.actors, this.collisionLayer, hitLevel);
+        };
+        Overworld.prototype.render = function () {
+            this.game.debug.body(this.player);
+            this.game.debug.bodyInfo(this.player, 32, 32);
+        };
+        return Overworld;
+    }(Phaser.State));
+    Scumbag.Overworld = Overworld;
+    function hitLevel(actor) {
+        console.log("collision");
+        var directionPoint = Scumbag.directionToPoint(actor.directions[0]);
+        actor.body.x -= directionPoint.x;
+        actor.body.y -= directionPoint.y;
+        actor.changeDirection();
+    }
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
@@ -336,5 +483,139 @@ var Scumbag;
         return Preloader;
     }(Phaser.State));
     Scumbag.Preloader = Preloader;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var num = 0;
+    var Weapon = (function (_super) {
+        __extends(Weapon, _super);
+        function Weapon(game, parent, wait, manaCost) {
+            _super.call(this, game, parent, 'G' + (num++), false, true, Phaser.Physics.ARCADE);
+            this.wait = wait;
+            this.manaCost = manaCost;
+        }
+        Weapon.prototype.launchBullet = function (x, y, angle, speed, gx, gy, lifespan) {
+            var bullet = this.getFirstExists(false);
+            if (bullet != null)
+                bullet.fire(x, y, angle, speed, gx, gy, lifespan);
+        };
+        return Weapon;
+    }(Phaser.Group));
+    Scumbag.Weapon = Weapon;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Blaster = (function (_super) {
+        __extends(Blaster, _super);
+        function Blaster(game, parent) {
+            _super.call(this, game, parent, 200, 1);
+            this.bulletSpeed = 600;
+            this.gravity = 500;
+            this.lifespan = 5000;
+            this.explosion = new Scumbag.Explosion(game, parent, 40, 10);
+            for (var i = 0; i < 32; i++)
+                this.add(new Scumbag.Bullet(game, 'bullet1', this.explosion), true);
+            this.setAll('tracking', true);
+        }
+        Blaster.prototype.fire = function (source) {
+            this.launchBullet(source.x, source.y, source.angle, this.bulletSpeed, 0, this.gravity, this.lifespan);
+        };
+        return Blaster;
+    }(Scumbag.Weapon));
+    Scumbag.Blaster = Blaster;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Explosion = (function (_super) {
+        __extends(Explosion, _super);
+        function Explosion(game, parent, bulletLimit, nBullets) {
+            _super.call(this, game, parent, 0, 0);
+            this.bulletSpeed = 400;
+            this.bulletGravity = 600;
+            this.bulletLifespan = 2000;
+            for (var i = 0; i < bulletLimit; i++) {
+                this.add(new Scumbag.Bullet(game, 'bullet2'), true);
+            }
+            this.nBullets = nBullets;
+        }
+        Explosion.prototype.fire = function (source) {
+            for (var i = 0; i < 10; i++) {
+                var angle = Math.random() * 2 * Math.PI - Math.PI;
+                this.launchBullet(source.x, source.y, angle, this.bulletSpeed, 0, this.bulletGravity, this.bulletLifespan);
+            }
+        };
+        return Explosion;
+    }(Scumbag.Weapon));
+    Scumbag.Explosion = Explosion;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Minigun = (function (_super) {
+        __extends(Minigun, _super);
+        function Minigun(game, parent) {
+            _super.call(this, game, parent, 100, 0.3);
+            this.bulletSpeed = 800;
+            this.gravity = 300;
+            this.lifespan = 5000;
+            for (var i = 0; i < 50; i++)
+                this.add(new Scumbag.Bullet(game, 'bullet2'), true);
+        }
+        Minigun.prototype.fire = function (source) {
+            this.launchBullet(source.x, source.y, source.angle + (Math.random() * 0.4) - 0.2, this.bulletSpeed, 0, this.gravity, this.lifespan);
+        };
+        return Minigun;
+    }(Scumbag.Weapon));
+    Scumbag.Minigun = Minigun;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Nuke = (function (_super) {
+        __extends(Nuke, _super);
+        function Nuke(game, parent) {
+            _super.call(this, game, parent, 1000, 7);
+            this.bulletSpeed = 600;
+            this.gravity = 500;
+            this.lifespan = 2000;
+            this.radioactivity = new Scumbag.Radioactivity(game, parent, 100);
+            for (var i = 0; i < 10; i++)
+                this.add(new Scumbag.Bullet(game, 'bullet4', this.radioactivity), true);
+            this.setAll('collide', false);
+            this.setAll('body.bounce.x', 0.5);
+            this.setAll('body.bounce.y', 0.5);
+        }
+        Nuke.prototype.fire = function (source) {
+            this.launchBullet(source.x, source.y, source.angle, this.bulletSpeed, 0, this.gravity, this.lifespan);
+        };
+        return Nuke;
+    }(Scumbag.Weapon));
+    Scumbag.Nuke = Nuke;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Radioactivity = (function (_super) {
+        __extends(Radioactivity, _super);
+        function Radioactivity(game, parent, particleLimit) {
+            _super.call(this, game, parent, 0, 0);
+            this.bulletSpeed = 400;
+            this.bulletGravity = 600;
+            this.bulletLifespan = 4000;
+            this.explosion = new Scumbag.Explosion(game, parent, 300, 5);
+            for (var i = 0; i < particleLimit; i++) {
+                this.add(new Scumbag.Bullet(game, 'bullet3', this.explosion), true);
+            }
+            this.setAll('body.bounce.x', 0.9);
+            this.setAll('body.bounce.y', 0.9);
+            this.setAll('collide', false);
+        }
+        Radioactivity.prototype.fire = function (source) {
+            for (var i = 0; i < 20; i++) {
+                var angle = Math.random() * 2 * Math.PI - Math.PI;
+                this.launchBullet(source.x, source.y, angle, this.bulletSpeed, 0, this.bulletGravity, this.bulletLifespan +
+                    (Math.random() * 2000 - 500));
+            }
+        };
+        return Radioactivity;
+    }(Scumbag.Weapon));
+    Scumbag.Radioactivity = Radioactivity;
 })(Scumbag || (Scumbag = {}));
 //# sourceMappingURL=game.js.map
