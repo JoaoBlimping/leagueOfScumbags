@@ -36,9 +36,10 @@ module Scumbag
 
       //add player and stuff
       this.actors = this.game.add.group();
-      this.player = new Actor(this.game,144,144,'chad');
+      this.player = new Actor(this.game,144,144,'chad',
+                              this.tilemap.tileWidth,
+                              this.tilemap.tileHeight);
       this.actors.add(this.player);
-
     }
 
 

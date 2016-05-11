@@ -9,6 +9,8 @@ module Scumbag
   {
     moveSpeed:      number;
     angle:          number;
+    tileWidth:      number;
+    tileHeight:     number;
     directions:     Direction[];
     targetX = -1;
     targetY = -1;
@@ -17,15 +19,21 @@ module Scumbag
     /** create it just like you would a sprite, at least at the moment.
      * TODO: It will probably need some kind of id so it can build itself from
      * some data file */
-    constructor(game:Phaser.Game,x:number,y:number,key:string)
+    constructor(game:Phaser.Game,x:number,y:number,key:string,tileWidth:number,
+                tileHeight:number)
     {
       //run superconstructor
       super(game,x,y,key);
 
+      //set tilesize
+      this.tileWidth = tileWidth;
+      this.tileHeight = tileHeight;
+
       //turn on physics
       this.game.physics.arcade.enable(this);
       this.body.collideWorldBounds = true;
-      this.body.height = 32;
+      this.body.width = tileWidth;
+      this.body.height = tileHeight;
 
       //do animation type crap
       this.anchor.setTo(0.5,1);
@@ -46,14 +54,16 @@ module Scumbag
 
     update()
     {
-      let inTileX = this.body.x / 32;
-      let inTileY = this.body.y / 32;
+      let inTileX = this.body.x / this.tileWidth;
+      let inTileY = this.body.y / this.tileHeight;
 
       let directionPoint = directionToPoint(this.directions[0]);
 
       //if it doesn't have a target at the moment, get one
       if (this.targetX == -1 || this.targetY == -1)
       {
+        this.body.x = Math.round(inTileX) * this.tileWidth;
+        this.body.y = Math.round(inTileY) * this.tileHeight;
         this.targetX = Math.round(inTileX) + directionPoint.x;
         this.targetY = Math.round(inTileY) + directionPoint.y;
       }

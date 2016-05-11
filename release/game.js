@@ -44,13 +44,16 @@ var Scumbag;
 (function (Scumbag) {
     var Actor = (function (_super) {
         __extends(Actor, _super);
-        function Actor(game, x, y, key) {
+        function Actor(game, x, y, key, tileWidth, tileHeight) {
             _super.call(this, game, x, y, key);
             this.targetX = -1;
             this.targetY = -1;
+            this.tileWidth = tileWidth;
+            this.tileHeight = tileHeight;
             this.game.physics.arcade.enable(this);
             this.body.collideWorldBounds = true;
-            this.body.height = this.body.halfHeight;
+            this.body.width = tileWidth;
+            this.body.height = tileHeight;
             this.anchor.setTo(0.5, 1);
             this.animations.add('down', [0, 1, 2, 3], 10, true);
             this.animations.add('right', [4, 5, 6, 7], 10, true);
@@ -61,10 +64,12 @@ var Scumbag;
             game.add.existing(this);
         }
         Actor.prototype.update = function () {
-            var inTileX = this.body.x / 32;
-            var inTileY = this.body.y / 32;
+            var inTileX = this.body.x / this.tileWidth;
+            var inTileY = this.body.y / this.tileHeight;
             var directionPoint = Scumbag.directionToPoint(this.directions[0]);
             if (this.targetX == -1 || this.targetY == -1) {
+                this.body.x = Math.round(inTileX) * this.tileWidth;
+                this.body.y = Math.round(inTileY) * this.tileHeight;
                 this.targetX = Math.round(inTileX) + directionPoint.x;
                 this.targetY = Math.round(inTileY) + directionPoint.y;
             }
@@ -405,7 +410,7 @@ var Scumbag;
             this.tilemap.setCollisionBetween(0, 6569);
             this.collisionLayer.resizeWorld();
             this.actors = this.game.add.group();
-            this.player = new Scumbag.Actor(this.game, 144, 144, 'chad');
+            this.player = new Scumbag.Actor(this.game, 144, 144, 'chad', this.tilemap.tileWidth, this.tilemap.tileHeight);
             this.actors.add(this.player);
         };
         Overworld.prototype.update = function () {
