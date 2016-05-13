@@ -9,3 +9,6 @@ I dunno.
 This means that I'm really going to have to implement the script system at the
 same time I implement the gui. The script system is probably just going to use
 those web worker thingies since it kinda needs to be concurrent.
+
+
+Web workers will probably need to be loaded

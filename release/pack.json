@@ -26,6 +26,13 @@
     {
         "type": "tilemap","key": "map2","url": "maps/map2.json","data": null,
         "format": "TILED_JSON"
-    }
+    },
+    {"type": "shader","key": "boxes","url": "shaders/boxes.frag"},
+    {"type": "shader","key": "headache","url": "shaders/headache.frag"},
+    {"type": "shader","key": "uninitialised","url": "shaders/uninitialised.frag"},
+    {"type": "shader","key": "pyramid","url": "shaders/pyramid.frag"},
+
+    {"type": "text","key": "test","url": "scripts/test.js"}
+
   ]
 }

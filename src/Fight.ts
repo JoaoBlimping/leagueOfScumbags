@@ -5,7 +5,7 @@ module Scumbag
 {
   export class Fight extends Phaser.State
   {
-    background:       Phaser.Sprite;
+    background:       Background;
     music:            Phaser.Sound;
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
@@ -19,7 +19,8 @@ module Scumbag
     create()
     {
       //create the background
-      this.background = this.add.sprite(0, 0, 'titlepage');
+      this.background = new ShaderBackground(this.game,'pyramid');
+      this.game.add.existing(this.background);
 
       //load and play the music
       this.music = this.add.audio('music', 1, false);

@@ -183,7 +183,8 @@ var Scumbag;
             _super.apply(this, arguments);
         }
         Fight.prototype.create = function () {
-            this.background = this.add.sprite(0, 0, 'titlepage');
+            this.background = new Scumbag.ShaderBackground(this.game, 'pyramid');
+            this.game.add.existing(this.background);
             this.music = this.add.audio('music', 1, false);
             this.music.play();
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -372,15 +373,15 @@ var Scumbag;
             this.background.alpha = 0;
             this.logo = this.add.sprite(this.world.centerX, -300, 'logo');
             this.logo.anchor.setTo(0.5, 0.5);
-            this.add.tween(this.background).to({ alpha: 1 }, 2000, Phaser.Easing.Bounce.InOut, true);
-            this.add.tween(this.logo).to({ y: 220 }, 2000, Phaser.Easing.Elastic.Out, true, 2000);
+            this.add.tween(this.background).to({ alpha: 1 }, 500, Phaser.Easing.Bounce.InOut, true);
+            this.add.tween(this.logo).to({ y: 220 }, 500, Phaser.Easing.Elastic.Out, true, 2000);
             this.input.onDown.addOnce(this.fadeOut, this);
             this.game.input.keyboard.createCursorKeys();
             this.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
         };
         MainMenu.prototype.fadeOut = function () {
-            this.add.tween(this.background).to({ alpha: 0 }, 2000, Phaser.Easing.Linear.None, true);
-            var tween = this.add.tween(this.logo).to({ y: 800 }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.background).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+            var tween = this.add.tween(this.logo).to({ y: 800 }, 500, Phaser.Easing.Linear.None, true);
             tween.onComplete.add(this.startGame, this);
         };
         MainMenu.prototype.startGame = function () {
@@ -488,6 +489,62 @@ var Scumbag;
         return Preloader;
     }(Phaser.State));
     Scumbag.Preloader = Preloader;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Background = (function (_super) {
+        __extends(Background, _super);
+        function Background(game) {
+            _super.call(this, game, 0, 0, "");
+            this.width = game.width;
+            this.height = game.height;
+        }
+        return Background;
+    }(Phaser.Image));
+    Scumbag.Background = Background;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var ShaderBackground = (function (_super) {
+        __extends(ShaderBackground, _super);
+        function ShaderBackground(game, key) {
+            _super.call(this, game);
+            this.filter = new Phaser.Filter(game, null, game.cache.getShader(key));
+            this.filter.setResolution(game.width, game.height);
+            this.filters = [this.filter];
+        }
+        ShaderBackground.prototype.update = function () {
+            this.filter.update(this.game.input.activePointer);
+        };
+        return ShaderBackground;
+    }(Scumbag.Background));
+    Scumbag.ShaderBackground = ShaderBackground;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var GuiElement = (function () {
+        function GuiElement(width, height, bottom) {
+            this.width = width;
+            this.height = height;
+            this.bottom = bottom;
+        }
+        return GuiElement;
+    }());
+    Scumbag.GuiElement = GuiElement;
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
+    var Script = (function () {
+        function Script(game, key) {
+            var data = new Blob([game.cache.getText(key)]);
+            this.worker = new Worker(window.URL.createObjectURL(data));
+        }
+        Script.prototype.run = function () {
+            return 0;
+        };
+        return Script;
+    }());
+    Scumbag.Script = Script;
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
