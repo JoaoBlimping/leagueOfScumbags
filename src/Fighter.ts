@@ -24,8 +24,6 @@ module Scumbag
     prevTime:       number;
 
 
-
-
     /** create it just like you would a sprite, at least at the moment.
      * TODO: It will probably need some kind of id so it can build itself from
      * some data file */

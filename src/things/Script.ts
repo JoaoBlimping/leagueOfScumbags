@@ -1,28 +1,38 @@
+///<reference path="../gui/GuiBuilder.ts"/>
+
 module Scumbag
 {
-
-  /** wraps around web workers so that they can be synchronously loaded at the
-   * start of the game. plus it just does all the scripty stuff */
-  export class Script
+  /** this is the context in scripts are run */
+  namespace ScriptContext
   {
-    worker:   Worker;
+    export import gui = GuiBuilder;
+    export let value:  number;
+  }
+
+
+
+  /** runs game scripts */
+  export namespace Script
+  {
+    let blocks:     string[];
+    let nextBlock:  number;
 
 
     /** sets the script up to go.
      * key is a key to a preloaded text file */
-    constructor(game:Phaser.Game,key:string)
+    export function setScript(game:Phaser.Game,key:string)
     {
-      let data = new Blob([game.cache.getText(key)]);
-      this.worker = new Worker(window.URL.createObjectURL(data));
+      blocks = game.cache.getText(key).split('\n');
+      nextBlock = 0;
+      runScript(0);
     }
 
-
-    /** runs the script and then returns it's output */
-    run():number
+    /** runs the script for one block */
+    export function runScript(value:number)
     {
-      this.worker.postMessage(0);
-      return 0;
+      ScriptContext.value = value;
+      let effect = new Function(blocks[nextBlock++]);
+      effect.call(ScriptContext);
     }
-
   }
 }

@@ -3,7 +3,9 @@
 
 module Scumbag
 {
-  export class Overworld extends Phaser.State
+  /** the scene in which you walk around and most of the storyline takes
+   * place */
+  export class Overworld extends GuiState
   {
     background:       Phaser.Sprite;
     music:            Phaser.Sound;
@@ -40,10 +42,13 @@ module Scumbag
                               this.tilemap.tileWidth,
                               this.tilemap.tileHeight);
       this.actors.add(this.player);
+
+      //load the script
+      Script.setScript(this.game,'test');
     }
 
 
-    update()
+    postGuiUpdate()
     {
       //check collisions between the player and the level
       this.game.physics.arcade.collide(this.actors,this.collisionLayer,
@@ -62,7 +67,6 @@ module Scumbag
   /** when an actor hits the level */
   function hitLevel(actor:Actor)
   {
-    console.log("collision");
     let directionPoint = directionToPoint(actor.directions[0]);
     actor.body.x -= directionPoint.x;
     actor.body.y -= directionPoint.y;

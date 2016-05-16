@@ -8,7 +8,7 @@
  - add sound effects
  - add music
  - make the level destructible. probably add a property to certain tiles that
-   means they can be destroyed if a bullet hits them. also make tiles smaller
+   means they can be *destroyed* if a bullet hits them. also make tiles smaller
  - add support for gamepads and stuff, and also make it modular enough that
    multiplayer might work.
  - add a strafe button, and also like a reverse strafe that lets you stand on
@@ -18,4 +18,5 @@
 ## Overworld
  - make it that actors are loaded from the map file, and that is where all their
    trash is stored.
- - add the event system that will let you do all the cool story stuff and that
+ - write scripts in javascript, but let them interface with typescript so that
+   they can do cool stuff and all that.

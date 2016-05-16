@@ -71,8 +71,6 @@ module Scumbag
       this.body.velocity.x = directionPoint.x * this.moveSpeed;
       this.body.velocity.y = directionPoint.y * this.moveSpeed;
 
-      console.log(this.targetX+','+inTileX+' '+this.targetY+','+inTileY);
-
       //if it's reached it's target
       if (inTileX - this.targetX > -0.10 && inTileX - this.targetX < 0.10 &&
           inTileY - this.targetY> -0.10 && inTileY - this.targetY < 0.10)

@@ -75,7 +75,6 @@ var Scumbag;
             }
             this.body.velocity.x = directionPoint.x * this.moveSpeed;
             this.body.velocity.y = directionPoint.y * this.moveSpeed;
-            console.log(this.targetX + ',' + inTileX + ' ' + this.targetY + ',' + inTileY);
             if (inTileX - this.targetX > -0.10 && inTileX - this.targetX < 0.10 &&
                 inTileY - this.targetY > -0.10 && inTileY - this.targetY < 0.10) {
                 this.changeDirection();
@@ -413,6 +412,7 @@ var Scumbag;
             this.actors = this.game.add.group();
             this.player = new Scumbag.Actor(this.game, 144, 144, 'chad', this.tilemap.tileWidth, this.tilemap.tileHeight);
             this.actors.add(this.player);
+            Scumbag.Script.setScript(this.game, 'test');
         };
         Overworld.prototype.update = function () {
             this.game.physics.arcade.collide(this.actors, this.collisionLayer, hitLevel);
@@ -425,7 +425,6 @@ var Scumbag;
     }(Phaser.State));
     Scumbag.Overworld = Overworld;
     function hitLevel(actor) {
-        console.log("collision");
         var directionPoint = Scumbag.directionToPoint(actor.directions[0]);
         actor.body.x -= directionPoint.x;
         actor.body.y -= directionPoint.y;
@@ -522,6 +521,27 @@ var Scumbag;
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
+    var GuiBuilder;
+    (function (GuiBuilder) {
+        function buildWindow(width, height, bottom) {
+            console.log("building window " + width + "," + height + "," + bottom);
+            return width + height;
+        }
+        GuiBuilder.buildWindow = buildWindow;
+        function buildQA(question) {
+            console.log("building question " + question);
+            return 5;
+        }
+        GuiBuilder.buildQA = buildQA;
+        function buildTextbox(text) {
+            console.log("building textbox " + text);
+            return 4;
+        }
+        GuiBuilder.buildTextbox = buildTextbox;
+    })(GuiBuilder = Scumbag.GuiBuilder || (Scumbag.GuiBuilder = {}));
+})(Scumbag || (Scumbag = {}));
+var Scumbag;
+(function (Scumbag) {
     var GuiElement = (function () {
         function GuiElement(width, height, bottom) {
             this.width = width;
@@ -534,17 +554,27 @@ var Scumbag;
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {
-    var Script = (function () {
-        function Script(game, key) {
-            var data = new Blob([game.cache.getText(key)]);
-            this.worker = new Worker(window.URL.createObjectURL(data));
+    var ScriptContext;
+    (function (ScriptContext) {
+        ScriptContext.gui = Scumbag.GuiBuilder;
+    })(ScriptContext || (ScriptContext = {}));
+    var Script;
+    (function (Script) {
+        var blocks;
+        var nextBlock;
+        function setScript(game, key) {
+            blocks = game.cache.getText(key).split('\n');
+            nextBlock = 0;
+            runScript(0);
         }
-        Script.prototype.run = function () {
-            return 0;
-        };
-        return Script;
-    }());
-    Scumbag.Script = Script;
+        Script.setScript = setScript;
+        function runScript(value) {
+            ScriptContext.value = value;
+            var effect = new Function(blocks[nextBlock++]);
+            effect.call(ScriptContext);
+        }
+        Script.runScript = runScript;
+    })(Script = Scumbag.Script || (Scumbag.Script = {}));
 })(Scumbag || (Scumbag = {}));
 var Scumbag;
 (function (Scumbag) {

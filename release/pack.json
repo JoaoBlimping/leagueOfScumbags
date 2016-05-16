@@ -32,7 +32,7 @@
     {"type": "shader","key": "uninitialised","url": "shaders/uninitialised.frag"},
     {"type": "shader","key": "pyramid","url": "shaders/pyramid.frag"},
 
-    {"type": "text","key": "test","url": "scripts/test.js"}
+    {"type": "text","key": "test","url": "scripts/test.script"}
 
   ]
 }
