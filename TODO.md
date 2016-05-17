@@ -1,5 +1,8 @@
-# TODO
-## Fighting
+TODO
+====
+
+Fighting
+--------
  - add some kind of mana
    bar so that the amount of time it takes to fire a certain weapon can decrease
    as the player becomes more powerful. Also some kind of delay bar. make it
@@ -8,15 +11,18 @@
  - add sound effects
  - add music
  - make the level destructible. probably add a property to certain tiles that
-   means they can be *destroyed* if a bullet hits them. also make tiles smaller
+   means they can be **destroyed** if a bullet hits them. also make tiles smaller
  - add support for gamepads and stuff, and also make it modular enough that
    multiplayer might work.
  - add a strafe button, and also like a reverse strafe that lets you stand on
    spot and aim. I think they would work well as left trigger buttons on a
    controller.
 
-## Overworld
+Overworld
+---------
  - make it that actors are loaded from the map file, and that is where all their
    trash is stored.
- - write scripts in javascript, but let them interface with typescript so that
-   they can do cool stuff and all that.
+ - make it so that all the actors stop when a gui thing is going
+ - add text GuiElement. Probably causing me to have to fix some of the gui
+   positioning stuff in the process.
+ - add gui buttons and selectors and stuff.

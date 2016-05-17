@@ -48,6 +48,13 @@ module Scumbag
     }
 
 
+    render()
+    {
+      this.game.debug.body(this.player);
+      this.game.debug.bodyInfo(this.player,32,32);
+    }
+
+
     postGuiUpdate()
     {
       //check collisions between the player and the level
@@ -56,11 +63,10 @@ module Scumbag
     }
 
 
-    render()
-    {
-      this.game.debug.body(this.player);
-      this.game.debug.bodyInfo(this.player,32,32);
-    }
+    onGuiStart() {this.actors.setAll('updating',false)}
+
+
+    onGuiEnd() {this.actors.setAll('updating',true)}
   }
 
 

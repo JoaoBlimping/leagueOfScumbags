@@ -1,4 +1,2 @@
-this.gui.buildQA("would you like fish?","yes","no");
-if (value == 1){  nextBlock = 3;}
-nextBlock = 4;this.gui.buildTextbox("ok, cool. Enjoy your fish :)");
-var selection = Math.random() * 2;if (selection > 1) this.gui.buildTextbox("you are making me exceedingly angry");else this.gui.buildTextbox("you are making me moderately angry");
+this.state.buildQA("would you like fish?","yes","no");
+if (value == 2){  var selection = Math.random() * 2;  if (selection > 1) this.state.buildTextbox("you are making me exceedingly angry");  else this.state.buildTextbox("you are making me moderately angry");}else{  this.state.buildTextbox("ok, cool. Enjoy your fish :)");}

@@ -5,6 +5,7 @@
     {"type": "image","key": "combatTiles","url": "images/combatTiles.png"},
     {"type": "image","key": "outsideTiles","url": "images/outside.png"},
     {"type": "image","key": "healthBar","url": "images/healthBar.png"},
+    {"type": "image","key": "window","url": "images/window.png"},
     {"type": "image","key": "manaBar","url": "images/manaBar.png"},
     {"type": "image","key": "bullet1","url": "images/bullet1.png"},
     {"type": "image","key": "bullet2","url": "images/bullet2.png"},

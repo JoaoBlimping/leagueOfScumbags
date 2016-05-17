@@ -9,10 +9,14 @@ module Scumbag
 
     /** creates the window, using the game thing to set up the size, and it's
      * renderer, and also a list of it's children */
-    constructor(game:Phaser.Game,children:GuiElement[])
+    constructor(game:Phaser.Game,key:string,children:GuiElement[])
     {
-      super(game.width,game.height / 3,true);
+      super(game.width,game.height / 4,true);
       this.children = children;
+
+      this.image = game.add.image(0,game.height - game.height / 4,key);
+      this.image.width = game.width;
+      this.image.height = game.height / 4;
     }
 
 

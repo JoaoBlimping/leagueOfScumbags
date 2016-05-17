@@ -14,6 +14,7 @@ module Scumbag
     directions:     Direction[];
     targetX = -1;
     targetY = -1;
+    updating = true;
 
 
     /** create it just like you would a sprite, at least at the moment.
@@ -54,6 +55,8 @@ module Scumbag
 
     update()
     {
+      if (!this.updating) return;
+
       let inTileX = this.body.x / this.tileWidth;
       let inTileY = this.body.y / this.tileHeight;
 
