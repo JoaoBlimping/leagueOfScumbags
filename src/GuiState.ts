@@ -24,9 +24,11 @@ module Scumbag
     abstract postGuiUpdate():void;
 
 
-    buildQA(question:string,...answers[]):void
+    buildQA(question:string,...answers:string[]):void
     {
       
+
+
 
     }
   }

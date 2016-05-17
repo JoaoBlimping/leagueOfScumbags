@@ -24,9 +24,6 @@ module Scumbag
 
     /** updates the gui element, which can return numbers if it does stuff like
      * a button or whatever */
-    update():number
-    {
-      return 0;
-    }
+    abstract update():number;
   }
 }

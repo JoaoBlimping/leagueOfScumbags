@@ -1,3 +1,6 @@
+""" This script turns relatively javascripty scripts into the weird format that
+    our dear program can read more easily """
+
 import os
 
 

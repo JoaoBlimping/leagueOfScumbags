@@ -4,20 +4,16 @@ this.gui.buildQA("would you like fish?","yes","no");
 ~
 
 //block1
-if (value == 1)
+//if they said no to the faish
+if (value == 2)
 {
-  nextBlock = 3;
+  var selection = Math.random() * 2;
+  if (selection > 1) this.gui.buildTextbox("you are making me exceedingly angry");
+  else this.gui.buildTextbox("you are making me moderately angry");
 }
 
-~
-
-//block2
-nextBlock = 4;
-this.gui.buildTextbox("ok, cool. Enjoy your fish :)");
-
-~
-
-//block3
-var selection = Math.random() * 2;
-if (selection > 1) this.gui.buildTextbox("you are making me exceedingly angry");
-else this.gui.buildTextbox("you are making me moderately angry");
+//if they said yes to fish
+else
+{
+  this.gui.buildTextbox("ok, cool. Enjoy your fish :)");
+}
