@@ -20,6 +20,7 @@ Fighting
 
 Overworld
 ---------
+ - add music
  - make it that actors are loaded from the map file, and that is where all their
    trash is stored.
  - make it so that all the actors stop when a gui thing is going

@@ -15,6 +15,7 @@ module Scumbag
     player:           Actor;
 
 
+    /** overrides Phaser.State.create() */
     create()
     {
       //create the background
@@ -48,6 +49,7 @@ module Scumbag
     }
 
 
+    /** overrides Phaser.State.render() */
     render()
     {
       this.game.debug.body(this.player);
@@ -55,6 +57,7 @@ module Scumbag
     }
 
 
+    /** overrides GuiState.postGuiUpdate() */
     postGuiUpdate()
     {
       //check collisions between the player and the level
@@ -63,14 +66,16 @@ module Scumbag
     }
 
 
+    /** overrides GuiState.onGuiStart() */
     onGuiStart() {this.actors.setAll('updating',false)}
 
 
+    /** overrides GuiState.onGuiEnd() */
     onGuiEnd() {this.actors.setAll('updating',true)}
   }
 
 
-  /** when an actor hits the level */
+  /** what happens when an actor hits the level */
   function hitLevel(actor:Actor)
   {
     let directionPoint = directionToPoint(actor.directions[0]);

@@ -1,3 +1,10 @@
+The code comes under the GPL3, but the content is under Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International
+
+
+http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 

@@ -30,7 +30,10 @@ module Scumbag
      * answers */
     buildQA(question:string,...answers:string[]):void
     {
-      this.setGui(new Window(this.game,"window",new Array<GuiElement>()));
+      let text = new TextElement(this.game,question,{font:"24px Serif",fill:"#0f0"});
+      let text2 = new TextElement(this.game,answers.join("\n"),{font:"15px Sans",fill:"#fff"});
+
+      this.setGui(new Window(this.game,"window",new Array<GuiElement>(text,text2)));
     }
 
 

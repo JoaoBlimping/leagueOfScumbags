@@ -53,6 +53,7 @@ module Scumbag
     }
 
 
+    /** overrides Phaser.Sprite.update() */
     update()
     {
       if (!this.updating) return;
@@ -88,6 +89,9 @@ module Scumbag
       if (this.directions[0] == Direction.down) this.animations.play("down");
     }
 
+
+    /** put the actor's current direction at the end of the queue, and make it
+     * move in the next direction */
     changeDirection():void
     {
       this.directions = this.directions.slice(1).concat(this.directions[0]);

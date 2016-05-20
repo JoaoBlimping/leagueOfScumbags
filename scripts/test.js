@@ -1,5 +1,8 @@
 //block0
-this.state.buildQA("would you like fish?","yes","no");
+this.state.buildQA("would you like fish?","I would rather kill myself",
+                   "there is no such thing as ethical consumption under capitalism",
+                   "sex",
+                   "fish is a great source of nutrients I would know since I am a fish hahaha!");
 
 ~
 

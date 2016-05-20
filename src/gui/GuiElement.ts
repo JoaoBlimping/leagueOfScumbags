@@ -15,12 +15,33 @@ module Scumbag
 
 
     /** just sets all this stuff */
-    constructor(width:number,height:number,bottom:boolean)
+    constructor(bottom:boolean)
     {
-      this.width = width;
-      this.height = height;
       this.bottom = bottom;
     }
+
+
+    /** brings the element to the front */
+    abstract bringToFront():void;
+
+
+    /** adds to the position of the gui element so that they can get moved
+     * around no matter how their graphics representation works */
+    abstract addPosition(x:number,y:number):void;
+
+
+    /** sets the position of the gui element absolutely. this way it works
+     * no matter what it uses to visualise itself */
+    abstract setPosition(x:number,y:number):void;
+
+
+    /** gives you the width of this element */
+    abstract getWidth():number;
+
+
+    /** gives you the height of this element */
+    abstract getHeight():number;
+
 
     /** updates the gui element, which can return numbers if it does stuff like
      * a button or whatever */
