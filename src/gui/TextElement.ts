@@ -1,5 +1,9 @@
+///<reference path="GuiElement.ts"/>
+
+
 module Scumbag
 {
+  /** used to display text in the gui */
   export class TextElement extends GuiElement
   {
     text:   Phaser.Text;
@@ -38,6 +42,14 @@ module Scumbag
     }
 
 
+    /** implements GuiElement.getX() */
+    getX() {return this.text.x}
+
+
+    /** implements GuiElement.getY() */
+    getY() {return this.text.y}
+
+
     /** implements GuiElement.getWidth */
     getWidth() {return this.text.width}
 
@@ -48,5 +60,12 @@ module Scumbag
 
     /** implements GuiElement.update */
     update() {return 0}
+
+
+    /** implements GuiElement.destroy */
+    destroy()
+    {
+      this.text.destroy();
+    }
   }
 }

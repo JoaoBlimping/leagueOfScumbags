@@ -1,4 +1,4 @@
-///<reference path="phaser/phaser.d.ts"/>
+/// <reference path="../phaser/phaser.d.ts"/>
 
 
 module Scumbag
@@ -19,6 +19,7 @@ module Scumbag
 
       //Load our actual games assets
       this.game.load.pack("main","pack.json");
+      //this.game.load.pack("main","scripts.json");
     }
 
     create()

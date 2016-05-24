@@ -1,4 +1,4 @@
-///<reference path="phaser/phaser.d.ts"/>
+///<reference path="GuiState.ts"/>
 
 
 module Scumbag
@@ -37,23 +37,28 @@ module Scumbag
       this.tilemap.setCollisionBetween(0, 6569);
       this.collisionLayer.resizeWorld();
 
+
       //add player and stuff
       this.actors = this.game.add.group();
-      this.player = new Actor(this.game,144,144,'chad',
+      this.player = new PlayerActor(this.game,160,160,'chad',
                               this.tilemap.tileWidth,
                               this.tilemap.tileHeight);
       this.actors.add(this.player);
+      this.game.camera.follow(this.player);
+
+      //create the top layer of the world
+      this.tilemap.createLayer("overhead");
 
       //load the script
-      Script.setScript(this.game,'test');
+      Script.setScript('test');
     }
 
 
     /** overrides Phaser.State.render() */
     render()
     {
-      this.game.debug.body(this.player);
-      this.game.debug.bodyInfo(this.player,32,32);
+      //this.game.debug.body(this.player);
+      //this.game.debug.bodyInfo(this.player,32,32);
     }
 
 

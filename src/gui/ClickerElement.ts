@@ -1,15 +1,27 @@
+///<reference path="GuiElement.ts"/>
+
+
 module Scumbag
 {
+
+  function click()
+  {
+    this.go = true;
+  }
+
+
   export class ClickerElement extends GuiElement
   {
     private image:        Phaser.Image;
+    private go = false;
 
 
     /** creates a text thingy */
-    constructor(game:Phaser.Game)
+    constructor(game:Phaser.Game,key:string)
     {
       super(false);
-      this.image = game.add.image(0,0,'clicker');//TODO: bad
+      this.image = game.add.image(0,0,key);
+      InputManager.getInputDevice(0).addOnButtonPress(Button.a,click,this);
     }
 
 
@@ -36,6 +48,14 @@ module Scumbag
     }
 
 
+    /** implements GuiElement.getX() */
+    getX() {return this.image.x}
+
+
+    /** implements GuiElement.getY() */
+    getY() {return this.image.y}
+
+
     /** implements GuiElement.getWidth */
     getWidth() {return this.image.width}
 
@@ -47,8 +67,16 @@ module Scumbag
     /** implements GuiElement.update */
     update()
     {
+      if (this.go) return 1;
+      else return 0;
+    }
 
-      return 1;
+
+    /** implements GuiElement.destroy */
+    destroy()
+    {
+      InputManager.getInputDevice(0).removeOnButtonPress(Button.a,click);
+      this.image.destroy();
     }
   }
 }

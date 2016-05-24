@@ -35,6 +35,14 @@ module Scumbag
     abstract setPosition(x:number,y:number):void;
 
 
+    /** gives you the horizontal position */
+    abstract getX():number;
+
+
+    /** gives you the vertical position */
+    abstract getY():number;
+
+
     /** gives you the width of this element */
     abstract getWidth():number;
 
@@ -46,5 +54,9 @@ module Scumbag
     /** updates the gui element, which can return numbers if it does stuff like
      * a button or whatever */
     abstract update():number;
+
+
+    /** gets rid of stuff when the gui element shouldn't exist any more */
+    abstract destroy():void;
   }
 }

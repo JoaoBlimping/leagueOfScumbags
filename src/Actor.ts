@@ -11,7 +11,7 @@ module Scumbag
     angle:          number;
     tileWidth:      number;
     tileHeight:     number;
-    directions:     Direction[];
+    directions:     Array<Direction>;
     targetX = -1;
     targetY = -1;
     updating = true;
@@ -44,9 +44,9 @@ module Scumbag
       this.animations.add('up',[12,13,14,15],10,true);
 
       //add controller
-      this.moveSpeed = 80;
+      this.moveSpeed = 100;
 
-      this.directions = [Direction.down,Direction.right];
+      this.directions = new Array();
 
       //add it to the scene
       game.add.existing(this);
@@ -57,6 +57,8 @@ module Scumbag
     update()
     {
       if (!this.updating) return;
+
+      //if (this.directions.length == 0) return;
 
       let inTileX = this.body.x / this.tileWidth;
       let inTileY = this.body.y / this.tileHeight;
@@ -83,10 +85,12 @@ module Scumbag
       }
 
       //set the animation right
+
       if (this.directions[0] == Direction.up) this.animations.play("up");
-      if (this.directions[0] == Direction.left) this.animations.play("left");
-      if (this.directions[0] == Direction.right) this.animations.play("right");
-      if (this.directions[0] == Direction.down) this.animations.play("down");
+      else if (this.directions[0] == Direction.left) this.animations.play("left");
+      else if (this.directions[0] == Direction.right) this.animations.play("right");
+      else if (this.directions[0] == Direction.down) this.animations.play("down");
+      else this.animations.stop();
     }
 
 
@@ -94,8 +98,7 @@ module Scumbag
      * move in the next direction */
     changeDirection():void
     {
-      this.directions = this.directions.slice(1).concat(this.directions[0]);
-      this.directions = this.directions.concat(this.directions.pop());
+      this.directions.splice(0,1);
       this.targetX = -1;
       this.targetY = -1;
     }
