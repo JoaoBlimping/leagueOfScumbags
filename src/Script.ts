@@ -8,6 +8,7 @@ module Scumbag
   /** this is the context in scripts are run */
   namespace ScriptContext
   {
+    export let arguments:     string;
     export let value:         number;
     export let state:         GuiState;
 
@@ -41,11 +42,14 @@ module Scumbag
     }
 
     /** sets the script up to go.
-     * key is a key to a preloaded text file */
-    export function setScript(key:string)
+     * content is the key for the script, and then optionally a '?' and then a
+     * string that value will be set to for the first block */
+    export function setScript(content:string)
     {
-      blocks = game.cache.getText(key).split('\n');
+      let splitContent = content.split("?");
+      blocks = game.cache.getText(splitContent[0]).split('\n');
       ScriptContext.state = <GuiState>game.state.getCurrentState();
+      ScriptContext.arguments = splitContent[1];
       nextBlock = 0;
       runScript(0);
     }

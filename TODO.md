@@ -5,6 +5,7 @@ General
 ----
 
 
+
 Fighting
 --------
  - convert to using new input system.
@@ -15,9 +16,19 @@ Fighting
    spot and aim. I think they would work well as left trigger buttons on a
    controller.
 
+
 Overworld
 ---------
  - add music
- - make it that actors are loaded from the map file, and that is where all their
-   trash is stored.
  - add things to make characters move around based on a script and stuff.
+ - fix the way the player interacts with npcs so that you don't have to walking
+   into them to talk to them.
+ - fix render order again.
+
+ - make it that battles can be triggered from the overworld by specifying a map.
+ - make it you can go to different overworld maps from scripts.
+ - make it that entering regions can trigger a script.
+ - add self switches, global switches, and game saving.
+ - allow arguments to scripts so that I don't need to write a new one every time
+   I want to do something. for example there can be a common go to new area
+   script that regions can use

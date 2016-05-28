@@ -64,6 +64,7 @@ module Scumbag
     private setGui(gui:GuiElement):void
     {
       this.gui = gui;
+      this.gui.addPosition(this.game.camera.x,this.game.camera.y);
       this.onGuiStart();
     }
 

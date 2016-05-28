@@ -41,7 +41,9 @@
     {"type": "shader","key": "pyramid","url": "shaders/pyramid.frag"},
 
     {"type": "text","key": "test","url": "scripts/test.script"},
-    {"type": "text","key": "menuScript","url": "scripts/menuScript.script"}
+    {"type": "text","key": "menuScript","url": "scripts/menuScript.script"},
+    {"type": "text","key": "toDenny","url": "scripts/toDenny.script"},
+    {"type": "text","key": "transport","url": "scripts/transport.script"}
 
   ]
 }

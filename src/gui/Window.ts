@@ -10,7 +10,7 @@ module Scumbag
   {
     private children:     GuiElement[];
     private image:        Phaser.Image;
-    private chip:         Phaser.Image;
+    private chip:         Phaser.Image  = null;
 
     /** creates the window, using the game thing to set up the size, and it's
      * renderer, and also a list of it's children */
@@ -62,6 +62,13 @@ module Scumbag
     {
       this.image.x += x;
       this.image.y += y;
+      
+      if (this.chip != null)
+      {
+        this.chip.x += x;
+        this.chip.y += y;
+      }
+
       for (let i = 0;i < this.children.length;i++)
       {
         this.children[i].addPosition(x,y);
@@ -76,7 +83,13 @@ module Scumbag
       let deltaY = y - this.image.y;
 
       this.image.x += deltaX;
-      this.image.y += deltaY;
+      this.image.y += deltaY
+
+      if (this.chip != null)
+      {
+        this.chip.x += deltaX;
+        this.chip.y += deltaY;
+      }
 
       for (let i = 0;i < this.children.length;i++)
       {

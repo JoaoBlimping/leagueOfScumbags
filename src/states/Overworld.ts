@@ -3,6 +3,22 @@
 
 module Scumbag
 {
+
+  /** this is run when the player collides with an npc */
+  function actorCollide(a:Actor,b:Actor)
+  {
+    let script = null;
+    if (a instanceof PlayerActor && b instanceof NpcActor) script = b.script;
+    else if (a instanceof NpcActor && b instanceof PlayerActor) script = a.script;
+    else return;
+
+    let inputDevice = InputManager.getInputDevice(0);
+    if (inputDevice.getButtonState(Button.a) && script != null)
+    {
+      Script.setScript(script);
+    }
+  }
+
   /** the scene in which you walk around and most of the storyline takes
    * place */
   export class Overworld extends GuiState
@@ -12,6 +28,7 @@ module Scumbag
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
     actors:           Phaser.Group;
+    regions:          {[name:string]:Region};
     player:           Actor;
 
 
@@ -39,18 +56,44 @@ module Scumbag
 
 
       //add player and stuff
+      this.player = new PlayerActor(this.game,160,160,'chad');
       this.actors = this.game.add.group();
-      this.player = new PlayerActor(this.game,160,160,'chad',
-                              this.tilemap.tileWidth,
-                              this.tilemap.tileHeight);
       this.actors.add(this.player);
       this.game.camera.follow(this.player);
 
+
+      //create the regions
+      this.regions = createRegions(this.tilemap.objects["regions"]);
+
+      //create the actors
+      let actors = this.tilemap.objects["actors"];
+      for (let i in actors)
+      {
+        let x = actors[i].x;
+        let y = actors[i].y + this.tilemap.tileHeight;
+        let key = actors[i].properties.key;
+        let pathNames = [];
+        if (actors[i].properties.hasOwnProperty("path"))
+        {
+          pathNames = actors[i].properties.path.split(",");
+        }
+        let path:Region[] = [];
+        for (let u in pathNames) path.push(this.regions[pathNames[u]]);
+
+        let actor = new NpcActor(this.game,x,y,key);
+        actor.path = path;
+        actor.moveOnSpot = actors[i].properties.moveOnSpot;
+        actor.body.immovable = actor.moveOnSpot;
+        if (actors[i].properties.hasOwnProperty("script"))
+        {
+          actor.script = actors[i].properties.script;
+        }
+
+        this.actors.add(actor);
+      }
+
       //create the top layer of the world
       this.tilemap.createLayer("overhead");
-
-      //load the script
-      Script.setScript('test');
     }
 
 
@@ -65,27 +108,48 @@ module Scumbag
     /** overrides GuiState.postGuiUpdate() */
     postGuiUpdate()
     {
-      //check collisions between the player and the level
-      this.game.physics.arcade.collide(this.actors,this.collisionLayer,
-                                       hitLevel);
+      //make it look right
+      this.actors.sort('y', Phaser.Group.SORT_ASCENDING);
+
+      //check collisions between the characetrsand the level
+      this.game.physics.arcade.collide(this.actors,this.collisionLayer);
+
+       //check collisions between the actors and each other
+       this.game.physics.arcade.collide(this.actors,this.actors,actorCollide);
+
+       //check if the player is in a region with a script
+       for (let i in this.regions)
+       {
+         if (this.regions[i].script != null)
+         {
+           if (this.player.x > this.regions[i].x &&
+               this.player.x < this.regions[i].x + this.regions[i].width &&
+               this.player.y > this.regions[i].y &&
+               this.player.y < this.regions[i].y + this.regions[i].height)
+           {
+             Script.setScript(this.regions[i].script);
+
+           }
+         }
+       }
+
     }
 
 
     /** overrides GuiState.onGuiStart() */
-    onGuiStart() {this.actors.setAll('updating',false)}
+    onGuiStart()
+    {
+      this.player.updating = false;
+      this.actors.setAll('updating',false);
+    }
 
 
     /** overrides GuiState.onGuiEnd() */
-    onGuiEnd() {this.actors.setAll('updating',true)}
+    onGuiEnd()
+    {
+      this.player.updating = true;
+      this.actors.setAll('updating',true);
+    }
   }
 
-
-  /** what happens when an actor hits the level */
-  function hitLevel(actor:Actor)
-  {
-    let directionPoint = directionToPoint(actor.directions[0]);
-    actor.body.x -= directionPoint.x;
-    actor.body.y -= directionPoint.y;
-    actor.changeDirection();
-  }
 }

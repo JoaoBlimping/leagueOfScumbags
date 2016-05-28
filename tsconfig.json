@@ -1,7 +1,6 @@
 {
     "compilerOptions":
     {
-      "noImplicitAny": true,
       "removeComments": true,
       "preserveConstEnums": true,
       "outFile": "release/game.js",
