@@ -17,6 +17,11 @@ def parse(data):
     return "\n".join(finalData)
 
 
+packFile = open('release/scriptPack.json','w')
+packFile.write('{"scripts":[')
+
+addComma = False
+
 path = 'scripts/'
 listing = os.listdir(path)
 for infilename in listing:
@@ -24,6 +29,16 @@ for infilename in listing:
     parsedData = parse(infile.read())
     infile.close()
 
-    outfile = open('release/scripts/'+infilename.split('.')[0]+'.script','w')
+    noExtName = infilename.split('.')[0]
+
+    if addComma: packFile.write(',')
+    else: addComma = True
+
+    packFile.write('{"type":"text","key":"'+noExtName+'","url":"scripts/'+noExtName+'.script"}')
+
+    outfile = open('release/scripts/'+noExtName+'.script','w')
     outfile.write(parsedData)
     outfile.close()
+
+packFile.write(']}')
+packFile.close();\

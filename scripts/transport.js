@@ -1,3 +1,2 @@
 var arguments = this.arguments.split(",");
-
-console.log("transporting you to level "+arguments[0]+", region "+arguments[1]);
+this.transport(arguments[0],arguments[1]);

@@ -7,7 +7,7 @@ this.state.buildQA("League of Scumbags",
 ~
 
 //block 1
-if (this.value == 1) this.changeState('Overworld');
+if (this.value == 1) this.transport('map2','frontHouse1');
 else
 {
   this.setNextBlock(0);

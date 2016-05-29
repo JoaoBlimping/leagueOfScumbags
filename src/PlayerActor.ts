@@ -3,6 +3,14 @@
 
 module Scumbag
 {
+  export function addPlayerAtRegion(game:Phaser.Game,region:Region,key:string)
+  {
+    let x = region.x + region.width / 2;
+    let y = region.y + region.height / 2;
+    return new PlayerActor(game,x,y,key);
+  }
+
+
   export class PlayerActor extends Actor
   {
     constructor(game:Phaser.Game,x:number,y:number,key:string)

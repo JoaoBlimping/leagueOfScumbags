@@ -17,9 +17,15 @@ module Scumbag
      * may need to be replaced with like a set level function or something
      * also, I'll need a separate function to start battles, and then go back to
      * the overworld when they are done */
-    export function changeState(newState:string):void
+    export function changeState(newState:string,...args):void
     {
-      game.state.start(newState, true, false);
+      game.state.start(newState,true,false,args);
+    }
+
+
+    export function transport(level:string,playerRegion:string)
+    {
+      game.state.start("Overworld",true,false,level,playerRegion);
     }
 
 

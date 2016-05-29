@@ -9,6 +9,7 @@ module Scumbag
     script: string;
   }
 
+
   export function createRegions(data:any[]):{[name:string]:Region}
   {
     let regions:{[name:string]:Region} = {};

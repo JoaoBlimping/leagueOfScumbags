@@ -32,9 +32,11 @@ module Scumbag
     player:           Actor;
 
 
-    /** overrides Phaser.State.create() */
-    create()
+    /** overrides Phaser.State.init() */
+    init(map:string,playerRegion:string)
     {
+      console.log(map,playerRegion);
+
       //create the background
       this.background = this.add.sprite(0, 0, 'titlepage');
 
@@ -46,7 +48,7 @@ module Scumbag
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
       //create the tilemap
-      this.tilemap = this.add.tilemap('map2');
+      this.tilemap = this.add.tilemap(map);
       this.tilemap.addTilesetImage('outsideTiles','outsideTiles');
       this.tilemap.createLayer("background");
       this.collisionLayer = this.tilemap.createLayer('collisions');
@@ -54,16 +56,14 @@ module Scumbag
       this.tilemap.setCollisionBetween(0, 6569);
       this.collisionLayer.resizeWorld();
 
-
-      //add player and stuff
-      this.player = new PlayerActor(this.game,160,160,'chad');
-      this.actors = this.game.add.group();
-      this.actors.add(this.player);
-      this.game.camera.follow(this.player);
-
-
       //create the regions
       this.regions = createRegions(this.tilemap.objects["regions"]);
+      console.log(this.regions);
+
+      //add player and stuff
+      this.player = addPlayerAtRegion(this.game,this.regions[playerRegion],"chad");
+      this.actors = this.game.add.group();
+      this.actors.add(this.player);
 
       //create the actors
       let actors = this.tilemap.objects["actors"];
@@ -86,7 +86,10 @@ module Scumbag
         actor.body.immovable = actor.moveOnSpot;
         if (actors[i].properties.hasOwnProperty("script"))
         {
-          actor.script = actors[i].properties.script;
+          if (actors[i].properties.script != "")
+          {
+            actor.script = actors[i].properties.script;
+          }
         }
 
         this.actors.add(actor);
@@ -97,11 +100,24 @@ module Scumbag
     }
 
 
+    /** implements Phaser.State.create() */
+    create()
+    {
+      this.game.camera.follow(this.player);
+    }
+
+
     /** overrides Phaser.State.render() */
     render()
     {
       //this.game.debug.body(this.player);
       //this.game.debug.bodyInfo(this.player,32,32);
+    }
+
+
+    shutDown()
+    {
+      console.log("k");
     }
 
 
@@ -128,11 +144,9 @@ module Scumbag
                this.player.y < this.regions[i].y + this.regions[i].height)
            {
              Script.setScript(this.regions[i].script);
-
            }
          }
        }
-
     }
 
 

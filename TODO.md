@@ -29,6 +29,4 @@ Overworld
  - make it you can go to different overworld maps from scripts.
  - make it that entering regions can trigger a script.
  - add self switches, global switches, and game saving.
- - allow arguments to scripts so that I don't need to write a new one every time
-   I want to do something. for example there can be a common go to new area
-   script that regions can use
+ - rip off all of rpgmaker's features pretty much

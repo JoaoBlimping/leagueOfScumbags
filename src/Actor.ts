@@ -21,7 +21,11 @@ module Scumbag
       this.body.collideWorldBounds = true;
 
       //set the tile width
-      this.body.height = this.height / 2;
+      this.body.width = this.width / 5 * 4;
+      this.body.height = this.height / 10 * 4;
+      this.body.offset.x = this.width / 10;
+      this.body.offset.y = this.height / 10 * 6;
+
 
       //do animation type crap
       this.anchor.setTo(0.5,1);
