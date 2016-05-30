@@ -34,6 +34,34 @@ module Scumbag
       nextBlock = newNextBlock;
       nextBlockSet = true;
     }
+
+
+    export function setSwitch(key:string,value:boolean):void
+    {
+      StateOfGame.switches[key] = value;
+    }
+
+
+    export function getSwitch(key:string):boolean
+    {
+      if (key in StateOfGame.switches) return StateOfGame.switches[key];
+      else return false;
+    }
+
+    export function setVariable(key:string,value:number):void
+    {
+      StateOfGame.variables[key] = value;
+    }
+
+    export function getVarirable(key:number):number
+    {
+      if (key in StateOfGame.variables) return StateOfGame.variables[key];
+      else return 0;
+    }
+
+    export function saveGame(slot:number) {StateOfGame.save(slot)}
+
+    export function loadGame(slot:number) {StateOfGame.load(slot)}
   }
 
 

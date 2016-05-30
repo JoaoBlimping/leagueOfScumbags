@@ -112,6 +112,14 @@
         }],
  "nextobjectid":24,
  "orientation":"orthogonal",
+ "properties":
+    {
+     "startScript":"welcomeToDennys"
+    },
+ "propertytypes":
+    {
+     "startScript":"string"
+    },
  "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[

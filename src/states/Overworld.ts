@@ -35,14 +35,8 @@ module Scumbag
     /** overrides Phaser.State.init() */
     init(map:string,playerRegion:string)
     {
-      console.log(map,playerRegion);
-
       //create the background
       this.background = this.add.sprite(0, 0, 'titlepage');
-
-      //load and play the music
-      this.music = this.add.audio('music', 1, false);
-      this.music.play();
 
       //turn on phyysics
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -58,7 +52,6 @@ module Scumbag
 
       //create the regions
       this.regions = createRegions(this.tilemap.objects["regions"]);
-      console.log(this.regions);
 
       //add player and stuff
       this.player = addPlayerAtRegion(this.game,this.regions[playerRegion],"chad");
@@ -97,6 +90,15 @@ module Scumbag
 
       //create the top layer of the world
       this.tilemap.createLayer("overhead");
+
+      //if there ain't no things then don't go there
+      if (this.tilemap.properties == null) return;
+
+      //load music if there is some
+      if (this.tilemap.properties.hasOwnProperty("music"))
+      {
+        MusicManager.playSong(this.game,this.tilemap.properties.music);
+      }
     }
 
 
@@ -104,6 +106,16 @@ module Scumbag
     create()
     {
       this.game.camera.follow(this.player);
+      this.game.camera.focusOnXY(this.player.position.x,this.player.position.y);
+
+      //run script if there is one
+      if (this.tilemap.properties.hasOwnProperty("startScript"))
+      {
+        if (this.tilemap.properties.startScript != "")
+        {
+          Script.setScript(this.tilemap.properties.startScript);
+        }
+      }
     }
 
 

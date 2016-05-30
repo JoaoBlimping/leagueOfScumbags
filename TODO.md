@@ -19,14 +19,13 @@ Fighting
 
 Overworld
 ---------
- - add music
  - add things to make characters move around based on a script and stuff.
  - fix the way the player interacts with npcs so that you don't have to walking
-   into them to talk to them.
- - fix render order again.
-
+   into them to talk to them, and it doesn't repeat if you are still walking, or
+   they are. make it when you press A, it outputs an invisible thing which
+   activates an npc if it hits them.
+ - make map loading completely proper so that there can be different tilesets,
+   music, and backgrounds
  - make it that battles can be triggered from the overworld by specifying a map.
- - make it you can go to different overworld maps from scripts.
- - make it that entering regions can trigger a script.
- - add self switches, global switches, and game saving.
+ - game saving.
  - rip off all of rpgmaker's features pretty much

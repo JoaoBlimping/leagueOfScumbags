@@ -44,6 +44,15 @@
     {"type": "shader","key": "boxes","url": "shaders/boxes.frag"},
     {"type": "shader","key": "headache","url": "shaders/headache.frag"},
     {"type": "shader","key": "uninitialised","url": "shaders/uninitialised.frag"},
-    {"type": "shader","key": "pyramid","url": "shaders/pyramid.frag"}
+    {"type": "shader","key": "pyramid","url": "shaders/pyramid.frag"},
+
+    {
+      "type": "audio","key": "music","urls":["audio/music.ogg"],
+      "autoDecode": true
+    },
+    {
+      "type": "audio","key": "menuMusic","urls":["audio/menuMusic.ogg"],
+      "autoDecode": true
+    }
   ]
 }

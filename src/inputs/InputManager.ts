@@ -8,7 +8,7 @@ module Scumbag
   {
     let inputDevices = Array<InputDevice>(N_INPUT_DEVICES);
 
-    export function init(game:Phaser.Game)
+    export function init(game:Phaser.Game):void
     {
       game.input.gamepad.start();
 
@@ -27,7 +27,7 @@ module Scumbag
       }
     }
 
-    export function getInputDevice(id:number)
+    export function getInputDevice(id:number):InputDevice
     {
       return inputDevices[id];
     }

@@ -157,6 +157,16 @@
         }],
  "nextobjectid":21,
  "orientation":"orthogonal",
+ "properties":
+    {
+     "music":"music",
+     "startScript":""
+    },
+ "propertytypes":
+    {
+     "music":"string",
+     "startScript":"string"
+    },
  "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[

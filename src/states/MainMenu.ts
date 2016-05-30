@@ -20,6 +20,9 @@ module Scumbag
       this.add.tween(this.background).to({ alpha: 1}, 500, Phaser.Easing.Bounce.InOut, true);
       this.add.tween(this.logo).to({ y: 220 }, 700, Phaser.Easing.Elastic.Out,true, 500);
 
+      //chuck on a sweet beat
+      MusicManager.playSong(this.game,'menuMusic');
+
       //initialise the controls
       InputManager.init(this.game);
 
