@@ -5,7 +5,7 @@ module Scumbag
 {
   export class Fight extends Phaser.State
   {
-    background:       Background;
+    background:       Phaser.Image;
     music:            Phaser.Sound;
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
@@ -16,11 +16,30 @@ module Scumbag
     manaBar:          Phaser.Image;
 
 
+    init(map:string)
+    {
+      //create the tilemap
+      this.tilemap = this.add.tilemap(map);
+      this.tilemap.addTilesetImage('combatTiles','combatTiles');
+      this.tilemap.createLayer("background");
+      this.collisionLayer = this.tilemap.createLayer("collisions");
+      this.tilemap.setLayer(this.collisionLayer);
+      this.tilemap.setCollisionBetween(0, 6569);
+      this.collisionLayer.resizeWorld();
+    }
+
+
     create()
     {
       //create the background
-      this.background = new ShaderBackground(this.game,'pyramid');
-      this.game.add.existing(this.background);
+      if (this.tilemap.properties.hasOwnProperty("background"))
+      {
+        if (this.tilemap.properties.background != "")
+        {
+          this.background = this.add.image(0,0,this.tilemap.properties.background);
+          this.background.sendToBack();
+        }
+      }
 
       //load and play the music
       this.music = this.add.audio('music', 1, false);
@@ -28,15 +47,6 @@ module Scumbag
 
       //turn on phyysics
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-      //create the tilemap
-      this.tilemap = this.add.tilemap('map1');
-      this.tilemap.addTilesetImage('combatTiles','combatTiles');
-      this.tilemap.createLayer("background");
-      this.collisionLayer = this.tilemap.createLayer("collisions");
-      this.tilemap.setLayer(this.collisionLayer);
-      this.tilemap.setCollisionBetween(0, 6569);
-      this.collisionLayer.resizeWorld();
 
 
       //make group for all the bullets
@@ -46,7 +56,7 @@ module Scumbag
       this.fighters = this.game.add.group();
       this.player = new Fighter(this.game,this.game.camera.width / 2,
                                 this.game.world.height / 2,'dude',
-                                new Nuke(this.game,this.bullets));
+                                new Blaster(this.game,this.bullets));
       this.fighters.add(this.player);
       this.game.camera.follow(this.player);
 

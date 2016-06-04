@@ -29,6 +29,18 @@ module Scumbag
     }
 
 
+    export function startFight(map:string)
+    {
+      game.state.start("Fight",true,false,map);
+    }
+
+
+    export function toOverworld()
+    {
+      game.state.start("Overworld",true,false);
+    }
+
+
     export function setNextBlock(newNextBlock:number):void
     {
       nextBlock = newNextBlock;
@@ -38,28 +50,31 @@ module Scumbag
 
     export function setSwitch(key:string,value:boolean):void
     {
-      StateOfGame.switches[key] = value;
+      StateOfGame.parameters.switches[key] = value;
     }
 
 
     export function getSwitch(key:string):boolean
     {
-      if (key in StateOfGame.switches) return StateOfGame.switches[key];
+      if (key in StateOfGame.parameters.switches) return StateOfGame.parameters.switches[key];
       else return false;
     }
 
     export function setVariable(key:string,value:number):void
     {
-      StateOfGame.variables[key] = value;
+      StateOfGame.parameters.variables[key] = value;
     }
 
     export function getVarirable(key:number):number
     {
-      if (key in StateOfGame.variables) return StateOfGame.variables[key];
+      if (key in StateOfGame.parameters.variables) return StateOfGame.parameters.variables[key];
       else return 0;
     }
 
-    export function saveGame(slot:number) {StateOfGame.save(slot)}
+    export function saveGame(slot:number)
+    {
+      StateOfGame.save(slot);
+    }
 
     export function loadGame(slot:number) {StateOfGame.load(slot)}
   }

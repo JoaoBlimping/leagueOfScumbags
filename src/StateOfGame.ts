@@ -2,21 +2,31 @@ module Scumbag
 {
   export namespace StateOfGame
   {
-    export let switches:    {[name:string]:boolean} = {};
-    export let variables:   {[name:string]:number}  = {};
+    export let parameters =
+    {
+      switches:   {},
+      variables:  {},
+      characters: [],
+      map:        "",
+      playerX:    0,
+      playerY:    0
+    }
 
 
     export function save(slot:number):void
     {
+      let data = JSON.stringify(parameters);
       if (typeof(Storage) !== "undefined")
       {
-        localStorage.setItem("save"+slot,[switches,variables].toString());
+        localStorage.setItem("save"+slot,data);
+        console.log(data);
+        console.log(parameters.switches);
       }
       else
       {
         console.log("I'm afraid saving won't be possible in this browser, but" +
                     " here's what it was going to save:");
-        console.log([switches,variables].toString);
+        console.log(data);
       }
     }
 
@@ -25,10 +35,7 @@ module Scumbag
     {
       if (typeof(Storage) !== "undefined")
       {
-        let data = localStorage.getItem("save"+slot);
-        console.log(data);
-        //switches = data[0];
-        //variables = data[1];
+        parameters = JSON.parse(localStorage.getItem("save"+slot));
       }
       else
       {

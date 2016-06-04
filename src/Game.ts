@@ -6,7 +6,7 @@ module Scumbag
   {
     constructor()
     {
-      super(1152,528,Phaser.AUTO,'content',null);
+      super(864,396,Phaser.AUTO,'content',null,false,false);
 
       this.state.add('Boot',Boot,false);
       this.state.add('Preloader',Preloader,false);

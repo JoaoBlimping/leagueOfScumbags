@@ -16,6 +16,7 @@ this.state.buildQA("would you like fish?",
 //if they said no to the fish
 if (this.value == 1)
 {
+  this.setNextBlock(3);
   var selection = Math.random() * 2;
   if (selection > 1) this.state.buildTextbox("Purple Hat Man","cunt","phm_angry");
   else this.state.buildTextbox("Purple Hat Man","you fiend","phm_angry");
@@ -24,7 +25,12 @@ if (this.value == 1)
 //if they said yes to fish
 else
 {
+  this.setNextBlock(69);
   var selection = Math.random() * 2;
   if (selection > 1) this.state.buildTextbox("Purple Hat Man","that's so great","phm_normal");
   else this.state.buildTextbox("Purple Hat Man","That is so wonderful :)","phm_normal");
 }
+~
+
+//block 3
+this.startFight("map1");

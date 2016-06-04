@@ -1,4 +1,3 @@
-console.log(this.getSwitch("beenToDennys"));
 if (!this.getSwitch("beenToDennys"))
 {
   this.setSwitch("beenToDennys",true);
