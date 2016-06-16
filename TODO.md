@@ -1,13 +1,13 @@
 TODO
 ====
+I need to remember to keep the scope reasonable so that I can actually finish
+this game without dying first. Then I can add more features for the sequel.
 
 General
 ----
 - bug where the music system can't stop a song once it's repeated.
 - on a related note, I really want to have midi music. It will save a lot of
   size which I think is important on internet, and also they are groove fests.
-- add a transition thingo which will receive a pic of the previous screen
-  somehow and then it will somehow do a groovy transition
 
 
 Fighting
@@ -36,4 +36,6 @@ Overworld
    into them to talk to them, and it doesn't repeat if you are still walking, or
    they are. make it when you press A, it outputs an invisible thing which
    activates an npc if it hits them.
- - rip off all of rpgmaker's features pretty much
+
+ - control music from script
+ - be able to get actors in level by name from script.
