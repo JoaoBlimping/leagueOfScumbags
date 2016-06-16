@@ -58,8 +58,8 @@
                  "type":"region",
                  "visible":true,
                  "width":32,
-                 "x":1325.6698124199,
-                 "y":687.627403005942
+                 "x":989.6698124199,
+                 "y":521.627403005942
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -81,14 +81,14 @@
      "music":"string"
     },
  "renderorder":"right-down",
- "tileheight":32,
+ "tileheight":24,
  "tilesets":[
         {
-         "columns":10,
+         "columns":7,
          "firstgid":1,
          "image":"..\/images\/outside.png",
-         "imageheight":192,
-         "imagewidth":320,
+         "imageheight":144,
+         "imagewidth":240,
          "margin":0,
          "name":"outsideTiles",
          "spacing":0,
@@ -101,11 +101,11 @@
                  "name":"dirt",
                  "tile":-1
                 }],
-         "tilecount":60,
+         "tilecount":30,
          "tileheight":32,
          "tilewidth":32
         }],
- "tilewidth":32,
+ "tilewidth":24,
  "version":1,
  "width":100
 }

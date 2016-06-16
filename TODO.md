@@ -4,11 +4,8 @@ TODO
 General
 ----
 - bug where the music system can't stop a song once it's repeated.
-- make maps have different backgrounds. Maybe I'll just make it that they have
-  picture backgrounds because I am lazy, and also I think they can be used to
-  a more spooky effect than the glsl backgrounds. So that means I will need to
-  read maps's background colours and put that at the very bottom, and then have
-  an optional background picture as well.
+- on a related note, I really want to have midi music. It will save a lot of
+  size which I think is important on internet, and also they are groove fests.
 - add a transition thingo which will receive a pic of the previous screen
   somehow and then it will somehow do a groovy transition
 
@@ -22,15 +19,21 @@ Fighting
  - add a strafe button, and also like a reverse strafe that lets you stand on
    spot and aim. I think they would work well as left trigger buttons on a
    controller.
- - you seem to be able to walk through walls and all this stuff at the moment
+ - you seem to be able to walk through walls and all this stuff at the moment,
+   probably check the fighter's body.
 
 
 Overworld
 ---------
- - add things to make characters move around based on a script and stuff.
+ - add things to make characters move around based on a script and stuff. also
+   make it that turning in certain directions and also standing still count as
+   movements. I'll do this by making it that movement is an interface, and then
+   when it has a wait movement it sets a flag which says it's waiting and also
+   sets the time after which it will turn off the flag and go on to the next
+   movement. yeah, it works, but I need to make the timing work properly because
+   it is weird at the moment I think.
  - fix the way the player interacts with npcs so that you don't have to walking
    into them to talk to them, and it doesn't repeat if you are still walking, or
    they are. make it when you press A, it outputs an invisible thing which
    activates an npc if it hits them.
- - make it that battles can be triggered from the overworld by specifying a map.
  - rip off all of rpgmaker's features pretty much

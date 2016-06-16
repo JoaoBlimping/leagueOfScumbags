@@ -96,8 +96,8 @@ module Scumbag
         {
           pathNames = actors[i].properties.path.split(",");
         }
-        let path:Region[] = [];
-        for (let u in pathNames) path.push(this.regions[pathNames[u]]);
+        let path:Movement[] = [];
+        for (let u in pathNames) path.push(stringToMovement(pathNames[u],this.regions));
 
         let actor = new NpcActor(this.game,x,y,key);
         actor.path = path;

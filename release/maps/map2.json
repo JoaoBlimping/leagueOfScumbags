@@ -45,7 +45,7 @@
                  "properties":
                     {
                      "key":"chad",
-                     "path":"behindHouse2,frontHouse1,frontHouse3",
+                     "path":"behindHouse2,#5000,frontHouse1,#1000,frontHouse3,#2000",
                      "script":""
                     },
                  "propertytypes":

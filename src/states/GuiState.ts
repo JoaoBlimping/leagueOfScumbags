@@ -3,6 +3,11 @@
 
 module Scumbag
 {
+  let headingFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#087"};
+  let questionFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#0cc"};
+  let bodyFont = {font:"12px Sans",fill:"#ffa"};
+
+
   /** this is used for any game state that contains gui windows n shit */
   export abstract class GuiState extends Phaser.State
   {
@@ -32,8 +37,8 @@ module Scumbag
      * answers */
     buildTextbox(heading:string,content:string,chipKey?:string):void
     {
-      let head = new TextElement(this.game,heading,{font:"24px Serif",fill:"#0f0"});
-      let text = new TextElement(this.game,content,{font:"15px Sans",fill:"#fff"});
+      let head = new TextElement(this.game,heading,headingFont);
+      let text = new TextElement(this.game,content,bodyFont);
       let clicker = new ClickerElement(this.game,'clicker');
 
       this.setGui(new Window(this.game,"window",new Array<GuiElement>(head,text,clicker),chipKey));
@@ -44,14 +49,12 @@ module Scumbag
      * answers */
     buildQA(question:string,chipKey:string,...answers:string[]):void
     {
-      let head = new TextElement(this.game,question,
-                                 {font:"24px Serif",fill:"#0f0"});
+      let head = new TextElement(this.game,question,questionFont);
 
       let body = new Array<TextElement>(answers.length);
       for (let i = 0;i < body.length;i++)
       {
-        body[i] = new TextElement(this.game,answers[i],
-                                  {font:"15px Sans",fill:"#fff"});
+        body[i] = new TextElement(this.game,answers[i],bodyFont);
       }
 
       let selector = new SelectorElement(this.game,'selector',body);
