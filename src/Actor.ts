@@ -3,25 +3,47 @@
 
 module Scumbag
 {
+  /** the different modes of movement that actors can be in
+   * PermanentPath is for when they are following a path over and over again
+   * TemporaryPath is for when they follow a path once and then stop
+   * PlayerControlled is for whe they are being controlled by the player*/
+  export enum MovementMode
+  {
+    PermanentPath,
+    TemporaryPath,
+    PlayerControlled
+  }
+
+
   /** a fighter that will jump about and all that in the battle system */
-  export abstract class Actor extends Phaser.Sprite
+  export class Actor extends Phaser.Sprite
   {
     name:           string;
     moveSpeed:      number;
-    updating:       boolean = true;
-    moveOnSpot:     boolean = false;
+    updating:       boolean       = true;
+    moveOnSpot:     boolean       = false;
+
+    moveMode:       MovementMode  = MovementMode.PermanentPath;
+    path:           Movement[]    = [];
+    script:         string        = null;
+
+    waiting:          boolean   = false;
+    waitTime:         number    = 0;
 
     /** like a sprite, but also with tile width and height */
-    constructor(game:Phaser.Game,x:number,y:number,key:string)
+    constructor(game:Phaser.Game,x:number,y:number,key:string,name:string)
     {
       //run superconstructor
       super(game,x,y,key);
+
+      //set it's name
+      this.name = name;
 
       //turn on physics
       this.game.physics.arcade.enable(this);
       this.body.collideWorldBounds = true;
 
-      //set the tile width
+      //set it's dimensions
       this.body.width = this.width / 5 * 4;
       this.body.height = this.height / 10 * 4;
       this.body.offset.x = this.width / 10;
@@ -55,7 +77,7 @@ module Scumbag
         return;
       }
 
-      this.postActorUpdate();
+      this.move();
 
       //set the animation right
       let angle = Math.atan2(this.body.velocity.y,this.body.velocity.x);
@@ -71,9 +93,66 @@ module Scumbag
       else this.animations.stop();
     }
 
+    move():void
+    {
+      if ((this.path.length == 0 &&
+          (this.moveMode == MovementMode.PermanentPath ||
+           this.moveMode == MovementMode.TemporaryPath)) || this.waiting)
+      {
+        return;
+      }
 
-    /** this is the update that will happen when the superclass has decided that
-     * it is allowed to happen */
-    abstract postActorUpdate():void;
+      //control like the player
+      if (this.moveMode == MovementMode.PlayerControlled)
+      {
+        let input = InputManager.getInputDevice(0);
+        this.body.velocity.x = input.getAxisState(Axis.Horizontal) * this.moveSpeed;
+        this.body.velocity.y = input.getAxisState(Axis.Vertical) * this.moveSpeed;
+      }
+
+      //control via some sort of path
+      else
+      {
+        if (this.path[0].type == MovementType.Wait)
+        {
+          this.waitTime -= this.game.time.elapsedMS;
+          if (this.waitTime <= 0) this.nextMovement();
+        }
+        else if (this.path[0].type == MovementType.Walk) this.pathMove();
+      }
+    }
+
+    pathMove():void
+    {
+      if (this.x > this.path[0].region.x &&
+          this.x < this.path[0].region.x + this.path[0].region.width &&
+          this.y > this.path[0].region.y &&
+          this.y < this.path[0].region.y + this.path[0].region.height)
+      {
+        this.nextMovement();
+        return;
+      }
+
+      //set angle to the target destination
+      let deltaX = (this.path[0].region.x + this.path[0].region.width / 2) - this.x;
+      let deltaY = (this.path[0].region.y + this.path[0].region.height / 2) - this.y;
+      let angle = Math.atan2(deltaY,deltaX);
+
+      this.body.velocity.x = this.moveSpeed * Math.cos(angle);
+      this.body.velocity.y = this.moveSpeed * Math.sin(angle);
+    }
+
+    nextMovement():void
+    {
+      if (this.moveMode == MovementMode.PermanentPath)
+      {
+        this.path.push(this.path[0]);
+      }
+      this.path.splice(0,1);
+      if (this.path[0].type == MovementType.Wait)
+      {
+        this.waitTime = this.path[0].waitTime;
+      }
+    }
   }
 }

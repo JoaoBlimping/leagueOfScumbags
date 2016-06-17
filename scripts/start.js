@@ -1,3 +1,3 @@
 //block 0
-console.log("frickkk");
-this.state.getActorByName("player").kill();
+var player = this.state.getActorByName("player");
+player.moveMode = 1;

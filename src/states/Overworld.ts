@@ -8,13 +8,13 @@ module Scumbag
   function actorCollide(a:Actor,b:Actor)
   {
     let script = null;
-    if (a instanceof PlayerActor && b instanceof NpcActor)
+    if (a.name == "player")
     {
       script = b.script;
       StateOfGame.parameters.playerX = a.position.x;
       StateOfGame.parameters.playerY = a.position.y;
     }
-    else if (a instanceof NpcActor && b instanceof PlayerActor)
+    else if (b.name == "player")
     {
       script = a.script;
       StateOfGame.parameters.playerX = b.position.x;
@@ -28,6 +28,17 @@ module Scumbag
       Script.setScript(script);
     }
   }
+
+
+  function addPlayerAtRegion(game:Phaser.Game,region:Region,key:string)
+  {
+    let x = region.x + region.width / 2;
+    let y = region.y + region.height / 2;
+    let player = new Actor(game,x,y,key,"player");
+    player.moveMode = MovementMode.PlayerControlled;
+    return player;
+  }
+
 
   /** the scene in which you walk around and most of the storyline takes
    * place */
@@ -72,10 +83,11 @@ module Scumbag
       //add player and stuff
       if (playerRegion == null)
       {
-        this.player = new PlayerActor(this.game,
+        this.player = new Actor(this.game,
                                       StateOfGame.parameters.playerX,
                                       StateOfGame.parameters.playerY,
-                                      "chad");
+                                      "chad","player");
+        this.player.moveMode = MovementMode.PlayerControlled;
       }
       else
       {
@@ -91,6 +103,7 @@ module Scumbag
         let x = actors[i].x;
         let y = actors[i].y + this.tilemap.tileHeight;
         let key = actors[i].properties.key;
+        let name = actors[i].properties.name;
         let pathNames = [];
         if (actors[i].properties.hasOwnProperty("path"))
         {
@@ -99,7 +112,7 @@ module Scumbag
         let path:Movement[] = [];
         for (let u in pathNames) path.push(stringToMovement(pathNames[u],this.regions));
 
-        let actor = new NpcActor(this.game,x,y,key);
+        let actor = new Actor(this.game,x,y,key,name);
         actor.path = path;
         actor.moveOnSpot = actors[i].properties.moveOnSpot;
         actor.body.immovable = actor.moveOnSpot;

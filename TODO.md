@@ -10,6 +10,12 @@ General
 - on a related note, I really want to have midi music. It will save a lot of
   size which I think is important on internet, and also they are groove fests.
 
+- add some kind of macro system to the scipt parser so that I can declare for
+  all scripts the values of some enums and stuff which can't be accessed from
+  them.
+
+ - control music from script
+
 
 Fighting
 --------
@@ -31,13 +37,9 @@ Overworld
 ---------
  - give both npc and player actors the ability to be given a set path to follow,
    and add a gui element that waits for them to finish and then return to the
-   script
+   script. Probably merge npc and player back into a single class.
 
  - fix the way the player interacts with npcs so that you don't have to walking
    into them to talk to them, and it doesn't repeat if you are still walking, or
    they are. make it when you press A, it outputs an invisible thing which
    activates an npc if it hits them.
-
- - control music from script
-
- - be able to get actors in level by name from script.
