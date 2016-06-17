@@ -6,9 +6,10 @@ module Scumbag
   /** a fighter that will jump about and all that in the battle system */
   export abstract class Actor extends Phaser.Sprite
   {
+    name:           string;
     moveSpeed:      number;
-    updating:       boolean   = true;
-    moveOnSpot:     boolean   = false;
+    updating:       boolean = true;
+    moveOnSpot:     boolean = false;
 
     /** like a sprite, but also with tile width and height */
     constructor(game:Phaser.Game,x:number,y:number,key:string)

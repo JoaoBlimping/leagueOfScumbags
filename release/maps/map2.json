@@ -179,7 +179,7 @@
  "properties":
     {
      "music":"music",
-     "startScript":""
+     "startScript":"start"
     },
  "propertytypes":
     {

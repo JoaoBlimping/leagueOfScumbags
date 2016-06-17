@@ -16,6 +16,7 @@ module Scumbag
     constructor(game:Phaser.Game,x:number,y:number,key:string)
     {
       super(game,x,y,key);
+      this.name = "player";
     }
 
     postActorUpdate()

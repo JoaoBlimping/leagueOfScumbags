@@ -134,15 +134,6 @@ module Scumbag
         MusicManager.playSong(this.game,this.tilemap.properties.music);
       }
 
-      //run script if there is one
-      if (this.tilemap.properties.hasOwnProperty("startScript"))
-      {
-        if (this.tilemap.properties.startScript != "")
-        {
-          Script.setScript(this.tilemap.properties.startScript);
-        }
-      }
-
       //create the background
       if (this.tilemap.properties.hasOwnProperty("background"))
       {
@@ -150,6 +141,15 @@ module Scumbag
         {
           this.background = this.add.image(0,0,this.tilemap.properties.background);
           this.background.sendToBack();
+        }
+      }
+
+      //run script if there is one
+      if (this.tilemap.properties.hasOwnProperty("startScript"))
+      {
+        if (this.tilemap.properties.startScript != "")
+        {
+          Script.setScript(this.tilemap.properties.startScript);
         }
       }
     }
@@ -220,6 +220,20 @@ module Scumbag
     {
       this.player.updating = true;
       this.actors.setAll('updating',true);
+    }
+
+    /** gives you an actor by their name, or returns null if no actor has that
+     * name */
+    getActorByName(name:string):Actor
+    {
+      for (let i = 0;i < this.actors.length;i++)
+      {
+        if ((<Actor>this.actors.getAt(i)).name == name)
+        {
+          return <Actor>this.actors.getAt(i);
+        }
+      }
+      return null;
     }
   }
 
