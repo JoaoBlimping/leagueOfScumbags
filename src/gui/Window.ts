@@ -17,7 +17,7 @@ module Scumbag
     constructor(game:Phaser.Game,key:string,children:GuiElement[],
                 chipKey?:string)
     {
-      super(true);
+      super();
       this.children = children;
 
       this.image = game.add.image(0,game.height - game.height / 4,key);
@@ -62,7 +62,7 @@ module Scumbag
     {
       this.image.x += x;
       this.image.y += y;
-      
+
       if (this.chip != null)
       {
         this.chip.x += x;

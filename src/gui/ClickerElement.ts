@@ -19,7 +19,7 @@ module Scumbag
     /** creates a text thingy */
     constructor(game:Phaser.Game,key:string)
     {
-      super(false);
+      super();
       this.image = game.add.image(0,0,key);
       InputManager.getInputDevice(0).addOnButtonPress(Button.a,click,this);
     }

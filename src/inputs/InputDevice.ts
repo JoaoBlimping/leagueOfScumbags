@@ -11,6 +11,8 @@ module Scumbag
     r,
     select,
     start,
+    lTrigger,
+    rTrigger,
     nButtons
   }
 
@@ -20,8 +22,6 @@ module Scumbag
   {
     Horizontal,
     Vertical,
-    lTrigger,
-    rTrigger,
     nAxes
   }
 

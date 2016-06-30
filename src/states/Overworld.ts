@@ -44,7 +44,7 @@ module Scumbag
    * place */
   export class Overworld extends GuiState
   {
-    background:       Phaser.Image  = null;
+    background:       Background    = null;
     music:            Phaser.Sound  = null;
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
@@ -71,11 +71,14 @@ module Scumbag
         this.tilemap.addTilesetImage(this.tilemap.tilesets[i].name,
                                      this.tilemap.tilesets[i].name);
       }
-      this.tilemap.createLayer("background");
       this.collisionLayer = this.tilemap.createLayer('collisions');
       this.tilemap.setLayer(this.collisionLayer);
-      this.tilemap.setCollisionBetween(0, 6569);
+      this.tilemap.setCollisionBetween(0,6569);
       this.collisionLayer.resizeWorld();
+      this.collisionLayer.visible = false;
+
+      this.tilemap.createLayer("background");
+      this.tilemap.createLayer("things");
 
       //create the regions
       this.regions = createRegions(this.tilemap.objects["regions"]);
@@ -103,14 +106,12 @@ module Scumbag
         let x = actors[i].x;
         let y = actors[i].y + this.tilemap.tileHeight;
         let key = actors[i].properties.key;
-        let name = actors[i].properties.name;
-        let pathNames = [];
+        let name = actors[i].name;
+        let path:Movement[] = [];
         if (actors[i].properties.hasOwnProperty("path"))
         {
-          pathNames = actors[i].properties.path.split(",");
+          path = stringToMovements(actors[i].properties.path,this.regions);
         }
-        let path:Movement[] = [];
-        for (let u in pathNames) path.push(stringToMovement(pathNames[u],this.regions));
 
         let actor = new Actor(this.game,x,y,key,name);
         actor.path = path;
@@ -123,7 +124,6 @@ module Scumbag
             actor.script = actors[i].properties.script;
           }
         }
-
         this.actors.add(actor);
       }
 
@@ -152,8 +152,10 @@ module Scumbag
       {
         if (this.tilemap.properties.background != "")
         {
-          this.background = this.add.image(0,0,this.tilemap.properties.background);
-          this.background.sendToBack();
+          this.background = new Background(this.tilemap.properties.background,
+                                           this.tilemap.width * this.tilemap.tileWidth,
+                                           this.tilemap.height * this.tilemap.tileHeight,
+                                           this.game);
         }
       }
 
@@ -185,16 +187,7 @@ module Scumbag
       //fix up the background image if there is one
       if (this.background != null)
       {
-        let mapWidth = this.tilemap.width * this.tilemap.tileWidth;
-        let mapHeight = this.tilemap.height * this.tilemap.tileHeight;
-
-        let x = (this.game.camera.position.x) / (mapWidth - this.game.camera.width) *
-                (mapWidth - this.background.width);
-        let y = (this.game.camera.position.y) / (mapHeight - this.game.camera.height) *
-                (mapHeight - this.background.height);
-
-        if (isFinite(x)) this.background.x = x;
-        if (isFinite(y)) this.background.y = y;
+        this.background.update(this.camera.x,this.camera.y);
       }
 
       //check collisions between the characetrsand the level

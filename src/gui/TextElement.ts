@@ -13,7 +13,7 @@ module Scumbag
     constructor(game:Phaser.Game,content:string,
                 style:{font:string,fill:string})
     {
-      super(false);
+      super();
       this.text = game.add.text(0,0,content,style);
       this.text.setShadow(1,1,'rgba(0,0,0,0.5)',2);
     }

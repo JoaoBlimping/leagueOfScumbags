@@ -10,9 +10,6 @@ module Scumbag
     private down:       Phaser.Key;
     private left:       Phaser.Key;
     private right:      Phaser.Key;
-    private d:          Phaser.Key;
-    private c:          Phaser.Key;
-
 
     constructor(game:Phaser.Game)
     {
@@ -24,6 +21,8 @@ module Scumbag
       this.buttons[Button.y] = game.input.keyboard.addKey(Phaser.KeyCode.A);
       this.buttons[Button.l] = game.input.keyboard.addKey(Phaser.KeyCode.S);
       this.buttons[Button.r] = game.input.keyboard.addKey(Phaser.KeyCode.X);
+      this.buttons[Button.lTrigger] = game.input.keyboard.addKey(Phaser.KeyCode.D);
+      this.buttons[Button.rTrigger] = game.input.keyboard.addKey(Phaser.KeyCode.C);
       this.buttons[Button.select] = game.input.keyboard.addKey(Phaser.KeyCode.BACKSPACE);
       this.buttons[Button.start] = game.input.keyboard.addKey(Phaser.KeyCode.ENTER);
 
@@ -58,18 +57,6 @@ module Scumbag
         if (this.up.isDown) return -1;
         if (this.down.isDown) return 1;
         return 0;
-      }
-
-      if (axis == Axis.lTrigger)
-      {
-        if (this.d.isDown) return 1;
-        return -1;
-      }
-
-      if (axis == Axis.rTrigger)
-      {
-        if (this.c.isDown) return 1;
-        return -1;
       }
     }
 

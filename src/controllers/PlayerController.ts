@@ -2,40 +2,44 @@
 
 module Scumbag
 {
-  /** controller that controls the player with the keyboard or a gamepad */
-  export class PlayerController extends Controller
+
+  export namespace Controllers
   {
-    control(controlled:Controllable):void
+    /** controller that controls the player with the keyboard or a gamepad */
+    export class PlayerController extends Controller
     {
-      let x = 0,y = 0;
-
-      //moving
+      control(controlled:Fighter):void
       {
-        //horizontal keys
-        if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) x = -1;
-        else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) x = 1;
+        let x = 0,y = 0;
 
-        //vertical keys
-        if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP)) y = -1;
-        else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) y = 1;
-
-        if (x != 0 || y != 0)
+        //moving
         {
-          let angle = Math.atan2(y,x);
-          controlled.move(angle);
+          //directions
+          x = InputManager.getInputDevice(0).getAxisState(Axis.Horizontal);
+          y = InputManager.getInputDevice(0).getAxisState(Axis.Vertical);
+
+          if (Math.abs(x) > 0.2 || Math.abs(y) > 0.2)
+          {
+            let angle = Math.atan2(y,x);
+            controlled.move(angle);
+          }
         }
-      }
 
-      //jumping
-      if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT))
-      {
-        controlled.jump();
-      }
+        //jumping
+        if (InputManager.getInputDevice(0).getButtonState(Button.a))
+        {
+          controlled.jump();
+        }
 
-      //attacking
-      if (this.game.input.keyboard.isDown(Phaser.Keyboard.CONTROL))
-      {
-        controlled.attack();
+        //attacking
+        if (InputManager.getInputDevice(0).getButtonState(Button.lTrigger))
+        {
+          controlled.attack(WeaponSlot.Left);
+        }
+        else if (InputManager.getInputDevice(0).getButtonState(Button.rTrigger))
+        {
+          controlled.attack(WeaponSlot.Right);
+        }
       }
     }
   }

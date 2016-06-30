@@ -34,4 +34,14 @@ module Scumbag
     }
     else return {type:MovementType.Walk,waitTime:0,region:regions[data]};
   }
+
+
+  export function stringToMovements(data:string,
+                                    regions:{[name:string]:Region}):Movement[]
+  {
+    let pathNames = data.split(",");
+    let path:Movement[] = [];
+    for (let u in pathNames) path.push(stringToMovement(pathNames[u],regions));
+    return path;
+  }
 }

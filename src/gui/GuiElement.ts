@@ -11,13 +11,12 @@ module Scumbag
   {
     width:    number;
     height:   number;
-    bottom:   boolean;
+    blocking: boolean;
 
 
-    /** just sets all this stuff */
-    constructor(bottom:boolean)
+    constructor(blocking=true)
     {
-      this.bottom = bottom;
+      this.blocking = blocking;
     }
 
 

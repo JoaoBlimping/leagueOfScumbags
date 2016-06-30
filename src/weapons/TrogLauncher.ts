@@ -4,9 +4,8 @@ module Scumbag
 {
   export namespace Weapons
   {
-
     /** shoots out some kind of bullet */
-    export class Blaster extends Weapon
+    export class TrogLauncher extends Weapon
     {
       bulletSpeed = 600;
       gravity     = 500;

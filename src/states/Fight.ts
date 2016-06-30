@@ -5,7 +5,7 @@ module Scumbag
 {
   export class Fight extends Phaser.State
   {
-    background:       Phaser.Image;
+    background:       Background            = null;
     music:            Phaser.Sound;
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
@@ -36,14 +36,18 @@ module Scumbag
       {
         if (this.tilemap.properties.background != "")
         {
-          this.background = this.add.image(0,0,this.tilemap.properties.background);
-          this.background.sendToBack();
+          this.background = new Background(this.tilemap.properties.background,
+                                           this.tilemap.width * this.tilemap.tileWidth,
+                                           this.tilemap.height * this.tilemap.tileHeight,
+                                           this.game);
         }
       }
 
-      //load and play the music
-      this.music = this.add.audio('music', 1, false);
-      this.music.play();
+      //load music if there is some
+      if (this.tilemap.properties.hasOwnProperty("music"))
+      {
+        MusicManager.playSong(this.game,this.tilemap.properties.music);
+      }
 
       //turn on phyysics
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -52,11 +56,35 @@ module Scumbag
       //make group for all the bullets
       this.bullets = this.game.add.group();
 
-      //add the player and stuff
+      //fighters
       this.fighters = this.game.add.group();
-      this.player = new Fighter(this.game,this.game.camera.width / 2,
-                                this.game.world.height / 2,'dude',
-                                new Blaster(this.game,this.bullets));
+
+      //make the enemies
+      let enemies = this.tilemap.objects["enemies"];
+      for (let i in enemies)
+      {
+        let x = enemies[i].x;
+        let y = enemies[i].y;
+        let type = enemies[i].properties.kind;
+        this.fighters.add(createFighterFromEnemy(type,x,y,this.bullets,this.game));
+      }
+
+      //add the player and stuff
+      let playerRegion = this.tilemap.objects["player"][0];
+      let playerX = playerRegion.x;
+      let playerY = playerRegion.y;
+
+      this.player = new Fighter(this.game,playerX,playerY,"dude");
+      this.player.controller = new Controllers.PlayerController(this.game);
+      this.player.weapons[WeaponSlot.Left] = new Weapons.Nuke(this.game,this.bullets);
+      this.player.weapons[WeaponSlot.Right] = new Weapons.Minigun(this.game,this.bullets);
+      this.player.maxHealth = 20;
+      this.player.health = 20;
+      this.player.healthRegen = 0.1;
+      this.player.maxMana = 10;
+      this.player.mana = 10;
+      this.player.manaRegen = 0.1;
+
       this.fighters.add(this.player);
       this.game.camera.follow(this.player);
 
@@ -70,6 +98,12 @@ module Scumbag
 
     update()
     {
+      //update the background
+      if (this.background != null)
+      {
+        this.background.update(this.camera.x,this.camera.y);
+      }
+
       //check collisions between the player and the level
       this.game.physics.arcade.collide(this.fighters,this.collisionLayer);
 
@@ -91,7 +125,7 @@ module Scumbag
 
     render()
     {
-      //this.game.debug.bodyInfo(this.player,0,32);
+      //this.game.debug.body(this.player);
     }
   }
 

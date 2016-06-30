@@ -14,7 +14,7 @@ module Scumbag
   export class SelectorElement extends GuiElement
   {
     image:        Phaser.Image;
-    children:     Array<GuiElement>;
+    children:     GuiElement[];
     x = 0;
     y = 0;
     go = false;
@@ -25,7 +25,7 @@ module Scumbag
     /** creates a text thingy */
     constructor(game:Phaser.Game,key:string,children:GuiElement[])
     {
-      super(false);
+      super();
       this.image = game.add.image(0,0,key);
       this.children = children;
       InputManager.getInputDevice(0).addOnButtonPress(Button.a,click,this);

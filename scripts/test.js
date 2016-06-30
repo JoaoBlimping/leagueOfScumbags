@@ -1,13 +1,13 @@
 //block 0
-this.state.buildTextbox("Purple Hat Man",
+this.state.buildTextbox("Aini",
                         "gday friends!\nI've got some fish out the back",
-                        "phm_normal");
+                        "aini_normal");
 ~
 
 
 //block1
 this.state.buildQA("would you like fish?",
-                   "phm_normal",
+                   "aini_normal",
                    "I would rather kill myself",
                    "yeah");
 ~
@@ -18,8 +18,8 @@ if (this.value == 1)
 {
   this.setNextBlock(3);
   var selection = Math.random() * 2;
-  if (selection > 1) this.state.buildTextbox("Purple Hat Man","cunt","phm_angry");
-  else this.state.buildTextbox("Purple Hat Man","you fiend","phm_angry");
+  if (selection > 1) this.state.buildTextbox("Aini","cunt","aini_angry");
+  else this.state.buildTextbox("Aini","you fiend","aini_angry");
 }
 
 //if they said yes to fish
@@ -27,8 +27,8 @@ else
 {
   this.setNextBlock(69);
   var selection = Math.random() * 2;
-  if (selection > 1) this.state.buildTextbox("Purple Hat Man","that's so great","phm_normal");
-  else this.state.buildTextbox("Purple Hat Man","That is so wonderful :)","phm_normal");
+  if (selection > 1) this.state.buildTextbox("Aini","that's so great","aini_normal");
+  else this.state.buildTextbox("Aini","That is so wonderful :)","phm_normal");
 }
 ~
 

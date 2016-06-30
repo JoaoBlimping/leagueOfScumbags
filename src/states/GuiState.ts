@@ -15,18 +15,19 @@ module Scumbag
 
     update()
     {
-      if (this.gui == null)
+      if (this.gui == null || !this.gui.blocking)
       {
         this.postGuiUpdate()
       }
-      else
+
+      if (this.gui != null)
       {
         let value = this.gui.update();
         if (value != 0)
         {
+          if (this.gui.blocking) this.onGuiEnd();
           this.gui.destroy();
           this.gui = null;
-          this.onGuiEnd();
           Script.runScript(value);
         }
       }
@@ -63,12 +64,18 @@ module Scumbag
     }
 
 
+    buildWaiter(...actorPaths:{name:string,path:string}[])
+    {
+      this.setGui(new Waiter(this.game,actorPaths));
+    }
+
+
     /** sets the gui to some gui element */
     private setGui(gui:GuiElement):void
     {
       this.gui = gui;
       this.gui.addPosition(this.game.camera.x,this.game.camera.y);
-      this.onGuiStart();
+      if (this.gui.blocking) this.onGuiStart();
     }
 
 

@@ -1,6 +1,8 @@
 {
   "main":
   [
+    {"type":"json","key":"enemies","url":"data/enemies.json"},
+
     {"type": "image","key": "titlepage","url": "images/menu.jpg"},
     {"type": "image","key": "logo","url": "images/logo.png"},
     {"type": "image","key": "combatTiles","url": "images/combatTiles.png"},
@@ -19,6 +21,9 @@
 
     {"type": "image","key": "phm_normal","url": "chips/phm_normal.png"},
     {"type": "image","key": "phm_angry","url": "chips/phm_angry.png"},
+    {"type": "image","key": "aini_noHat","url": "chips/aini_noHat.png"},
+    {"type": "image","key": "aini_normal","url": "chips/aini_normal.png"},
+    {"type": "image","key": "aini_angry","url": "chips/aini_angry.png"},
 
     {
       "type": "spritesheet","key": "dude","url": "images/dude.png",
@@ -46,10 +51,18 @@
         "format": "TILED_JSON"
     },
 
-    {"type": "shader","key": "boxes","url": "shaders/boxes.frag"},
-    {"type": "shader","key": "headache","url": "shaders/headache.frag"},
-    {"type": "shader","key": "uninitialised","url": "shaders/uninitialised.frag"},
-    {"type": "shader","key": "pyramid","url": "shaders/pyramid.frag"},
+    {
+      "type": "audio","key": "shot","urls":["audio/shot.wav"],
+      "autoDecode": true
+    },
+    {
+      "type": "audio","key": "bang","urls":["audio/bang.wav"],
+      "autoDecode": true
+    },
+    {
+      "type": "audio","key": "throw","urls":["audio/throw.wav"],
+      "autoDecode": true
+    },
 
     {
       "type": "audio","key": "music","urls":["audio/music.ogg"],

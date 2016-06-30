@@ -3,22 +3,48 @@
 
 module Scumbag
 {
+
+  const BASE_GRAVITY = 400;
+
+  export function createFighterFromEnemy(type:string,x:number,y:number,
+                                         bulletGroup:Phaser.Group,
+                                         game:Phaser.Game):Fighter
+  {
+    let data = Enemies.getEnemyData(type,game);
+
+    let fighter = new Fighter(game,x,y,data.key);
+
+    fighter.controller = new Controllers[data.controller](game);
+    fighter.weapons[WeaponSlot.Left] = new Weapons[data.lWeapon](game,bulletGroup);
+    fighter.weapons[WeaponSlot.Right] = new Weapons[data.rWeapon](game,bulletGroup);
+
+    fighter.maxHealth = data.health;
+    fighter.health = data.health;
+    fighter.healthRegenRate = data.healthRegen;
+    fighter.maxMana = data.mana;
+    fighter.mana = data.mana;
+    fighter.manaRegenRate = data.manaRegen;
+
+    return fighter;
+  }
+
+
   /** a fighter that will jump about and all that in the battle system */
-  export class Fighter extends Phaser.Sprite implements Controllable
+  export class Fighter extends Phaser.Sprite
   {
     moveSpeed:      number;
     jumpHeight:     number;
     angle:          number;
     controller:     Controller;
-    weapon:         Weapon;
+    weapons:        Weapon[];
 
     maxHealth:      number;
     maxMana:        number;
     mana:           number;
     healthRegenRate:number;
-    healthRegen:    number;
+    healthRegen:    number  = 0;
     manaRegenRate:  number;
-    manaRegen:      number;
+    manaRegen:      number  = 0;
     canFireTime:    number;
 
     prevTime:       number;
@@ -27,7 +53,7 @@ module Scumbag
     /** create it just like you would a sprite, at least at the moment.
      * TODO: It will probably need some kind of id so it can build itself from
      * some data file */
-    constructor(game:Phaser.Game,x:number,y:number,key:string,weapon:Weapon)
+    constructor(game:Phaser.Game,x:number,y:number,key:string)
     {
       //run superconstructor
       super(game,x,y,key);
@@ -38,7 +64,6 @@ module Scumbag
       this.body.collideWorldBounds = true;
 
       //do animation type crap
-      this.anchor.setTo(0.5,0.5);
       this.animations.add('up', [0,1,2], 10, true);
       this.animations.add('upright', [3,4,5], 10, true);
       this.animations.add('right', [6,7,8], 10, true);
@@ -48,22 +73,18 @@ module Scumbag
       //add controller
       this.moveSpeed = 200;
       this.jumpHeight = 400;
-      this.controller = new PlayerController(this.game);
 
-      //add weapon
-      this.weapon = weapon;
+      //make weapons array
+      this.weapons = [];
+      this.weapons.length = WeaponSlot.nWeaponSlots;
 
       //set health and max health
-      this.maxHealth = 10;
-      this.health = 10;
       this.healthRegen = 0;
-      this.healthRegenRate = 1000;
-      this.maxMana = 10;
-      this.mana = 10;
       this.manaRegen = 0;
-      this.manaRegenRate = 1000;
 
       this.prevTime = this.game.time.time;
+
+      this.anchor.setTo(0.5,0.5);
 
       //add it to the scene
       game.add.existing(this);
@@ -102,12 +123,15 @@ module Scumbag
         if (this.body.velocity.x < 0)
         {
           this.scale.x = -1;
+          this.body.offset.x = this.width;
+
           if (animationAngle > 0) animationAngle = (animationAngle - Math.PI) * -1;
           else animationAngle = (animationAngle + Math.PI) * -1;
         }
-        else
+        else if (this.body.velocity.x > 0)
         {
           this.scale.x = 1;
+          this.body.offset.x = 0;
         }
 
         if (animationAngle > (3 * Math.PI / 8)) this.animations.play('down');
@@ -151,14 +175,14 @@ module Scumbag
     }
 
 
-    attack()
+    attack(slot:WeaponSlot)
     {
       let currentTime = this.game.time.time;
 
-      if (currentTime < this.canFireTime || this.mana < this.weapon.manaCost) return;
-      this.weapon.fire(this);
-      this.canFireTime = currentTime + this.weapon.wait;
-      this.mana -= this.weapon.manaCost;
+      if (currentTime < this.canFireTime || this.mana < this.weapons[slot].manaCost) return;
+      this.weapons[slot].fire(this);
+      this.canFireTime = currentTime + this.weapons[slot].wait;
+      this.mana -= this.weapons[slot].manaCost;
     }
   }
 }

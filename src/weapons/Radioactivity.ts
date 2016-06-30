@@ -32,6 +32,7 @@ module Scumbag
 
     fire(source:Phaser.Sprite)
     {
+      this.game.sound.play("bang");
       for (let i = 0;i < 20;i++)
       {
         let angle = Math.random() * 2 * Math.PI - Math.PI;

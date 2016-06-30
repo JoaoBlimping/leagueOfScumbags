@@ -149,10 +149,18 @@ module Scumbag
         this.path.push(this.path[0]);
       }
       this.path.splice(0,1);
+
+      if (this.path.length == 0) return;
+
       if (this.path[0].type == MovementType.Wait)
       {
         this.waitTime = this.path[0].waitTime;
       }
+    }
+
+    setPathFromString(newPath:string,regions:{[name:string]:Region}):void
+    {
+      this.path = stringToMovements(newPath,regions);
     }
   }
 }

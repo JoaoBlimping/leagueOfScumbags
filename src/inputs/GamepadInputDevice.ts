@@ -25,14 +25,12 @@ module Scumbag
       this.buttons[Button.r] = this.pad.getButton(Phaser.Gamepad.XBOX360_RIGHT_BUMPER);
       this.buttons[Button.select] = this.pad.getButton(Phaser.Gamepad.XBOX360_BACK);
       this.buttons[Button.start] = this.pad.getButton(Phaser.Gamepad.XBOX360_START);
+      this.buttons[Button.lTrigger] = this.pad.getButton(Phaser.Gamepad.XBOX360_LEFT_TRIGGER);
+      this.buttons[Button.rTrigger] = this.pad.getButton(Phaser.Gamepad.XBOX360_RIGHT_TRIGGER);
 
       this.axes = new Array<number>(Axis.nAxes);
       this.axes[Axis.Horizontal] = Phaser.Gamepad.XBOX360_STICK_LEFT_X;
       this.axes[Axis.Vertical] = Phaser.Gamepad.XBOX360_STICK_LEFT_Y;
-      this.axes[Axis.lTrigger] = Phaser.Gamepad.XBOX360_LEFT_TRIGGER;
-      this.axes[Axis.rTrigger] = Phaser.Gamepad.XBOX360_RIGHT_TRIGGER;
-
-
     }
 
 

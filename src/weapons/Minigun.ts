@@ -2,27 +2,31 @@
 
 module Scumbag
 {
-  /** shoots out some kind of bullet */
-  export class Minigun extends Weapon
+  export namespace Weapons
   {
-    bulletSpeed = 800;
-    gravity     = 300;
-    lifespan    = 5000;
-
-    /** creates the gun */
-    constructor(game:Phaser.Game,parent:Phaser.Group)
+    /** shoots out some kind of bullet */
+    export class Minigun extends Weapon
     {
-      super(game,parent,100,0.3);
+      bulletSpeed = 800;
+      gravity     = 300;
+      lifespan    = 5000;
 
-      //create the future bullets
-      for (let i = 0;i < 50;i++) this.add(new Bullet(game,'bullet2'),true);
-    }
+      /** creates the gun */
+      constructor(game:Phaser.Game,parent:Phaser.Group)
+      {
+        super(game,parent,100,0.3);
+
+        //create the future bullets
+        for (let i = 0;i < 50;i++) this.add(new Bullet(game,'bullet2'),true);
+      }
 
 
-    fire(source:Phaser.Sprite)
-    {
-      this.launchBullet(source.x,source.y,source.angle + (Math.random() * 0.4) - 0.2 ,this.bulletSpeed,0,
-                        this.gravity,this.lifespan);
+      fire(source:Phaser.Sprite)
+      {
+        this.game.sound.play("shot");
+        this.launchBullet(source.x,source.y,source.angle + (Math.random() * 0.4) - 0.2 ,this.bulletSpeed,0,
+                          this.gravity,this.lifespan);
+      }
     }
   }
 }
