@@ -14,7 +14,7 @@ module Scumbag
       /** creates the gun */
       constructor(game:Phaser.Game,parent:Phaser.Group)
       {
-        super(game,parent,100,0.3);
+        super(game,parent,50,0.15);
 
         //create the future bullets
         for (let i = 0;i < 50;i++) this.add(new Bullet(game,'bullet2'),true);

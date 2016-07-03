@@ -11,7 +11,6 @@ module Scumbag
                                          game:Phaser.Game):Fighter
   {
     let data = Enemies.getEnemyData(type,game);
-
     let fighter = new Fighter(game,x,y,data.key);
 
     fighter.controller = new Controllers[data.controller](game);
@@ -64,11 +63,11 @@ module Scumbag
       this.body.collideWorldBounds = true;
 
       //do animation type crap
-      this.animations.add('up', [0,1,2], 10, true);
-      this.animations.add('upright', [3,4,5], 10, true);
-      this.animations.add('right', [6,7,8], 10, true);
-      this.animations.add('downright', [9,10,11], 10, true);
-      this.animations.add('down', [12,13,14], 10, true);
+      this.animations.add('up',[0,1,2],10,true);
+      this.animations.add('upright',[3,4,5],10,true);
+      this.animations.add('right',[6,7,8],10,true);
+      this.animations.add('downright',[9,10,11],10,true);
+      this.animations.add('down',[12,13,14],10,true);
 
       //add controller
       this.moveSpeed = 200;

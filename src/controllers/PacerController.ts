@@ -26,7 +26,7 @@ module Scumbag
         controlled.jump();
 
         //attacking
-        if (Math.random() > 0.95)
+        if (Math.random() > 0.9)
         {
           let state = controlled.game.state.getCurrentState();
           if (state instanceof Fight)

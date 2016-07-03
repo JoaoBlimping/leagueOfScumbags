@@ -3,8 +3,8 @@
   [
     {
       "name":"trog","key":"dude","controller":"PacerController","gravity":1,
-      "lWeapon":"TrogLauncher","rWeapon":"Nuke","health":20,"healthRegen":0.1,
-      "mana":50,"manaRegen":0.1
+      "lWeapon":"TrogLauncher","rWeapon":"Nuke","health":20,"healthRegen":10000,
+      "mana":50,"manaRegen":500
     },
     {"name":"trogMother","key":"trogMother","controller":"pacer","gravity":1}
   ]

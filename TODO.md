@@ -16,16 +16,17 @@ General
 
  - control music from script
 
- - make panorama backgrounds work in fight and overworld.
-
 
 Fighting
 --------
-- add enemies which are placed as objects, and so is the player but seperately.
+- write some decent ai
+- make it that running into enemies hurts you
+- make it link with the characters that you have alive at the time, and when one
+  dies it either goes to the next one or chucks you a game over if you have no
+  more.
+- when you kill all the enemies it should return to the map just as it was when
+  you left.
 
-- make you be able to use two different weapons
-
-- add sound effects
 
 
 Overworld

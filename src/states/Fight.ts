@@ -80,10 +80,10 @@ module Scumbag
       this.player.weapons[WeaponSlot.Right] = new Weapons.Minigun(this.game,this.bullets);
       this.player.maxHealth = 20;
       this.player.health = 20;
-      this.player.healthRegen = 0.1;
+      this.player.healthRegenRate = 1000;
       this.player.maxMana = 10;
       this.player.mana = 10;
-      this.player.manaRegen = 0.1;
+      this.player.manaRegenRate = 500;
 
       this.fighters.add(this.player);
       this.game.camera.follow(this.player);
@@ -104,7 +104,7 @@ module Scumbag
         this.background.update(this.camera.x,this.camera.y);
       }
 
-      //check collisions between the player and the level
+      //check collisions between the fighters and the level
       this.game.physics.arcade.collide(this.fighters,this.collisionLayer);
 
       //check collisions between bullets and the level
@@ -151,7 +151,6 @@ module Scumbag
   function hitFighter(bullet:Bullet,fighter:Fighter)
   {
     if (!bullet.collide) return false;
-
     fighter.damage(bullet.power);
     bullet.kill();
     return true;
