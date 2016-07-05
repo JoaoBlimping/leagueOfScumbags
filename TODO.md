@@ -16,14 +16,17 @@ General
 
  - control music from script
 
+ - groovy transition into battles
+
 
 Fighting
 --------
-- write some decent ai
 - make it that running into enemies hurts you
+
 - make it link with the characters that you have alive at the time, and when one
   dies it either goes to the next one or chucks you a game over if you have no
   more.
+
 - when you kill all the enemies it should return to the map just as it was when
   you left.
 

@@ -120,6 +120,18 @@ module Scumbag
       //make the health bar right
       this.healthBar.scale.x = this.player.health / this.player.maxHealth;
       this.manaBar.scale.x = this.player.mana / this.player.maxMana;
+
+      //if all fighters except the player are dead we leave the fight
+      for (let fighter of this.fighters.children)
+      {
+        if (fighter instanceof Fighter)
+        {
+          if (fighter != this.player && fighter.alive) return;
+        }
+      }
+
+      this.game.state.start("Overworld");
+
     }
 
 
