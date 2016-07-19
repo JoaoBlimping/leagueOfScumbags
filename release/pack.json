@@ -14,11 +14,17 @@
     {"type": "image","key": "window","url": "images/window.png"},
     {"type": "image","key": "clicker","url": "images/clicker.png"},
     {"type": "image","key": "selector","url": "images/selector.png"},
+
     {"type": "image","key": "bullet1","url": "images/bullet1.png"},
     {"type": "image","key": "bullet2","url": "images/bullet2.png"},
     {"type": "image","key": "bullet3","url": "images/bullet3.png"},
     {"type": "image","key": "bullet4","url": "images/bullet4.png"},
     {"type": "image","key": "bullet5","url": "images/bullet5.png"},
+    {"type": "image","key": "bullet6","url": "images/bullet6.png"},
+    {"type": "image","key": "bullet7","url": "images/bullet7.png"},
+
+    {"type": "image","key": "blood1","url": "images/blood1.png"},
+    {"type": "image","key": "blood2","url": "images/blood2.png"},
 
     {"type": "image","key": "phm_normal","url": "chips/phm_normal.png"},
     {"type": "image","key": "phm_angry","url": "chips/phm_angry.png"},
@@ -58,6 +64,10 @@
       "type": "spritesheet","key": "chad","url": "images/chad.png",
       "frameWidth": 24,"frameHeight": 48
     },
+    {
+      "type": "spritesheet","key": "robot","url": "images/robot.png",
+      "frameWidth": 32,"frameHeight": 64
+    },
 
     {
         "type": "tilemap","key": "map1","url": "maps/map1.json","data": null,
@@ -86,6 +96,10 @@
     },
     {
       "type": "audio","key": "throw","urls":["audio/throw.wav"],
+      "autoDecode": true
+    },
+    {
+      "type": "audio","key": "trogDeath","urls":["audio/trogDeath.wav"],
       "autoDecode": true
     },
 

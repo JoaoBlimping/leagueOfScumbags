@@ -24,16 +24,7 @@ General
 
 Fighting
 --------
-- make it give you a game over when you die rather than just crash
-
-- fix the one where when enemies die they don't really die.
-
-- make it so that enemies can't shoot themselves
-
 - make it so that bullets can't hit you immeadiately after you fire them
-
-- add weapon that fires upon death
-
 
 
 Overworld

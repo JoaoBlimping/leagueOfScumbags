@@ -24,9 +24,10 @@ module Scumbag
       {
         this.add(new Bullet(game,'bullet3',this.explosion),true);
       }
-      this.setAll('body.bounce.x',0.9);
-      this.setAll('body.bounce.y',0.9);
+      this.setAll('body.bounce.x',0.95);
+      this.setAll('body.bounce.y',0.95);
       this.setAll('collide',false);
+      this.setAll('bouncy',true);
     }
 
 

@@ -10,8 +10,6 @@ module Scumbag
                                          bulletGroup:Phaser.Group,
                                          game:Phaser.Game):Fighter
   {
-    console.log("f:"+type);
-
     let data = Enemies.getEnemyData(type,game);
     let fighter = new Fighter(game,x,y,data.key,data.directional);
 
@@ -31,6 +29,10 @@ module Scumbag
     fighter.collisionDamage = data.collisionDamage;
     fighter.body.gravity.y = BASE_GRAVITY * data.gravity;
     fighter.jumpHeight = BASE_GRAVITY * data.jump;
+    fighter.moveSpeed = data.moveSpeed;
+
+    fighter.deathWeapon = new Weapons[data.deathWeapon](game,bulletGroup,fighter);
+    fighter.deathSound = data.deathSound;
 
     return fighter;
   }
@@ -44,6 +46,10 @@ module Scumbag
     angle:          number;
     controller:     Controller;
     weapons:        Weapon[];
+    deathWeapon:    Weapon;
+
+    deathSound:     string;
+    directional:    boolean;
 
     maxHealth:      number;
     maxMana:        number;
@@ -88,8 +94,7 @@ module Scumbag
         this.animations.add('down',null,10,true);
       }
 
-      //add controller
-      this.moveSpeed = 200;
+      this.directional = directional;
 
       //make weapons array
       this.weapons = [];
@@ -157,10 +162,18 @@ module Scumbag
       else if (animationAngle > 0 - (3 * Math.PI / 8)) this.animations.play('upright');
       else this.animations.play('up');
 
-      if (this.body.velocity.x == 0)
+      if (this.body.velocity.x == 0 && this.directional)
       {
         this.animations.currentAnim.stop();
       }
+    }
+
+
+    kill()
+    {
+      this.game.sound.play(this.deathSound);
+      this.deathWeapon.fire(this);
+      return super.kill();
     }
 
 

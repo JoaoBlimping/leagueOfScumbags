@@ -26,6 +26,8 @@ module Scumbag
         this.setAll('collide',false);
         this.setAll('body.bounce.x',0.5);
         this.setAll('body.bounce.y',0.5);
+        this.setAll('scaleSpeed',0.02);
+        this.setAll('bouncy',true);
       }
 
 

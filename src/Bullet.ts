@@ -5,6 +5,7 @@ module Scumbag
   {
     tracking    = false;
     collide     = true;
+    bouncy      = false;
     scaleSpeed  = 0;
     power       = 1;
 

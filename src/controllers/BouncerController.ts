@@ -27,7 +27,13 @@ module Scumbag
         controlled.move(angle);
 
         //attacking
-        if (Math.random() > 0.6)
+        let event = Math.random();
+
+        if (event < 0.005)
+        {
+          this.game.sound.play(controlled.deathSound);
+        }
+        else if (event > 0.6)
         {
           let state = controlled.game.state.getCurrentState();
           if (state instanceof Fight)
@@ -37,6 +43,8 @@ module Scumbag
 
             let angle = Math.atan2(player.body.y - controlled.body.y,player.body.x - controlled.body.x);
             controlled.move(angle);
+
+
             //controlled.attack(Math.floor(Math.random() * 2));
           }
         }

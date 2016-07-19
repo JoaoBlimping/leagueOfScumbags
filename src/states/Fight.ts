@@ -151,11 +151,11 @@ module Scumbag
           {
             fighter.destroy();
             this.fighters.remove(fighter);
+            if (fighter == this.player) this.game.state.start("Overworld");
           }
-          if (fighter != this.player) return;
+
         }
       }
-      this.game.state.start("Overworld");
     }
 
 
@@ -199,7 +199,7 @@ module Scumbag
   /** this gets called when a bullet hits the level */
   function hitLevel(bullet:Bullet,tile:Phaser.Tile)
   {
-    if (bullet.collide)
+    if (!bullet.bouncy)
     {
       bullet.kill();
 
