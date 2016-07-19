@@ -17,6 +17,7 @@ module Scumbag
       this.stage.disableVisibilityChange = true;
       this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       this.scale.pageAlignHorizontally = true;
+      this.game.stage.smoothed = false;
 
       //start the preloader
       this.game.state.start('Preloader', true, false);

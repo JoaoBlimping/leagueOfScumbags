@@ -17,13 +17,10 @@ module Scumbag
         if (this.goLeft) x = -1;
         else x = 1;
 
-        if (Math.random() > 0.9) this.goLeft = !this.goLeft;
+        if (Math.random() > 0.96) this.goLeft = !this.goLeft;
 
         let angle = Math.atan2(y,x);
         controlled.move(angle);
-
-        //jumping
-        controlled.jump();
 
         //attacking
         if (Math.random() > 0.9)
@@ -31,8 +28,8 @@ module Scumbag
           let state = controlled.game.state.getCurrentState();
           if (state instanceof Fight)
           {
-            let player = state.player;
-            let angle = Math.atan2(player.body.y - controlled.body.y,player.body.x - controlled.body.x);
+
+            let angle = Math.random() * Math.PI * 2 - Math.PI;
             controlled.move(angle);
             controlled.attack(WeaponSlot.Left);
           }

@@ -3,9 +3,9 @@
 
 module Scumbag
 {
-  let headingFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#087"};
-  let questionFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#0cc"};
-  let bodyFont = {font:"12px Sans",fill:"#ffa"};
+  const headingFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#087"};
+  const questionFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#0cc"};
+  const bodyFont = {font:"12px Sans",fill:"#ffa"};
 
 
   /** this is used for any game state that contains gui windows n shit */

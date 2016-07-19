@@ -14,9 +14,9 @@ module Scumbag
 
     /** creates the gun */
     constructor(game:Phaser.Game,parent:Phaser.Group,bulletLimit:number,
-                nBullets:number)
+                nBullets:number,master:Fighter)
     {
-      super(game,parent,0,0);
+      super(game,parent,0,0,master);
       for (let i = 0;i < bulletLimit;i++)
       {
         this.add(new Bullet(game,'bullet2'),true);

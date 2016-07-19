@@ -5,6 +5,7 @@
 
     {"type": "image","key": "titlepage","url": "images/menu.jpg"},
     {"type": "image","key": "logo","url": "images/logo.png"},
+    {"type": "image","key": "dead","url": "images/dead.png"},
     {"type": "image","key": "combatTiles","url": "images/combatTiles.png"},
     {"type": "image","key": "panorama","url": "images/panorama.jpg"},
     {"type": "image","key": "outsideTiles","url": "images/outside.png"},
@@ -26,8 +27,32 @@
     {"type": "image","key": "aini_angry","url": "chips/aini_angry.png"},
 
     {
-      "type": "spritesheet","key": "dude","url": "images/dude.png",
+      "type": "spritesheet","key": "fogle","url": "images/fogle.png",
       "frameWidth": 32,"frameHeight": 48
+    },
+    {
+      "type": "spritesheet","key": "aini","url": "images/aini.png",
+      "frameWidth": 32,"frameHeight": 48
+    },
+    {
+      "type": "spritesheet","key": "purple","url": "images/purple.png",
+      "frameWidth": 32,"frameHeight": 48
+    },
+    {
+      "type": "spritesheet","key": "trogMother","url": "images/dude.png",
+      "frameWidth": 32,"frameHeight": 48
+    },
+    {
+      "type": "spritesheet","key": "trog","url": "images/trog.png",
+      "frameWidth": 24,"frameHeight": 24
+    },
+    {
+      "type": "spritesheet","key": "burrower","url": "images/burrower.png",
+      "frameWidth": 12,"frameHeight": 24
+    },
+    {
+      "type": "spritesheet","key": "god","url": "images/god.png",
+      "frameWidth": 200,"frameHeight": 200
     },
     {
       "type": "spritesheet","key": "chad","url": "images/chad.png",

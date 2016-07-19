@@ -11,6 +11,9 @@ this.state.buildQA("League of Scumbags",
 //new game
 if (this.value == 1)
 {
+  this.addCharacter("John Fogle");
+  this.addCharacter("Aini");
+  this.addCharacter("Purple Hat Man");
   this.transport('map2','frontHouse1');
 }
 

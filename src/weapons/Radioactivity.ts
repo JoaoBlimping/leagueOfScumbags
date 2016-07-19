@@ -12,12 +12,12 @@ module Scumbag
     explosion:  Explosion;
 
     /** creates the gun */
-    constructor(game:Phaser.Game,parent:Phaser.Group,particleLimit:number)
+    constructor(game:Phaser.Game,parent:Phaser.Group,master:Fighter,particleLimit:number)
     {
-      super(game,parent,0,0);
+      super(game,parent,0,0,master);
 
       //create the explosion maker
-      this.explosion = new Explosion(game,parent,300,5);
+      this.explosion = new Explosion(game,parent,300,5,master);
 
       //create the radioactive things
       for (let i = 0;i < particleLimit;i++)

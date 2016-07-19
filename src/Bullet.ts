@@ -6,7 +6,7 @@ module Scumbag
     tracking    = false;
     collide     = true;
     scaleSpeed  = 0;
-    power      = 1;
+    power       = 1;
 
     deathGun:   Weapon;
 
@@ -23,7 +23,6 @@ module Scumbag
       this.exists = false;
 
       this.deathGun = deathGun;
-
     }
 
 
@@ -35,9 +34,6 @@ module Scumbag
      */
     fire(x:number,y:number,angle:number,speed:number,gx:number,gy:number,lifespan:number)
     {
-      gx = gx || 0;
-      gy = gy || 0;
-
       this.reset(x, y);
       this.scale.set(1);
 

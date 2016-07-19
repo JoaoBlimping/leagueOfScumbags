@@ -71,12 +71,14 @@ module Scumbag
       else return 0;
     }
 
-    export function saveGame(slot:number)
-    {
-      StateOfGame.save(slot);
-    }
+    export function saveGame(slot:number) {StateOfGame.save(slot)}
 
     export function loadGame(slot:number) {StateOfGame.load(slot)}
+
+    export function addCharacter(character:string)
+    {
+      StateOfGame.parameters.characters.push(character);
+    }
   }
 
 

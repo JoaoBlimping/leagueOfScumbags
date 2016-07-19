@@ -12,12 +12,13 @@ module Scumbag
       lifespan    = 5000;
 
       /** creates the gun */
-      constructor(game:Phaser.Game,parent:Phaser.Group)
+      constructor(game:Phaser.Game,parent:Phaser.Group,master:Fighter)
       {
-        super(game,parent,50,0.15);
+        super(game,parent,50,0.15,master);
 
         //create the future bullets
         for (let i = 0;i < 50;i++) this.add(new Bullet(game,'bullet2'),true);
+        this.setAll('power',3);
       }
 
 

@@ -14,21 +14,25 @@ General
   all scripts the values of some enums and stuff which can't be accessed from
   them. I guess I could make it more advanced, but I probably can't be bothered.
 
- - control music from script
+- control music from script
 
- - groovy transition into battles
+- groovy transition into battles. make it some stupid picture zooms into the
+  screen or something.
 
+- script doesn't continue at end of battle. maybe make it that you set what
+  script to run if you win the battle and if you lose or something like that.
 
 Fighting
 --------
-- make it that running into enemies hurts you
+- make it give you a game over when you die rather than just crash
 
-- make it link with the characters that you have alive at the time, and when one
-  dies it either goes to the next one or chucks you a game over if you have no
-  more.
+- fix the one where when enemies die they don't really die.
 
-- when you kill all the enemies it should return to the map just as it was when
-  you left.
+- make it so that enemies can't shoot themselves
+
+- make it so that bullets can't hit you immeadiately after you fire them
+
+- add weapon that fires upon death
 
 
 
@@ -39,7 +43,8 @@ Overworld
    they are. make it when you press A, it outputs an invisible thing which
    activates an npc if it hits them.
 
- - maybe chuck in some kind of cool lighting/tinting effect if it's easy.
+- record the position of all actors in the scene when the player saves or goes
+  into a battle so that when they load or exit the battle it's the same.
 
- - add in some sort of transition to fighting mode complete with annoying battle
-   noise
+- make it you can open a menu that lets you save and lets you inspect your party
+  and that sort of thing.

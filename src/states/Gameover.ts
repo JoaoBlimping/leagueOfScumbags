@@ -11,6 +11,9 @@ module Scumbag
     /** overrides Phaser.State.create() */
     create()
     {
+      this.game.camera.x = 0;
+      this.game.camera.y = 0;
+
       this.background = this.add.sprite(0,0,'titlepage');
       this.background.alpha = 0;
 

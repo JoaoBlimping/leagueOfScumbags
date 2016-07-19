@@ -28,9 +28,13 @@ else
   this.setNextBlock(69);
   var selection = Math.random() * 2;
   if (selection > 1) this.state.buildTextbox("Aini","that's so great","aini_normal");
-  else this.state.buildTextbox("Aini","That is so wonderful :)","phm_normal");
+  else this.state.buildTextbox("Aini","That is so wonderful :)","aini_normal");
 }
 ~
 
 //block 3
 this.startFight("map1");
+~
+
+//block4
+this.state.buildTextbox("Aini","that wasn't very nice","aini_angry");

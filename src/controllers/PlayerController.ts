@@ -10,6 +10,9 @@ module Scumbag
     {
       control(controlled:Fighter):void
       {
+        controlled.body.velocity.x = 0;
+
+
         let x = 0,y = 0;
 
         //moving
@@ -21,7 +24,15 @@ module Scumbag
           if (Math.abs(x) > 0.2 || Math.abs(y) > 0.2)
           {
             let angle = Math.atan2(y,x);
-            controlled.move(angle);
+
+            if (InputManager.getInputDevice(0).getButtonState(Button.b))
+            {
+              controlled.look(angle);
+            }
+            else
+            {
+              controlled.move(angle);
+            }
           }
         }
 

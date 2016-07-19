@@ -15,16 +15,17 @@ module Scumbag
       explosion:  Explosion;
 
       /** creates the gun */
-      constructor(game:Phaser.Game,parent:Phaser.Group)
+      constructor(game:Phaser.Game,parent:Phaser.Group,master:Fighter)
       {
-        super(game,parent,200,1);
+        super(game,parent,200,1,master);
 
         //create the explosion maker
-        this.explosion = new Explosion(game,parent,40,10);
+        this.explosion = new Explosion(game,parent,40,10,master);
 
         //create the future bullets
         for (let i = 0;i < 32;i++) this.add(new Bullet(game,'bullet1',this.explosion),true);
         this.setAll('tracking',true);
+        this.setAll('power',5);
       }
 
 

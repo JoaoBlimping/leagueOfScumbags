@@ -14,12 +14,12 @@ module Scumbag
       radioactivity:  Radioactivity;
 
       /** creates the gun */
-      constructor(game:Phaser.Game,parent:Phaser.Group)
+      constructor(game:Phaser.Game,parent:Phaser.Group,master:Fighter)
       {
-        super(game,parent,1000,7);
+        super(game,parent,1000,7,master);
 
         //create the explosion maker
-        this.radioactivity = new Radioactivity(game,parent,100);
+        this.radioactivity = new Radioactivity(game,parent,null,100);
 
         //create the future bullets
         for (let i = 0;i < 10;i++) this.add(new Bullet(game,'bullet4',this.radioactivity),true);

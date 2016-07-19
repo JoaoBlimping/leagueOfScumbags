@@ -2,10 +2,48 @@
   "enemies":
   [
     {
-      "name":"trog","key":"dude","controller":"PacerController","gravity":1,
-      "lWeapon":"TrogLauncher","rWeapon":"Nuke","health":20,"healthRegen":10000,
-      "mana":50,"manaRegen":500
+      "name":"John Fogle","key":"fogle","controller":"PlayerController",
+      "gravity":1,"jump":1,"lWeapon":"Nuke","rWeapon":"Minigun","health":20,
+      "healthRegen":10000,"mana":20,"manaRegen":500,"collisionDamage":0,
+      "directional":true
     },
-    {"name":"trogMother","key":"trogMother","controller":"pacer","gravity":1}
+    {
+      "name":"Aini","key":"aini","controller":"PlayerController",
+      "gravity":1,"jump":1,"lWeapon":"Blaster","rWeapon":"Minigun","health":10,
+      "healthRegen":5000,"mana":50,"manaRegen":500,"collisionDamage":0,
+      "directional":true
+    },
+    {
+      "name":"Purple Hat Man","key":"purple","controller":"PlayerController",
+      "gravity":1,"jump":1,"lWeapon":"Blaster","rWeapon":"Nuke","health":15,
+      "healthRegen":15000,"mana":50,"manaRegen":500,"collisionDamage":0,
+      "directional":true
+    },
+
+
+    {
+      "name":"trogMother","key":"trogMother","controller":"PacerController",
+      "gravity":1,"jump":1,"lWeapon":"TrogLauncher","rWeapon":"Nothing","health":20,
+      "healthRegen":10000,"mana":50,"manaRegen":500,"collisionDamage":0.5,
+      "directional":true
+    },
+    {
+      "name":"trog","key":"trog","controller":"BouncerController","gravity":0.2,"jump":0.2,
+      "lWeapon":"Nothing","rWeapon":"Nothing","health":5,"healthRegen":10000,
+      "mana":0,"manaRegen":500,"collisionDamage":0.5,
+      "directional":true
+    },
+    {
+      "name":"burrower","key":"burrower","controller":"BurrowerController","gravity":1,"jump":0,
+      "lWeapon":"Minigun","rWeapon":"Minigun","health":5,"healthRegen":10000,
+      "mana":100,"manaRegen":500,"collisionDamage":0.5,
+      "directional":false
+    },
+    {
+      "name":"god","key":"god","controller":"StationaryController","gravity":0,"jump":0,
+      "lWeapon":"Blaster","rWeapon":"Minigun","health":30,"healthRegen":10000,
+      "mana":500,"manaRegen":500,"collisionDamage":5,
+      "directional":false
+    }
   ]
 }
