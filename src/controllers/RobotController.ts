@@ -18,8 +18,8 @@ module Scumbag
           let player = state.player;
           if (!player.alive) return;
 
-          let angle = Math.PI / 2;/* Math.atan2(player.body.y - controlled.body.y,
-                                 player.body.x - controlled.body.x);*/
+          let angle = Math.atan2(player.body.y - controlled.body.y,
+                                 player.body.x - controlled.body.x);
           controlled.look(angle);
           controlled.attack(WeaponSlot.Left);
         }

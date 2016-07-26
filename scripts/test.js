@@ -1,4 +1,7 @@
 //block 0
+this.setPlayerKey("lad");
+this.stopMusic();
+
 this.state.buildTextbox("Aini",
                         "gday friends!\nI've got some fish out the back",
                         "aini_normal");
@@ -33,6 +36,7 @@ else
 ~
 
 //block 3
+this.playMusic("menuMusic");
 this.startFight("map1");
 ~
 

@@ -45,7 +45,6 @@ module Scumbag
   export class Overworld extends GuiState
   {
     background:       Background    = null;
-    music:            Phaser.Sound  = null;
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
     actors:           Phaser.Group;
@@ -89,12 +88,14 @@ module Scumbag
         this.player = new Actor(this.game,
                                       StateOfGame.parameters.playerX,
                                       StateOfGame.parameters.playerY,
-                                      "chad","player");
+                                      StateOfGame.parameters.playerKey,
+                                      "player");
         this.player.moveMode = MovementMode.PlayerControlled;
       }
       else
       {
-        this.player = addPlayerAtRegion(this.game,this.regions[playerRegion],"chad");
+        this.player = addPlayerAtRegion(this.game,this.regions[playerRegion],
+                                        StateOfGame.parameters.playerKey);
       }
       this.actors = this.game.add.group();
       this.actors.add(this.player);

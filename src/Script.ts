@@ -79,6 +79,22 @@ module Scumbag
     {
       StateOfGame.parameters.characters.push(character);
     }
+
+
+    export function setPlayerKey(key:string)
+    {
+      if (this.state instanceof Overworld) this.state.player.loadTexture(key);
+      StateOfGame.parameters.playerKey = key;
+    }
+
+
+    export function playSound(key:string) {game.sound.play(key)}
+
+
+    export function playMusic(key:string) {MusicManager.playSong(game,key)}
+
+
+    export function stopMusic() {MusicManager.stop()}
   }
 
 

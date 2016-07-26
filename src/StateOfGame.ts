@@ -9,7 +9,8 @@ module Scumbag
       characters: [],
       map:        "",
       playerX:    0,
-      playerY:    0
+      playerY:    0,
+      playerKey:  ""
     }
 
 

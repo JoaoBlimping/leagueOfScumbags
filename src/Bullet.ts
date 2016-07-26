@@ -10,13 +10,13 @@ module Scumbag
     power       = 1;
 
     deathGun:   Weapon;
+    deathSpawn: string;
 
     /** constructs the bullet */
-    constructor(game:Phaser.Game,key:string,deathGun?:Weapon)
+    constructor(game:Phaser.Game,key:string,deathGun:Weapon,deathSpawn:string)
     {
       super(game,0,0,key);
 
-      this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
       this.anchor.set(0.5);
 
       this.checkWorldBounds = true;
@@ -24,6 +24,7 @@ module Scumbag
       this.exists = false;
 
       this.deathGun = deathGun;
+      this.deathSpawn = deathSpawn;
     }
 
 
@@ -35,7 +36,7 @@ module Scumbag
      */
     fire(x:number,y:number,angle:number,speed:number,gx:number,gy:number,lifespan:number)
     {
-      this.reset(x, y);
+      this.reset(x,y);
       this.scale.set(1);
 
       this.game.physics.arcade.velocityFromRotation(angle, speed, this.body.velocity);
@@ -64,6 +65,11 @@ module Scumbag
     kill()
     {
       if (this.deathGun != undefined) this.deathGun.fire(this);
+      if (this.deathSpawn != null)
+      {
+        let state = this.game.state.getCurrentState();
+        if (state instanceof Fight) state.addFighter(this.deathSpawn,this.x,this.y);
+      }
       return super.kill();
     }
   }

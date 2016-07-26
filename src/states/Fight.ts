@@ -124,7 +124,7 @@ module Scumbag
               }
               else
               {
-                this.game.physics.arcade.collide(fighter,child,hitMaster);
+                this.game.physics.arcade.collide(fighter,child,null,hitMaster);
               }
             }
           }
@@ -219,6 +219,7 @@ module Scumbag
   {
     if (!bullet.collide) return false;
     fighter.damage(bullet.power);
+
     bullet.kill();
     return true;
   }
@@ -227,8 +228,8 @@ module Scumbag
   /** this gets called when a bullet hits a fighter */
   function hitMaster(fighter:Fighter,bullet:Bullet)
   {
-    if (bullet.collide) bullet.kill();
-    return true;
+    console.log(!bullet.collide);
+    return !bullet.collide;
   }
 
 

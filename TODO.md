@@ -14,17 +14,24 @@ General
   all scripts the values of some enums and stuff which can't be accessed from
   them. I guess I could make it more advanced, but I probably can't be bothered.
 
-- control music from script
-
 - groovy transition into battles. make it some stupid picture zooms into the
   screen or something.
 
 - script doesn't continue at end of battle. maybe make it that you set what
   script to run if you win the battle and if you lose or something like that.
+  normally if you lose it would just go to game over, but maybe not all the time
+
+- make a shell script to build desktop packages
 
 Fighting
 --------
-- make it so that bullets can't hit you immeadiately after you fire them
+- make weapons for purple hat man
+
+- weapons have like no specialised code functionality. I bet I could turn them
+  all into a single class and then describe them in a JSON file. Ok, they have
+  a little bit, but it's mostly applying randomness which can be done by making
+  every number a range instead of a single value. Other than that, there isn't
+  much they can do 
 
 
 Overworld
@@ -39,3 +46,7 @@ Overworld
 
 - make it you can open a menu that lets you save and lets you inspect your party
   and that sort of thing.
+
+- make it so scripts can change the player actor's graphics.
+
+- make it so that scripts can play sound effects.

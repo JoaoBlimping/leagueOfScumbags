@@ -10,11 +10,25 @@ module Scumbag
     export function playSong(game:Phaser.Game,key:string):void
     {
       if (currentSongKey == key) return;
-      if (currentSong != null) currentSong.destroy()
+      if (currentSongKey != null)
+      {
+        game.sound.removeByKey(currentSongKey);
+      }
 
       currentSongKey = key;
       currentSong = game.add.audio(key,1,true);
       currentSong.play();
+    }
+
+
+    /** stops the currently playing song if there is one */
+    export function stop():void
+    {
+      if (currentSong != null)
+      {
+        currentSong.destroy();
+        currentSongKey = null;
+      }
     }
   }
 }

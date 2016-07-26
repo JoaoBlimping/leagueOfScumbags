@@ -16,8 +16,9 @@ module Scumbag
     fighter.name = type;
 
     fighter.controller = new Controllers[data.controller](game);
-    fighter.weapons[WeaponSlot.Left] = new Weapons[data.lWeapon](game,bulletGroup,fighter);
-    fighter.weapons[WeaponSlot.Right] = new Weapons[data.rWeapon](game,bulletGroup,fighter);
+    console.log(type,data.lWeapon,data.rWeapon);
+    fighter.weapons[WeaponSlot.Left] = new Weapon(game,bulletGroup,fighter,data.lWeapon);
+    fighter.weapons[WeaponSlot.Right] = new Weapon(game,bulletGroup,fighter,data.rWeapon);
 
     fighter.maxHealth = data.health;
     fighter.health = data.health;
@@ -31,7 +32,7 @@ module Scumbag
     fighter.jumpHeight = BASE_GRAVITY * data.jump;
     fighter.moveSpeed = data.moveSpeed;
 
-    fighter.deathWeapon = new Weapons[data.deathWeapon](game,bulletGroup,fighter);
+    fighter.deathWeapon = new Weapon(game,bulletGroup,fighter,data.deathWeapon);
     fighter.deathSound = data.deathSound;
 
     return fighter;
@@ -55,9 +56,7 @@ module Scumbag
     maxMana:        number;
     mana:           number;
     healthRegenRate:number;
-    healthRegen:    number  = 0;
     manaRegenRate:  number;
-    manaRegen:      number  = 0;
     collisionDamage:number;
     canFireTime:    number;
 
@@ -100,10 +99,6 @@ module Scumbag
       this.weapons = [];
       this.weapons.length = WeaponSlot.nWeaponSlots;
 
-      //set health and max health
-      this.healthRegen = 0;
-      this.manaRegen = 0;
-
       this.prevTime = this.game.time.time;
 
       this.anchor.setTo(0.5,0.5);
@@ -120,20 +115,9 @@ module Scumbag
       //mana and health regen
       let newTime = this.game.time.time;
       let elapsedTime = newTime - this.prevTime;
-      this.healthRegen += elapsedTime;
-      this.manaRegen += elapsedTime;
-      while (this.healthRegen > this.healthRegenRate)
-      {
-        if (this.health < this.maxHealth) this.health++;
-        this.healthRegen -= this.healthRegenRate;
-      }
-      while (this.manaRegen > this.manaRegenRate)
-      {
-        if (this.mana < this.maxMana) this.mana++;
-        this.manaRegen -= this.manaRegenRate;
-      }
-      this.prevTime = newTime;
 
+      if (this.health < this.maxHealth) this.health += this.healthRegenRate;
+      if (this.mana < this.maxMana) this.mana += this.manaRegenRate;
 
       //control the dude
       this.controller.control(this);
@@ -145,7 +129,6 @@ module Scumbag
       if (animationAngle > Math.PI / 2 || animationAngle < 0 - Math.PI / 2)
       {
         this.scale.x = -1;
-        this.body.offset.x = this.width;
 
         if (animationAngle > 0) animationAngle = (animationAngle - Math.PI) * -1;
         else animationAngle = (animationAngle + Math.PI) * -1;
@@ -153,7 +136,6 @@ module Scumbag
       else
       {
         this.scale.x = 1;
-        this.body.offset.x = 0;
       }
 
       if (animationAngle > (3 * Math.PI / 8)) this.animations.play('down');

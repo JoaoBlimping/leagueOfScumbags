@@ -3,55 +3,61 @@
   [
     {
       "name":"John Fogle","key":"fogle","controller":"PlayerController",
-      "gravity":1,"jump":1,"lWeapon":"Nuke","rWeapon":"Minigun",
-      "deathWeapon":"Blood","health":20,"healthRegen":10000,"mana":20,
-      "manaRegen":500,"collisionDamage":0,"directional":true,"moveSpeed":200
+      "gravity":1,"jump":1,"lWeapon":"nuke","rWeapon":"minigun",
+      "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":20,
+      "manaRegen":0.01,"collisionDamage":0,"directional":true,"moveSpeed":200
     },
     {
       "name":"Aini","key":"aini","controller":"PlayerController",
-      "gravity":1,"jump":1,"lWeapon":"Bouncy","rWeapon":"Blaster",
-      "deathWeapon":"Blood","health":10,"healthRegen":5000,"mana":50,
-      "manaRegen":500,"collisionDamage":0,"directional":true,"moveSpeed":200,
+      "gravity":1,"jump":1,"lWeapon":"bouncy","rWeapon":"blaster",
+      "deathWeapon":"blood","health":10,"healthRegen":0.075,"mana":50,
+      "manaRegen":0.03,"collisionDamage":0,"directional":true,"moveSpeed":200,
       "mass":25
     },
     {
       "name":"Purple Hat Man","key":"purple","controller":"PlayerController",
-      "gravity":1,"jump":1,"lWeapon":"Blaster","rWeapon":"Nuke",
-      "deathWeapon":"Blood","health":15,"healthRegen":15000,"mana":50,
-      "manaRegen":500,"collisionDamage":0,"directional":true,"moveSpeed":200
+      "gravity":1,"jump":1,"lWeapon":"monkeyLauncher","rWeapon":"minigun",
+      "deathWeapon":"blood","health":15,"healthRegen":0.055,"mana":50,
+      "manaRegen":0.018,"collisionDamage":0,"directional":true,"moveSpeed":200
     },
 
 
     {
       "name":"trogMother","key":"trogMother","controller":"PacerController",
-      "gravity":1,"jump":1,"lWeapon":"TrogLauncher","rWeapon":"Nothing",
-      "deathWeapon":"Blood","health":20,"healthRegen":10000,"mana":50,
-      "manaRegen":500,"collisionDamage":0.5,"directional":true,"moveSpeed":100
+      "gravity":1,"jump":1,"lWeapon":"trogLauncher","rWeapon":"nothing",
+      "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":50,
+      "manaRegen":0.02,"collisionDamage":0.5,"directional":true,"moveSpeed":100
     },
     {
       "name":"trog","key":"trog","controller":"BouncerController","gravity":0.2,
-      "jump":0.2,"lWeapon":"Nothing","rWeapon":"Nothing",
-      "deathWeapon":"Nothing","health":5,"healthRegen":10000,"mana":0,
-      "manaRegen":500,"collisionDamage":0.5,"directional":true,"moveSpeed":200,
+      "jump":0.2,"lWeapon":"nothing","rWeapon":"nothing",
+      "deathWeapon":"nothing","health":5,"healthRegen":0.05,"mana":0,
+      "manaRegen":0,"collisionDamage":0.5,"directional":true,"moveSpeed":200,
       "deathSound":"trogDeath"
     },
     {
       "name":"burrower","key":"burrower","controller":"BurrowerController",
-      "gravity":1,"jump":0,"lWeapon":"Minigun","rWeapon":"Minigun",
-      "deathWeapon":"Nothing","health":5,"healthRegen":10000,"mana":100,
-      "manaRegen":500,"collisionDamage":0.5,"directional":false,"moveSpeed":0
+      "gravity":1,"jump":0,"lWeapon":"minigun","rWeapon":"nothing",
+      "deathWeapon":"nothing","health":5,"healthRegen":0.05,"mana":100,
+      "manaRegen":0,"collisionDamage":0.5,"directional":false,"moveSpeed":0
     },
     {
       "name":"god","key":"god","controller":"StationaryController","gravity":0,
-      "jump":0,"lWeapon":"Blaster","rWeapon":"Minigun","deathWeapon":"Nothing",
-      "health":30,"healthRegen":10000,"mana":500,"manaRegen":500,
+      "jump":0,"lWeapon":"blaster","rWeapon":"minigun","deathWeapon":"blood",
+      "health":30,"healthRegen":0,"mana":500,"manaRegen":0.05,
       "collisionDamage":5,"directional":false,"moveSpeed":300
     },
     {
       "name":"robot","key":"robot","controller":"RobotController","gravity":1,
-      "jump":0,"lWeapon":"Blaster","rWeapon":"Nothing","deathWeapon":"Blood",
-      "health":25,"healthRegen":10000,"mana":500,"manaRegen":500,
+      "jump":0,"lWeapon":"smoke","rWeapon":"nothing","deathWeapon":"blood",
+      "health":25,"healthRegen":0,"mana":500,"manaRegen":0.05,
       "collisionDamage":5,"directional":false,"moveSpeed":0
+    },
+    {
+      "name":"monkey","key":"monkey","controller":"MonkeyController","gravity":0.001,
+      "jump":0,"lWeapon":"smoke","rWeapon":"nothing","deathWeapon":"blood",
+      "health":100,"healthRegen":0,"mana":500,"manaRegen":0.05,
+      "collisionDamage":0,"directional":false,"moveSpeed":0
     }
   ]
 }
