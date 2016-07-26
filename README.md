@@ -1,6 +1,6 @@
 leagueOfScumbags
 ================
-![alt ebola](release/images/dude.png "dude")
+![alt ebola](release/images/fogle.png "John Fogle")
 
 Libre html5 game using phaser.io.
 
