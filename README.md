@@ -13,6 +13,7 @@ Dependencies and that
  - typescript
  - python
  - uglify-js
+ - Phaser.io
 
 python is just used to parse scripts into the right format, and uglify-js just
 makes it more compact.
