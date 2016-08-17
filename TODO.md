@@ -8,12 +8,6 @@ the most important part of that, though.
 
 General
 -------
-- bug where the music system can't stop a song once it's repeated.
-
-- add some kind of macro system to the scipt parser so that I can declare for
-  all scripts the values of some enums and stuff which can't be accessed from
-  them. I guess I could make it more advanced, but I probably can't be bothered.
-
 - groovy transition into battles. make it some stupid picture zooms into the
   screen or something.
 
@@ -23,15 +17,11 @@ General
 
 - make a shell script to build desktop packages
 
+- start using texture atlases and prioritising them when the new version comes
+  out. have an atlas for fighters, actors, and bullets
+
 Fighting
 --------
-- make weapons for purple hat man
-
-- weapons have like no specialised code functionality. I bet I could turn them
-  all into a single class and then describe them in a JSON file. Ok, they have
-  a little bit, but it's mostly applying randomness which can be done by making
-  every number a range instead of a single value. Other than that, there isn't
-  much they can do 
 
 
 Overworld
@@ -41,12 +31,9 @@ Overworld
    they are. make it when you press A, it outputs an invisible thing which
    activates an npc if it hits them.
 
-- record the position of all actors in the scene when the player saves or goes
-  into a battle so that when they load or exit the battle it's the same.
-
 - make it you can open a menu that lets you save and lets you inspect your party
   and that sort of thing.
 
-- make it so scripts can change the player actor's graphics.
+- make it a actor page's script can start the moment the page starts.
 
-- make it so that scripts can play sound effects.
+- add background sounds

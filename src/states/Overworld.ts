@@ -10,13 +10,13 @@ module Scumbag
     let script = null;
     if (a.name == "player")
     {
-      script = b.script;
+      script = b.getPage().script;
       StateOfGame.parameters.playerX = a.position.x;
       StateOfGame.parameters.playerY = a.position.y;
     }
     else if (b.name == "player")
     {
-      script = a.script;
+      script = a.getPage().script;
       StateOfGame.parameters.playerX = b.position.x;
       StateOfGame.parameters.playerY = b.position.y;
     }
@@ -34,8 +34,12 @@ module Scumbag
   {
     let x = region.x + region.width / 2;
     let y = region.y + region.height / 2;
-    let player = new Actor(game,x,y,key,"player");
-    player.moveMode = MovementMode.PlayerControlled;
+
+    let page = new Page();
+    page.key = StateOfGame.parameters.playerKey;
+    page.moveMode = MovementMode.PlayerControlled;
+
+    let player = new Actor(game,x,y,"player",[page]);
     return player;
   }
 
@@ -85,12 +89,15 @@ module Scumbag
       //add player and stuff
       if (playerRegion == null)
       {
+        let page = new Page();
+        page.key = StateOfGame.parameters.playerKey;
+        page.moveMode = MovementMode.PlayerControlled;
         this.player = new Actor(this.game,
                                       StateOfGame.parameters.playerX,
                                       StateOfGame.parameters.playerY,
                                       StateOfGame.parameters.playerKey,
-                                      "player");
-        this.player.moveMode = MovementMode.PlayerControlled;
+                                      [page]);
+        this.player.pages[0].moveMode = MovementMode.PlayerControlled;
       }
       else
       {
@@ -106,25 +113,10 @@ module Scumbag
       {
         let x = actors[i].x;
         let y = actors[i].y + this.tilemap.tileHeight;
-        let key = actors[i].properties.key;
         let name = actors[i].name;
-        let path:Movement[] = [];
-        if (actors[i].properties.hasOwnProperty("path"))
-        {
-          path = stringToMovements(actors[i].properties.path,this.regions);
-        }
 
-        let actor = new Actor(this.game,x,y,key,name);
-        actor.path = path;
-        actor.moveOnSpot = actors[i].properties.moveOnSpot;
-        actor.body.immovable = actor.moveOnSpot;
-        if (actors[i].properties.hasOwnProperty("script"))
-        {
-          if (actors[i].properties.script != "")
-          {
-            actor.script = actors[i].properties.script;
-          }
-        }
+        let actor = new Actor(this.game,x,y,name,createPages(actors[i].properties.pages));
+
         this.actors.add(actor);
       }
 

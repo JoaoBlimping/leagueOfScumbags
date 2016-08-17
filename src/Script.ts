@@ -113,10 +113,8 @@ module Scumbag
      * string that value will be set to for the first block */
     export function setScript(content:string)
     {
-      let splitContent = content.split("?");
-      blocks = game.cache.getText(splitContent[0]).split('\n');
+      blocks = content.split('~');
       ScriptContext.state = <GuiState>game.state.getCurrentState();
-      ScriptContext.arguments = splitContent[1];
       nextBlock = 0;
       runScript(0);
     }

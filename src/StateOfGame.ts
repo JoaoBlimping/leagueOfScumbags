@@ -2,7 +2,22 @@ module Scumbag
 {
   export namespace StateOfGame
   {
-    export let parameters =
+    /** structure of a saved game's parameteres */
+    export interface StateParameters
+    {
+      switches:   {[name:string]:boolean};
+      variables:  {[name:string]:number};
+      characters: string[]
+      map:        string;
+      playerX:    number;
+      playerY:    number;
+      playerKey:  string;
+      actors:     {x:number,y:number}[]
+    }
+
+
+    /** the game's persistent state */
+    export let parameters:StateParameters =
     {
       switches:   {},
       variables:  {},
@@ -10,10 +25,12 @@ module Scumbag
       map:        "",
       playerX:    0,
       playerY:    0,
-      playerKey:  ""
-    }
+      playerKey:  "",
+      actors:     new Array<{x:number,y:number}>()
+    };
 
 
+    /** save the data to the given slot */
     export function save(slot:number):void
     {
       let data = JSON.stringify(parameters);
@@ -32,6 +49,7 @@ module Scumbag
     }
 
 
+    /** load the data from the given slot */
     export function load(slot:number):void
     {
       if (typeof(Storage) !== "undefined")
