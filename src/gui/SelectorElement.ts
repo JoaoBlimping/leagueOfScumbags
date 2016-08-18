@@ -19,7 +19,7 @@ module Scumbag
     y = 0;
     go = false;
     selection = 0;
-    oldVerticalStick = 0.0;
+    oldVerticalStick:number;
 
 
     /** creates a text thingy */
@@ -30,6 +30,8 @@ module Scumbag
       this.children = children;
       InputManager.getInputDevice(0).addOnButtonPress(Button.a,click,this);
 
+      this.oldVerticalStick = InputManager.getInputDevice(0).getAxisState(Axis.Vertical);
+
       let yPadding = 0;
 
       for (let i = 0;i < this.children.length;i++)
@@ -37,7 +39,7 @@ module Scumbag
         this.children[i].setPosition(this.image.x,
                                      this.image.y + yPadding);
         this.children[i].bringToFront();
-        yPadding += this.children[i].getHeight();
+        yPadding += this.children[i].getHeight() * 0.8;
       }
     }
 

@@ -8,32 +8,25 @@ the most important part of that, though.
 
 General
 -------
-- groovy transition into battles. make it some stupid picture zooms into the
-  screen or something.
-
-- script doesn't continue at end of battle. maybe make it that you set what
-  script to run if you win the battle and if you lose or something like that.
-  normally if you lose it would just go to game over, but maybe not all the time
-
-- make a shell script to build desktop packages
+- script doesn't continue at end of battle. make it that you can either have
+  battles that cause game over, or ones the set the outcome to a switch
 
 - start using texture atlases and prioritising them when the new version comes
   out. have an atlas for fighters, actors, and bullets
 
+
+
 Fighting
 --------
+- rebalance the weapons
 
 
 Overworld
 ---------
- - fix the way the player interacts with npcs so that you don't have to walking
-   into them to talk to them, and it doesn't repeat if you are still walking, or
-   they are. make it when you press A, it outputs an invisible thing which
-   activates an npc if it hits them.
-
-- make it you can open a menu that lets you save and lets you inspect your party
-  and that sort of thing.
-
-- make it a actor page's script can start the moment the page starts.
+- groovy transition into battles. make it some stupid picture zooms into the
+  screen or something.
 
 - add background sounds
+
+- save the positions of all actors when you save or enter a battle, and load
+  them again upon your return

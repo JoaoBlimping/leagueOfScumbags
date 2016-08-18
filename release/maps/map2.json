@@ -55,7 +55,7 @@
                  "name":"dennis",
                  "properties":
                     {
-                     "pages":">\nkey \"chad\"\nmoveOnSpot true\npath \"behindHouse2,frontHouse1,#1000,frontHouse3,#2000\"\n<\nconsole.log(\"hi\");\nthis.setSwitch(\"tango\",true);\nthis.setSwitch(\"bongo\",5);\n\n>s tango,v bongo 5\nmoveOnSpot false\nkey \"lad\"\n<\nconsole.log(\"kk\");\n"
+                     "pages":"@\nkey \"chad\"\nmoveOnSpot true\npath \"behindHouse2,frontHouse1,#1000,frontHouse3,#2000\"\n$\nthis.setSwitch(\"tango\",true);\nthis.setVariable(\"bongo\",6);\nthis.state.buildTextbox(\"dango\",\"I want to die\",\"aini_normal\");\n~\n\nthis.state.buildTextbox(\"dango\",\"yeah\",\"aini_normal\");\n\n@s tango,v bongo 5\nmoveOnSpot false\nkey \"lad\"\n$\nthis.state.buildQA(\"would you like fish?\",\"aini_normal\",\"I would rather kill myself\",\"yeah\");\n~\n\nif (this.value == 1)\n{\n  this.setNextBlock(2);\n  var selection = Math.random() * 2;\n  if (selection > 1) this.state.buildTextbox(\"Aini\",\"cunt\",\"aini_angry\");\n  else this.state.buildTextbox(\"Aini\",\"you fiend\",\"aini_angry\");\n}\n\n\/\/if they said yes to fish\nelse\n{\n  this.setNextBlock(69);\n  var selection = Math.random() * 2;\n  if (selection > 1) this.state.buildTextbox(\"Aini\",\"that's so great\",\"aini_normal\");\n  else this.state.buildTextbox(\"Aini\",\"That is so wonderful :)\",\"aini_normal\");\n}\n~\n\nconsole.log(\"frick\");\nthis.startFight(\"map1\");"
                     },
                  "propertytypes":
                     {
@@ -162,13 +162,11 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "music":"music",
-     "startScript":""
+     "music":"music"
     },
  "propertytypes":
     {
-     "music":"string",
-     "startScript":"string"
+     "music":"string"
     },
  "renderorder":"right-down",
  "tileheight":24,

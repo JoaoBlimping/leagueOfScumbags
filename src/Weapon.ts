@@ -39,8 +39,6 @@ module Scumbag
     {
       super(game,parent,'G'+(num++),false,true,Phaser.Physics.ARCADE);
 
-      console.log("w",type);
-
       this.master = master;
 
       let data = getWeaponData(type,game);

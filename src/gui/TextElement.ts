@@ -15,7 +15,7 @@ module Scumbag
     {
       super();
       this.text = game.add.text(0,0,content,style);
-      this.text.setShadow(1,1,'rgba(0,0,0,0.5)',2);
+      this.text.setShadow(1,1,'rgba(0,0,0,1)',4);
     }
 
 

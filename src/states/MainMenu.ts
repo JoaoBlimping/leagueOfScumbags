@@ -26,6 +26,9 @@ module Scumbag
       //initialise the controls
       InputManager.init(this.game);
 
+      //flush the state of game
+      StateOfGame.flush();
+
       //load the script
       Script.init(this.game);
       Script.setScript(this.game.cache.getText("menuScript"));

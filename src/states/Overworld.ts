@@ -4,29 +4,39 @@
 module Scumbag
 {
 
-  /** this is run when the player collides with an npc */
-  function actorCollide(a:Actor,b:Actor)
+  function actorSelector(a:Actor,distance:number)
   {
-    let script = null;
-    if (a.name == "player")
-    {
-      script = b.getPage().script;
-      StateOfGame.parameters.playerX = a.position.x;
-      StateOfGame.parameters.playerY = a.position.y;
-    }
-    else if (b.name == "player")
-    {
-      script = a.getPage().script;
-      StateOfGame.parameters.playerX = b.position.x;
-      StateOfGame.parameters.playerY = b.position.y;
-    }
-    else return;
+    return a != this.player && distance < this.player.width;
+  }
 
-    let inputDevice = InputManager.getInputDevice(0);
-    if (inputDevice.getButtonState(Button.a) && script != null)
+  /** this is run when the player presses A so we can check if they are touching
+   * another actor which can be activated */
+  function actorCollide()
+  {
+    if (!this.player.updating) return;
+
+    let closest = this.actors.getClosestTo(this.player,actorSelector,this);
+
+    if ((this.player.animations.currentAnim.name == "left" &&
+         closest.x >= this.player.x) ||
+        (this.player.animations.currentAnim.name == "right" &&
+         closest.x <= this.player.x) ||
+        (this.player.animations.currentAnim.name == "up" &&
+         closest.y >= this.player.y) ||
+        (this.player.animations.currentAnim.name == "down" &&
+         closest.y <= this.player.y))
     {
-      Script.setScript(script);
+      return;
     }
+
+    if (!closest.getPage().autorun) Script.setScript(closest.getPage().script);
+  }
+
+
+  function pause()
+  {
+    if (this.gui != null) return;
+    Script.setScript(this.game.cache.getText("saveScript"));
   }
 
 
@@ -152,14 +162,10 @@ module Scumbag
         }
       }
 
-      //run script if there is one
-      if (this.tilemap.properties.hasOwnProperty("startScript"))
-      {
-        if (this.tilemap.properties.startScript != "")
-        {
-          Script.setScript(this.tilemap.properties.startScript);
-        }
-      }
+      //add button press callbacks
+      let device = InputManager.getInputDevice(0);
+      device.addOnButtonPress(Button.a,actorCollide,this);
+      device.addOnButtonPress(Button.b,pause,this);
     }
 
 
@@ -187,7 +193,7 @@ module Scumbag
       this.game.physics.arcade.collide(this.actors,this.collisionLayer);
 
        //check collisions between the actors and each other
-       this.game.physics.arcade.collide(this.actors,this.actors,actorCollide);
+       this.game.physics.arcade.collide(this.actors,this.actors);
 
        //check if the player is in a region with a script
        for (let i in this.regions)

@@ -3,39 +3,21 @@
 
 module Scumbag
 {
-  /*
-   * SO what we're doing at the moment is:
-   * we need a page class which contains all the stuff for each page, and also
-   * stores and evaluates the conditions to go to that page.
-   * then the outer actor uses that to go to the right page and do the right
-   * stuff.
-   *
-   * parsing all the page stuff also has to be implemented, but will be pretty
-   * straitforward based on that pretend actor file I have on my desktop.
-   * just give every value a default, and then only set the ones that are in
-   * there.
-   *
-   * when the actors are first spawned, it should check the conditions for every
-   * page they have so you don't have to cycle through a couple at the start of
-   * the level, but after that, just check the page after the current one
-   */
-
-
   /** creates a bunch of pages out of a string containing their string representation */
   export function createPages(rawData:string):Page[]
   {
     let pages:Page[] = [];
 
-    let rawPages = rawData.split(">");
+    let rawPages = rawData.split("@");
     for (let i = 0;i < rawPages.length - 1;i++)
     {
       pages[i] = new Page();
 
       let rawPage = rawPages[i + 1];
       let conditions = rawPage.substr(0,rawPage.indexOf("\n")).split(",");
-      let values = rawPage.substr(rawPage.indexOf("\n"),rawPage.indexOf("<") -
+      let values = rawPage.substr(rawPage.indexOf("\n"),rawPage.indexOf("$") -
                    rawPage.indexOf("\n")).split("\n");
-      pages[i].script = rawPage.substr(rawPage.indexOf("<") + 1);
+      pages[i].script = rawPage.substr(rawPage.indexOf("$") + 1);
 
       //do conditions
       for (let u = 0;u < conditions.length;u++)
@@ -52,13 +34,8 @@ module Scumbag
         let value = values[u].substr(values[u].indexOf(" ") + 1);
         if (value.length < 1) continue;
         pages[i][name] = JSON.parse(value);
-        console.log(pages[i][name]);
       }
     }
-
-    console.log("bnbifdo");
-    console.log(pages);
-
     return pages;
   }
 
@@ -83,6 +60,7 @@ module Scumbag
 
     key:        string                            = "";
     moveOnSpot: boolean                           = false;
+    autorun:    boolean                           = false;
     moveSpeed:  number                            = 100;
     moveMode:   MovementMode                      = MovementMode.PermanentPath;
     path:       Movement[]                        = [];
@@ -116,6 +94,7 @@ module Scumbag
     updating: boolean = true;
     waiting:  boolean = false;
     waitTime: number  = 0;
+    autoran:  boolean = false;
 
     pages:    Page[];
     page:     number  = -1;
@@ -125,7 +104,6 @@ module Scumbag
     {
       //run superconstructor
       super(game,x,y,pages[0].key);
-      console.log(pages);
 
       //set it's parameters
       this.name = name;
@@ -154,6 +132,14 @@ module Scumbag
         if (!this.getPage().moveOnSpot) this.animations.stop();
         return;
       }
+
+      if (this.getPage().autorun && !this.autoran)
+      {
+        Script.setScript(this.getPage().script);
+        this.autoran = true;
+      }
+
+      this.evaluateNextPage();
 
       this.move();
 
@@ -266,8 +252,8 @@ module Scumbag
     /** checks to see if the actor can go to their next page */
     evaluateNextPage():void
     {
-      if (this.page >= this.pages.length) return;
-      if (this.pages[this.page].evaluatePermissions())
+      if (this.page >= this.pages.length - 1) return;
+      if (this.pages[this.page + 1].evaluatePermissions())
       {
         this.page++;
         this.beginPage();
@@ -292,6 +278,8 @@ module Scumbag
       this.animations.add('right',[4,5,6,7],10,true);
       this.animations.add('left',[8,9,10,11],10,true);
       this.animations.add('up',[12,13,14,15],10,true);
+
+      this.autoran = false;
     }
   }
 }

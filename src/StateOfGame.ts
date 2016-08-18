@@ -5,6 +5,7 @@ module Scumbag
     /** structure of a saved game's parameteres */
     export interface StateParameters
     {
+      slot:       number;
       switches:   {[name:string]:boolean};
       variables:  {[name:string]:number};
       characters: string[]
@@ -17,28 +18,33 @@ module Scumbag
 
 
     /** the game's persistent state */
-    export let parameters:StateParameters =
+    export let parameters:StateParameters;
+
+
+    export function flush()
     {
-      switches:   {},
-      variables:  {},
-      characters: [],
-      map:        "",
-      playerX:    0,
-      playerY:    0,
-      playerKey:  "",
-      actors:     new Array<{x:number,y:number}>()
-    };
+      parameters =
+      {
+        slot:       0,
+        switches:   {},
+        variables:  {},
+        characters: [],
+        map:        "",
+        playerX:    0,
+        playerY:    0,
+        playerKey:  "",
+        actors:     new Array<{x:number,y:number}>()
+      };
+    }
 
 
     /** save the data to the given slot */
-    export function save(slot:number):void
+    export function save():void
     {
       let data = JSON.stringify(parameters);
       if (typeof(Storage) !== "undefined")
       {
-        localStorage.setItem("save"+slot,data);
-        console.log(data);
-        console.log(parameters.switches);
+        localStorage.setItem("save"+parameters.slot,data);
       }
       else
       {
@@ -60,6 +66,7 @@ module Scumbag
       {
         console.log("I'm afraid loading won't be possible in this browser");
       }
+      parameters.slot = slot;
     }
   }
 }

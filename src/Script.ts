@@ -71,7 +71,17 @@ module Scumbag
       else return 0;
     }
 
-    export function saveGame(slot:number) {StateOfGame.save(slot)}
+    export function saveGame()
+    {
+      if (state instanceof Overworld)
+      {
+        let player = (<Overworld>state).player;
+        StateOfGame.parameters.playerX = player.x;
+        StateOfGame.parameters.playerY = player.y;
+      }
+
+      StateOfGame.save();
+    }
 
     export function loadGame(slot:number) {StateOfGame.load(slot)}
 
@@ -80,6 +90,8 @@ module Scumbag
       StateOfGame.parameters.characters.push(character);
     }
 
+    export function getCharacters() {return StateOfGame.parameters.characters}
+
 
     export function setPlayerKey(key:string)
     {
@@ -87,14 +99,15 @@ module Scumbag
       StateOfGame.parameters.playerKey = key;
     }
 
-
     export function playSound(key:string) {game.sound.play(key)}
-
 
     export function playMusic(key:string) {MusicManager.playSong(game,key)}
 
-
     export function stopMusic() {MusicManager.stop()}
+
+    export function setSlot(slot:number) {StateOfGame.parameters.slot = slot}
+
+    export function getSlot() {return StateOfGame.parameters.slot}
   }
 
 

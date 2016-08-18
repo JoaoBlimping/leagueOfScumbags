@@ -26,12 +26,9 @@ module Scumbag
       //chuck on a sweet beat
       MusicManager.playSong(this.game,'deadMusic');
 
-      //initialise the controls
-      InputManager.init(this.game);
-
       //load the script
       Script.init(this.game);
-      Script.setScript('deadScript');
+      Script.setScript(this.game.cache.getText("deadScript"));
     }
 
 

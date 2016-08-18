@@ -16,7 +16,6 @@ module Scumbag
     fighter.name = type;
 
     fighter.controller = new Controllers[data.controller](game);
-    console.log(type,data.lWeapon,data.rWeapon);
     fighter.weapons[WeaponSlot.Left] = new Weapon(game,bulletGroup,fighter,data.lWeapon);
     fighter.weapons[WeaponSlot.Right] = new Weapon(game,bulletGroup,fighter,data.rWeapon);
 
