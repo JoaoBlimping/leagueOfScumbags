@@ -15,6 +15,8 @@
     {"type": "image","key": "window","url": "images/window.png"},
     {"type": "image","key": "clicker","url": "images/clicker.png"},
     {"type": "image","key": "selector","url": "images/selector.png"},
+    {"type": "image","key": "cancel","url": "images/cancel.png"},
+    {"type": "image","key": "new","url": "images/new.png"},
 
     {"type": "image","key": "bullet1","url": "images/bullet1.png"},
     {"type": "image","key": "bullet2","url": "images/bullet2.png"},
@@ -36,15 +38,15 @@
     {"type": "image","key": "dany_normal","url": "chips/dany_normal.png"},
 
     {
-      "type": "spritesheet","key": "fogle","url": "images/fogle.png",
+      "type": "spritesheet","key": "John Fogle","url": "images/fogle.png",
       "frameWidth": 32,"frameHeight": 48
     },
     {
-      "type": "spritesheet","key": "aini","url": "images/aini.png",
+      "type": "spritesheet","key": "Aini","url": "images/aini.png",
       "frameWidth": 32,"frameHeight": 48
     },
     {
-      "type": "spritesheet","key": "purple","url": "images/purple.png",
+      "type": "spritesheet","key": "Purple Hat Man","url": "images/purple.png",
       "frameWidth": 32,"frameHeight": 48
     },
     {

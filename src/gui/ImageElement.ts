@@ -4,61 +4,56 @@
 module Scumbag
 {
   /** used to display text in the gui */
-  export class TextElement extends GuiElement
+  export class ImageElement extends GuiElement
   {
-    text:   Phaser.Text;
+    image:   Phaser.Image;
 
 
     /** creates a text thingy */
-    constructor(game:Phaser.Game,content:string,
-                style:{font:string,fill:string})
+    constructor(game:Phaser.Game,key:string)
     {
       super();
-      this.text = game.add.text(0,0,content,style);
-      this.text.setShadow(1,1,'rgba(0,0,0,1)',4);
+      this.image = game.add.image(0,0,key);
     }
 
 
     /** implements GuiElement.bringToFront */
     bringToFront()
     {
-      this.text.bringToTop();
+      this.image.bringToTop();
     }
 
 
     /** overrides GuiElement.setPosition */
     addPosition(x:number,y:number)
     {
-      this.text.x += x;
-      this.text.y += y;
+      this.image.x += x;
+      this.image.y += y;
     }
 
 
     /** overrides GuiElement.setPosition */
     setPosition(x:number,y:number)
     {
-      this.text.x = x;
-      this.text.y = y;
+      this.image.x = x;
+      this.image.y = y;
     }
 
 
     /** implements GuiElement.getX() */
-    getX() {return this.text.x}
+    getX() {return this.image.x}
 
 
     /** implements GuiElement.getY() */
-    getY() {return this.text.y}
+    getY() {return this.image.y}
 
 
     /** implements GuiElement.getWidth */
-    getWidth()
-    {
-      return this.text.width;
-    }
+    getWidth() {return this.image.width}
 
 
     /** implements GuiElement.getHeight */
-    getHeight() {return this.text.height}
+    getHeight() {return this.image.height}
 
 
     /** implements GuiElement.update */
@@ -68,7 +63,7 @@ module Scumbag
     /** implements GuiElement.destroy */
     destroy()
     {
-      this.text.destroy();
+      this.image.destroy();
     }
   }
 }

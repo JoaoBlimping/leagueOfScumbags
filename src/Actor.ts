@@ -61,6 +61,7 @@ module Scumbag
     key:        string                            = "";
     moveOnSpot: boolean                           = false;
     autorun:    boolean                           = false;
+    immovable:  boolean                           = false;
     moveSpeed:  number                            = 100;
     moveMode:   MovementMode                      = MovementMode.PermanentPath;
     path:       Movement[]                        = [];
@@ -278,6 +279,9 @@ module Scumbag
       this.animations.add('right',[4,5,6,7],10,true);
       this.animations.add('left',[8,9,10,11],10,true);
       this.animations.add('up',[12,13,14,15],10,true);
+
+      //make it immovable if relevant
+      if (this.getPage().immovable) this.body.immovable = true;
 
       this.autoran = false;
     }

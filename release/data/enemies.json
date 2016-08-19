@@ -2,20 +2,20 @@
   "enemies":
   [
     {
-      "name":"John Fogle","key":"fogle","controller":"PlayerController",
+      "name":"John Fogle","key":"John Fogle","controller":"PlayerController",
       "gravity":1,"jump":1,"lWeapon":"nuke","rWeapon":"minigun",
       "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":20,
       "manaRegen":0.01,"collisionDamage":0,"directional":true,"moveSpeed":200
     },
     {
-      "name":"Aini","key":"aini","controller":"PlayerController",
+      "name":"Aini","key":"Aini","controller":"PlayerController",
       "gravity":1,"jump":1,"lWeapon":"bouncy","rWeapon":"blaster",
       "deathWeapon":"blood","health":10,"healthRegen":0.075,"mana":50,
       "manaRegen":0.03,"collisionDamage":0,"directional":true,"moveSpeed":200,
       "mass":25
     },
     {
-      "name":"Purple Hat Man","key":"purple","controller":"PlayerController",
+      "name":"Purple Hat Man","key":"Purple Hat Man","controller":"PlayerController",
       "gravity":1,"jump":1,"lWeapon":"monkeyLauncher","rWeapon":"minigun",
       "deathWeapon":"blood","health":15,"healthRegen":0.055,"mana":50,
       "manaRegen":0.018,"collisionDamage":0,"directional":true,"moveSpeed":200
