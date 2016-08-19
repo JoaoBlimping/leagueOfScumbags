@@ -37,5 +37,5 @@ if (this.value == 1)
 
 else
 {
-  this.changeState("Overworld");
+  this.changeState("MainMenu");
 }
