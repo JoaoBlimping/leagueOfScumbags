@@ -17,7 +17,7 @@ module Scumbag
         {
           this.actors[i] = state.getActorByName(actorPaths[i].name);
           this.actors[i].getPage().path = stringToMovements(actorPaths[i].path,state.regions);
-          this.actors[i].getPage().moveMode = MovementMode.TemporaryPath;
+          this.actors[i].moveMode = MovementMode.TemporaryPath;
         }
       }
     }

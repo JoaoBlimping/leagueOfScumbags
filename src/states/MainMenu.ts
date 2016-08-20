@@ -14,11 +14,11 @@ module Scumbag
       this.background = this.add.sprite(0,0,"titlepage");
       this.background.alpha = 0;
 
-      this.logo = this.add.sprite(this.world.centerX,-300,"logo");
+      this.logo = this.add.sprite(this.game.width / 2,-300,'logo');
       this.logo.anchor.setTo(0.5,0.5);
 
       this.add.tween(this.background).to({alpha:1},500,Phaser.Easing.Default,true);
-      this.add.tween(this.logo).to({y:this.world.centerY - this.logo.height / 3},700,Phaser.Easing.Elastic.In,true,500);
+      this.add.tween(this.logo).to({y:this.game.height / 2 - this.logo.height / 3},700,Phaser.Easing.Elastic.In,true,500);
 
       //chuck on a sweet beat
       MusicManager.playSong(this.game,"menuMusic");

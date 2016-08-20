@@ -75,7 +75,12 @@ module Scumbag
         let x = enemies[i].x + enemies[i].width / 2;
         let y = enemies[i].y + enemies[i].height / 2;
         let type = enemies[i].properties.kind;
-        this.fighters.add(createFighterFromEnemy(type,x,y,this.bullets,this.game));
+        let mandatory = false;
+        if (enemies[i].properties.hasOwnProperty("mandatory"))
+        {
+          mandatory = enemies[i].properties.mandatory;
+        }
+        this.fighters.add(createFighterFromEnemy(type,x,y,mandatory,this.bullets,this.game));
       }
 
       //create the health bar for the plauer and also the mana bar
@@ -143,6 +148,7 @@ module Scumbag
       if (!this.player.alive) this.addPlayer();
 
       //if all fighters except the player are dead we leave the fight
+      let stay = false;
       for (let fighter of this.fighters.children)
       {
         if (fighter instanceof Fighter)
@@ -151,11 +157,16 @@ module Scumbag
           {
             fighter.destroy();
             this.fighters.remove(fighter);
-            if (fighter == this.player) this.game.state.start("Overworld");
           }
-
+          else if (fighter.mandatory) stay = true;
         }
       }
+
+      if (!stay)
+      {
+        this.game.state.start("Overworld");
+      }
+
     }
 
 
@@ -168,7 +179,7 @@ module Scumbag
     addFighter(type:string,x:number,y:number)
     {
       if (this.fighters.length >= MAX_FIGHTERS) return;
-      this.fighters.add(createFighterFromEnemy(type,x,y,this.bullets,this.game));
+      this.fighters.add(createFighterFromEnemy(type,x,y,false,this.bullets,this.game));
     }
 
     /** used to add the player's next character into the battle */
@@ -185,7 +196,7 @@ module Scumbag
       let character = StateOfGame.parameters.characters[this.playerDeaths];
       this.nameTag.text = character;
       this.player = createFighterFromEnemy(character,this.playerX,this.playerY,
-                                           this.bullets,this.game);
+                                           false,this.bullets,this.game);
 
       this.game.camera.follow(this.player);
       this.fighters.add(this.player);
@@ -228,7 +239,6 @@ module Scumbag
   /** this gets called when a bullet hits a fighter */
   function hitMaster(fighter:Fighter,bullet:Bullet)
   {
-    console.log(!bullet.collide);
     return !bullet.collide;
   }
 

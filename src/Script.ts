@@ -3,6 +3,25 @@ module Scumbag
   let game:Phaser.Game;
   let nextBlock = 0;
   let nextBlockSet = false;
+  let blocks:string[] = [];
+  let paused = false;
+
+
+  function storeActor(actor:Actor):void
+  {
+    StateOfGame.parameters.actors.push({name:actor.name,x:actor.x,y:actor.y});
+  }
+
+
+  function storeActors():void
+  {
+    let state = game.state.getCurrentState();
+    if (state instanceof Overworld)
+    {
+      StateOfGame.parameters.actors = [];
+      state.actors.forEach(storeActor,null);
+    }
+  }
 
 
   /** this is the context in scripts are run */
@@ -31,13 +50,15 @@ module Scumbag
 
     export function startFight(map:string)
     {
+      storeActors();
+      paused = true;
       game.state.start("Fight",true,false,map);
     }
 
 
     export function toOverworld()
     {
-      game.state.start("Overworld",true,false);
+      game.state.start("Overworld");
     }
 
 
@@ -73,17 +94,14 @@ module Scumbag
 
     export function saveGame()
     {
-      if (state instanceof Overworld)
-      {
-        let player = (<Overworld>state).player;
-        StateOfGame.parameters.playerX = player.x;
-        StateOfGame.parameters.playerY = player.y;
-      }
-
+      storeActors();
       StateOfGame.save();
     }
 
-    export function loadGame(slot:number) {StateOfGame.load(slot)}
+    export function loadGame(slot:number)
+    {
+      StateOfGame.load(slot);
+    }
 
     export function addCharacter(character:string)
     {
@@ -114,8 +132,6 @@ module Scumbag
   /** runs game scripts */
   export namespace Script
   {
-    let blocks:     string[];
-
     export function init(pGame:Phaser.Game)
     {
       game = pGame;
@@ -126,6 +142,7 @@ module Scumbag
      * string that value will be set to for the first block */
     export function setScript(content:string)
     {
+      paused = false;
       blocks = content.split('~');
       ScriptContext.state = <GuiState>game.state.getCurrentState();
       nextBlock = 0;
@@ -140,6 +157,22 @@ module Scumbag
       effect.call(ScriptContext);
       if (!nextBlockSet) nextBlock++;
       else nextBlockSet = false;
+    }
+
+    /** check if script execution was paused for a betle */
+    export function checkPaused():boolean
+    {
+      if (paused)
+      {
+        paused = false;
+        return true
+      }
+      return false;
+    }
+
+    export function clearPause():void
+    {
+      paused = false;
     }
   }
 }

@@ -3,7 +3,6 @@
 
 module Scumbag
 {
-
   function actorSelector(a:Actor,distance:number)
   {
     return a != this.player && distance < this.player.width;
@@ -47,9 +46,9 @@ module Scumbag
 
     let page = new Page();
     page.key = StateOfGame.parameters.playerKey;
-    page.moveMode = MovementMode.PlayerControlled;
 
     let player = new Actor(game,x,y,"player",[page]);
+    player.moveMode = MovementMode.PlayerControlled;
     return player;
   }
 
@@ -69,7 +68,13 @@ module Scumbag
     /** overrides Phaser.State.init() */
     init(map:string,playerRegion:string)
     {
-      if (map == null) map = StateOfGame.parameters.map;
+      let returning = false;
+
+      if (map == null)
+      {
+        map = StateOfGame.parameters.map;
+        returning = true;
+      }
 
       //save the map name
       StateOfGame.parameters.map = map;
@@ -101,13 +106,8 @@ module Scumbag
       {
         let page = new Page();
         page.key = StateOfGame.parameters.playerKey;
-        page.moveMode = MovementMode.PlayerControlled;
-        this.player = new Actor(this.game,
-                                      StateOfGame.parameters.playerX,
-                                      StateOfGame.parameters.playerY,
-                                      StateOfGame.parameters.playerKey,
-                                      [page]);
-        this.player.pages[0].moveMode = MovementMode.PlayerControlled;
+        this.player = new Actor(this.game,0,0,"player",[page]);
+        this.player.moveMode = MovementMode.PlayerControlled;
       }
       else
       {
@@ -125,9 +125,15 @@ module Scumbag
         let y = actors[i].y + this.tilemap.tileHeight;
         let name = actors[i].name;
 
-        let actor = new Actor(this.game,x,y,name,createPages(actors[i].properties.pages));
+        let actor = new Actor(this.game,x,y,name,createPages(actors[i].properties.pages,this.regions));
 
         this.actors.add(actor);
+      }
+
+      //load actors
+      if (returning)
+      {
+        this.restoreActors();
       }
 
       //create the top layer of the world
@@ -140,6 +146,8 @@ module Scumbag
     {
       this.game.camera.follow(this.player);
       this.game.camera.focusOnXY(this.player.position.x,this.player.position.y);
+
+      if (Script.checkPaused()) Script.runScript(0);
 
       //if there ain't no things then don't go there
       if (this.tilemap.properties == null) return;
@@ -166,6 +174,9 @@ module Scumbag
       let device = InputManager.getInputDevice(0);
       device.addOnButtonPress(Button.a,actorCollide,this);
       device.addOnButtonPress(Button.b,pause,this);
+
+      //start a play time counter
+      setInterval(function(){StateOfGame.parameters.time++},1000);
     }
 
 
@@ -240,6 +251,17 @@ module Scumbag
       }
       return null;
     }
+
+    restoreActors():void
+    {
+      for (let i = 0;i < StateOfGame.parameters.actors.length;i++)
+      {
+        let dude = this.getActorByName(StateOfGame.parameters.actors[i].name);
+        dude.x = StateOfGame.parameters.actors[i].x;
+        dude.y = StateOfGame.parameters.actors[i].y;
+      }
+    }
+
   }
 
 }

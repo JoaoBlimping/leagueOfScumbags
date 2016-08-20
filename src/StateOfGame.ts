@@ -10,10 +10,10 @@ module Scumbag
       variables:  {[name:string]:number};
       characters: string[]
       map:        string;
-      playerX:    number;
-      playerY:    number;
       playerKey:  string;
-      actors:     {x:number,y:number}[]
+      actors:     {name:string,x:number,y:number}[],
+      score:      number,
+      time:       number
     }
 
 
@@ -30,10 +30,10 @@ module Scumbag
         variables:  {},
         characters: [],
         map:        "",
-        playerX:    0,
-        playerY:    0,
         playerKey:  "",
-        actors:     new Array<{x:number,y:number}>()
+        actors:     new Array<{name:string,x:number,y:number}>(),
+        score:      0,
+        time:       0
       };
     }
 

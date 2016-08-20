@@ -4,7 +4,7 @@
 module Scumbag
 {
   /** creates a bunch of pages out of a string containing their string representation */
-  export function createPages(rawData:string):Page[]
+  export function createPages(rawData:string,regions:{[name:string]:Region}):Page[]
   {
     let pages:Page[] = [];
 
@@ -33,7 +33,12 @@ module Scumbag
         let name = values[u].substr(0,values[u].indexOf(" "));
         let value = values[u].substr(values[u].indexOf(" ") + 1);
         if (value.length < 1) continue;
-        pages[i][name] = JSON.parse(value);
+
+        if (name == "path")
+        {
+          pages[i].path = stringToMovements(JSON.parse(value),regions);
+        }
+        else pages[i][name] = JSON.parse(value);
       }
     }
     return pages;
@@ -63,7 +68,6 @@ module Scumbag
     autorun:    boolean                           = false;
     immovable:  boolean                           = false;
     moveSpeed:  number                            = 100;
-    moveMode:   MovementMode                      = MovementMode.PermanentPath;
     path:       Movement[]                        = [];
     script:     string                            = "";
 
@@ -96,6 +100,7 @@ module Scumbag
     waiting:  boolean = false;
     waitTime: number  = 0;
     autoran:  boolean = false;
+    moveMode: MovementMode;
 
     pages:    Page[];
     page:     number  = -1;
@@ -161,14 +166,14 @@ module Scumbag
     move():void
     {
       if ((this.getPage().path.length == 0 &&
-          (this.getPage().moveMode == MovementMode.PermanentPath ||
-           this.getPage().moveMode == MovementMode.TemporaryPath)) || this.waiting)
+          (this.moveMode == MovementMode.PermanentPath ||
+           this.moveMode == MovementMode.TemporaryPath)) || this.waiting)
       {
         return;
       }
 
       //control like the player
-      if (this.getPage().moveMode == MovementMode.PlayerControlled)
+      if (this.moveMode == MovementMode.PlayerControlled)
       {
         let input = InputManager.getInputDevice(0);
         this.body.velocity.x = input.getAxisState(Axis.Horizontal) * this.getPage().moveSpeed;
@@ -210,7 +215,7 @@ module Scumbag
     /** goes to the next movement that the actor has to do */
     nextMovement():void
     {
-      if (this.getPage().moveMode == MovementMode.PermanentPath)
+      if (this.moveMode == MovementMode.PermanentPath)
       {
         this.getPage().path.push(this.getPage().path[0]);
       }
@@ -268,9 +273,9 @@ module Scumbag
 
       //set it's dimensions
       this.body.width = this.width / 5 * 4;
-      this.body.height = this.height / 10 * 4;
+      this.body.height = this.height / 12 * 5;
       this.body.offset.x = this.width / 10;
-      this.body.offset.y = this.height / 10 * 6;
+      this.body.offset.y = this.height / 2;
 
 
       //do animation type crap
@@ -282,6 +287,9 @@ module Scumbag
 
       //make it immovable if relevant
       if (this.getPage().immovable) this.body.immovable = true;
+
+      //set move mode to PermanentPath
+      this.moveMode = MovementMode.PermanentPath;
 
       this.autoran = false;
     }

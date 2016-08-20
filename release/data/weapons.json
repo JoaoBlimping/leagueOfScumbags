@@ -23,7 +23,7 @@
     },
     {
       "name":"bouncy","speed":[595,605],"gx":[-300,300],"gy":[-300,300],
-      "lifespan":[290,350],"wait":60,"manaCost":0.35,"key":"bullet7","cluster":1,
+      "lifespan":[300,600],"wait":60,"manaCost":0.35,"key":"bullet7","cluster":1,
       "accuracy":0,"nBullets":32,"sound":null,
       "setAll":[["tracking",true],["power",3],["bouncy",true],
                 ["body.bounce.x",1],["body.bounce.y",1]],

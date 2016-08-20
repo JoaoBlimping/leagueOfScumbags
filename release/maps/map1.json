@@ -169,7 +169,7 @@
                  "properties":
                     {
                      "kind":"robot",
-                     "mandatory":false
+                     "mandatory":true
                     },
                  "propertytypes":
                     {

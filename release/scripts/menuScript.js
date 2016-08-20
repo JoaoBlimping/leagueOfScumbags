@@ -20,7 +20,7 @@ else if (this.value == 2)
 {
   this.setNextBlock(0);
   this.state.buildTextbox("Dany Burton",
-                          "Greetings, I am the creator of this nice game\n"+
+                          "Greetings, I am the CREATOR of this nice game\n"+
                           "I hope you enjoy it 8)\n"+
                           "If not, seek help from a mental health professional immeadiately",
                           "dany_normal");

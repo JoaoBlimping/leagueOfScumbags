@@ -7,6 +7,7 @@ module Scumbag
   const BASE_GRAVITY = 400;
 
   export function createFighterFromEnemy(type:string,x:number,y:number,
+                                         mandatory:boolean,
                                          bulletGroup:Phaser.Group,
                                          game:Phaser.Game):Fighter
   {
@@ -34,6 +35,8 @@ module Scumbag
     fighter.deathWeapon = new Weapon(game,bulletGroup,fighter,data.deathWeapon);
     fighter.deathSound = data.deathSound;
 
+    fighter.mandatory = mandatory;
+
     return fighter;
   }
 
@@ -58,6 +61,8 @@ module Scumbag
     manaRegenRate:  number;
     collisionDamage:number;
     canFireTime:    number;
+
+    mandatory:      boolean;
 
     prevTime:       number;
 

@@ -7,7 +7,17 @@ module Scumbag
   const questionFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#0cc"};
   const bodyFont = {font:"14px Serif",fill:"#ff6"};
 
-  const nSaves = 3;
+  const N_SAVES = 3;
+
+
+  /** turns a number of seconds into a string that looks like a time */
+  export function numberAsTime(time:number):string
+  {
+    let hrs = ~~(time / 3600);
+    let mins = ~~((time % 3600) / 60);
+    let secs = time % 60;
+    return hrs+":"+mins+":"+secs;
+  }
 
 
   /** this is used for any game state that contains gui windows n shit */
@@ -82,7 +92,7 @@ module Scumbag
       }
       pics[StateOfGame.parameters.characters.length] = new SelectorElement(this.game,'selector',body);
 
-      let shelf = new ShelfElement(this.game,pics);
+      let shelf = new ShelfElement(pics);
 
       this.setGui(new Window(this.game,"window",new Array<GuiElement>(head,shelf)));
 
@@ -92,7 +102,7 @@ module Scumbag
     buildSlot(cancelFirst:boolean=false):void
     {
       let children:GuiElement[] = [];
-      for (let i = 0;i < nSaves;i++)
+      for (let i = 0;i < N_SAVES;i++)
       {
         let head:GuiElement = new TextElement(this.game,"Slot " + (i + 1),headingFont);
 
@@ -109,14 +119,13 @@ module Scumbag
           pics[0] = new ImageElement(this.game,"new");
         }
 
-        let level = new TextElement(this.game,StateOfGame.parameters.map,bodyFont);
-        let time = new TextElement(this.game,"yeah",bodyFont);
-        let details:GuiElement = new StackElement(this.game,[level,time]);
+        let time = new TextElement(this.game,numberAsTime(StateOfGame.parameters.time),bodyFont);
+        let details:GuiElement = new StackElement([time]);
         pics[pics.length] = details;
 
-        let body = new ShelfElement(this.game,pics);
+        let body = new ShelfElement(pics);
 
-        children[i] = new StackElement(this.game,[head,body]);
+        children[i] = new StackElement([head,body]);
       }
 
       let cancelText = new TextElement(this.game,"Cancel",headingFont);
@@ -124,11 +133,11 @@ module Scumbag
 
       if (cancelFirst)
       {
-        children = [<GuiElement>new StackElement(this.game,[cancelText,cancelPic])].concat(children);
+        children = [<GuiElement>new StackElement([cancelText,cancelPic])].concat(children);
       }
       else
       {
-        children[nSaves] = new StackElement(this.game,[cancelText,cancelPic]);
+        children[N_SAVES] = new StackElement([cancelText,cancelPic]);
       }
 
 

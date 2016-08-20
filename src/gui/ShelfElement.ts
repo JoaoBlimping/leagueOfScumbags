@@ -13,7 +13,7 @@ module Scumbag
 
     /** creates the window, using the game thing to set up the size, and it's
      * renderer, and also a list of it's children */
-    constructor(game:Phaser.Game,children:GuiElement[])
+    constructor(children:GuiElement[])
     {
       super();
       this.children = children;
