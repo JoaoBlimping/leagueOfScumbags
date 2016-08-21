@@ -56,7 +56,7 @@ module Scumbag
       //load music if there is some
       if (this.tilemap.properties.hasOwnProperty("music"))
       {
-        MusicManager.playSong(this.game,this.tilemap.properties.music);
+        MusicManager.playSong(this.game,this.tilemap.properties.music,MusicChannel.Music);
       }
 
       //turn on phyysics
@@ -185,7 +185,11 @@ module Scumbag
     /** used to add the player's next character into the battle */
     addPlayer()
     {
-      if (this.player != null) this.player.destroy();
+      if (this.player != null)
+      {
+        this.player.destroy();
+        StateOfGame.parameters.score -= 6.4;
+      }
 
       if (this.playerDeaths == StateOfGame.parameters.characters.length)
       {
@@ -230,6 +234,7 @@ module Scumbag
   {
     if (!bullet.collide) return false;
     fighter.damage(bullet.power);
+    StateOfGame.parameters.score++;
 
     bullet.kill();
     return true;

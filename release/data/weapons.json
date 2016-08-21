@@ -4,7 +4,7 @@
     {
       "name":"minigun","speed":[775,825],"gx":[0,0],"gy":[495,505],
       "lifespan":[4900,5100],"wait":50,"manaCost":0.15,"key":"bullet2",
-      "accuracy":0.1,"nBullets":50,"sound":"shot","setAll":[["power",3]],"cluster":1,
+      "accuracy":0.05,"nBullets":50,"sound":"shot","setAll":[["power",3]],"cluster":1,
       "deathWeapon":null,"passOnMaster":true,"deathSpawn":null
     },
     {
@@ -58,7 +58,7 @@
     },
     {
       "name":"nuke","speed":[575,625],"gx":[0,0],"gy":[495,505],
-      "lifespan":[4900,5100],"wait":200,"manaCost":1,"key":"bullet4","cluster":1,
+      "lifespan":[2000,5000],"wait":1000,"manaCost":6,"key":"bullet4","cluster":1,
       "accuracy":0,"nBullets":10,"sound":"throw",
       "setAll":[["collide",false],["body.bounce.x",0.5],["body.bounce.y",0.5],["scaleSpeed",0.02],["bouncy",true]],
       "deathWeapon":"radioactivity","passOnMaster":false,"deathSpawn":null
@@ -66,7 +66,7 @@
     {
       "name":"radioactivity","speed":[375,425],"gx":[0,0],"gy":[595,605],
       "lifespan":[3500,4500],"wait":0,"manaCost":0,"key":"bullet3","cluster":32,
-      "accuracy":1,"nBullets":32,"sound":null,
+      "accuracy":1,"nBullets":64,"sound":null,
       "setAll":[["body.bounce.x",0.95],["body.bounce.y",0.95],["collide",false],["bouncy",true]],
       "deathWeapon":"explosion","passOnMaster":false,"deathSpawn":null
     },

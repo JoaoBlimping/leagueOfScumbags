@@ -17,6 +17,7 @@
     {"type": "image","key": "selector","url": "images/selector.png"},
     {"type": "image","key": "cancel","url": "images/cancel.png"},
     {"type": "image","key": "new","url": "images/new.png"},
+    {"type": "image","key": "transition","url": "images/transition.png"},
 
     {"type": "image","key": "bullet1","url": "images/bullet1.png"},
     {"type": "image","key": "bullet2","url": "images/bullet2.png"},
@@ -120,6 +121,10 @@
       "type": "audio","key": "trogDeath","urls":["audio/trogDeath.wav"],
       "autoDecode": true
     },
+    {
+      "type": "audio","key": "swish","urls":["audio/swish.ogg"],
+      "autoDecode": true
+    },
 
     {
       "type": "audio","key": "music","urls":["audio/music.ogg"],
@@ -127,6 +132,10 @@
     },
     {
       "type": "audio","key": "menuMusic","urls":["audio/menuMusic.ogg"],
+      "autoDecode": true
+    },
+    {
+      "type": "audio","key": "wind","urls":["audio/wind.ogg"],
       "autoDecode": true
     },
 

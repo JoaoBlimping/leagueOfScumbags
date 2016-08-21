@@ -52,7 +52,7 @@ module Scumbag
     {
       storeActors();
       paused = true;
-      game.state.start("Fight",true,false,map);
+      (<Overworld>state).transition(map);
     }
 
 
@@ -119,13 +119,18 @@ module Scumbag
 
     export function playSound(key:string) {game.sound.play(key)}
 
-    export function playMusic(key:string) {MusicManager.playSong(game,key)}
+    export function playMusic(key:string)
+    {
+      MusicManager.playSong(game,key,MusicChannel.Music);
+    }
 
-    export function stopMusic() {MusicManager.stop()}
+    export function stopMusic() {MusicManager.stopSong(MusicChannel.Music)}
 
     export function setSlot(slot:number) {StateOfGame.parameters.slot = slot}
 
     export function getSlot() {return StateOfGame.parameters.slot}
+
+    export function getScore() {return StateOfGame.parameters.score}
   }
 
 

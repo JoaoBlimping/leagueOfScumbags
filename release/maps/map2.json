@@ -162,10 +162,12 @@
  "orientation":"orthogonal",
  "properties":
     {
+     "ambience":"wind",
      "music":"music"
     },
  "propertytypes":
     {
+     "ambience":"string",
      "music":"string"
     },
  "renderorder":"right-down",

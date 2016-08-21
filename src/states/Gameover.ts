@@ -24,7 +24,7 @@ module Scumbag
       this.add.tween(this.logo).to({y:this.game.height / 2 - this.logo.height / 2},700,Phaser.Easing.Elastic.In,true,500);
 
       //chuck on a sweet beat
-      MusicManager.playSong(this.game,'deadMusic');
+      MusicManager.playSong(this.game,'deadMusic',MusicChannel.Music);
 
       //load the script
       Script.setScript(this.game.cache.getText("deadScript"));

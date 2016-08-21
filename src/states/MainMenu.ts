@@ -21,7 +21,8 @@ module Scumbag
       this.add.tween(this.logo).to({y:this.game.height / 2 - this.logo.height / 3},700,Phaser.Easing.Elastic.In,true,500);
 
       //chuck on a sweet beat
-      MusicManager.playSong(this.game,"menuMusic");
+      MusicManager.stopSong(MusicChannel.Ambience);
+      MusicManager.playSong(this.game,"menuMusic",MusicChannel.Music);
 
       //initialise the controls
       InputManager.init(this.game);

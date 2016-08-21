@@ -155,7 +155,16 @@ module Scumbag
       //load music if there is some
       if (this.tilemap.properties.hasOwnProperty("music"))
       {
-        MusicManager.playSong(this.game,this.tilemap.properties.music);
+        MusicManager.playSong(this.game,this.tilemap.properties.music,MusicChannel.Music);
+      }
+
+      if (this.tilemap.properties.hasOwnProperty("ambience"))
+      {
+        MusicManager.playSong(this.game,this.tilemap.properties.ambience,MusicChannel.Ambience);
+      }
+      else
+      {
+        MusicManager.stopSong(MusicChannel.Ambience);
       }
 
       //create the background
@@ -176,7 +185,7 @@ module Scumbag
       device.addOnButtonPress(Button.b,pause,this);
 
       //start a play time counter
-      setInterval(function(){StateOfGame.parameters.time++},1000);
+      setInterval(function(){StateOfGame.parameters.time++;StateOfGame.parameters.score -= 0.135},1000);
     }
 
 
@@ -260,6 +269,19 @@ module Scumbag
         dude.x = StateOfGame.parameters.actors[i].x;
         dude.y = StateOfGame.parameters.actors[i].y;
       }
+    }
+
+
+    transition(map:string):void
+    {
+      let transitioner = this.add.image(this.camera.x + this.game.width / 2,
+                                        this.camera.y + this.game.height / 2,
+                                        "transition");
+      transitioner.anchor.setTo(0.5,0.5);
+      let tween = this.add.tween(transitioner.scale).to({x:30,y:30},700,Phaser.Easing.Default,true);
+      this.add.tween(transitioner).to({angle:1000},700,Phaser.Easing.Default,true);
+      tween.onComplete.add(function(){this.game.state.start("Fight",true,false,map);},this);
+      this.game.sound.play("swish");
     }
 
   }

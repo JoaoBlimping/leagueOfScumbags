@@ -4,8 +4,8 @@
     {
       "name":"John Fogle","key":"John Fogle","controller":"PlayerController",
       "gravity":1,"jump":1,"lWeapon":"nuke","rWeapon":"minigun",
-      "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":20,
-      "manaRegen":0.01,"collisionDamage":0,"directional":true,"moveSpeed":200
+      "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":13,
+      "manaRegen":0.02,"collisionDamage":0,"directional":true,"moveSpeed":200
     },
     {
       "name":"Aini","key":"Aini","controller":"PlayerController",
