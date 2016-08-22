@@ -14,6 +14,7 @@ module Scumbag
       this.state.add('Fight',Fight,false);
       this.state.add('Overworld',Overworld,false);
       this.state.add('Gameover',Gameover,false);
+      this.state.add('Credits',Credits,false);
 
       this.state.start('Boot');
     }

@@ -11,8 +11,9 @@ this.state.buildQA("League of Scumbags",
 //new game
 if (this.value == 1)
 {
-  this.setNextBlock(2)
-  this.state.buildSlot();
+  this.win();
+  //this.setNextBlock(2)
+  //this.state.buildSlot();
 }
 
 //go to credits

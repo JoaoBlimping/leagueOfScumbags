@@ -1,0 +1,20 @@
+{
+  "items":
+  [
+    {"type":"heading","content":"the End!"},
+    {"type":"text","content":"Thankyou for playing this game I hope you had a nice time, and also you did not play so much that your eyes hurt or something"},
+
+    {"type":"text","content":"Graphics by Dany Burton"},
+    {"type":"text","content":"Story by Dany Burton"},
+    {"type":"text","content":"Music by Dany Burton"},
+    {"type":"text","content":"Sounds by Dany Burton"},
+    {"type":"text","content":"Programming by Dany Burton, you can get the source code at https://github.com/marineorganism/leagueOfScumbags"},
+    {"type":"text","content":"Tested by Chris"},
+
+    {"type":"text","content":"I can assure you that the league of scumbags will return in another game in the near future, and if you did not like it then beware!"},
+    {"type":"image","content":"danyburton"},
+    {"type":"text","content":"A game made by Dany Burton"}
+  ],
+  "background":"creditspage",
+  "music":"music"
+}

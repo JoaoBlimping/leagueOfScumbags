@@ -185,7 +185,7 @@ module Scumbag
       device.addOnButtonPress(Button.b,pause,this);
 
       //start a play time counter
-      setInterval(function(){StateOfGame.parameters.time++;StateOfGame.parameters.score -= 0.135},1000);
+      StateOfGame.startTimer();
     }
 
 

@@ -37,6 +37,19 @@ module Scumbag
       };
     }
 
+    let timerFunction = 0;
+
+    export function startTimer():void
+    {
+      timerFunction = setInterval(function(){StateOfGame.parameters.time++;StateOfGame.parameters.score -= 0.135},1000);
+    }
+
+
+    export function stopTimer():void
+    {
+      clearInterval(timerFunction);
+    }
+
 
     /** save the data to the given slot */
     export function save():void

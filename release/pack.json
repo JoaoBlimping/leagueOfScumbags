@@ -3,8 +3,10 @@
   [
     {"type":"json","key":"enemies","url":"data/enemies.json"},
     {"type":"json","key":"weapons","url":"data/weapons.json"},
+    {"type":"json","key":"credits","url":"data/credits.json"},
 
     {"type": "image","key": "titlepage","url": "images/menu.jpg"},
+    {"type": "image","key": "creditspage","url": "images/creditsBackground.jpg"},
     {"type": "image","key": "logo","url": "images/logo.png"},
     {"type": "image","key": "dead","url": "images/dead.png"},
     {"type": "image","key": "combatTiles","url": "images/combatTiles.png"},
@@ -18,6 +20,7 @@
     {"type": "image","key": "cancel","url": "images/cancel.png"},
     {"type": "image","key": "new","url": "images/new.png"},
     {"type": "image","key": "transition","url": "images/transition.png"},
+    {"type": "image","key": "danyburton","url": "images/profile.png"},
 
     {"type": "image","key": "bullet1","url": "images/bullet1.png"},
     {"type": "image","key": "bullet2","url": "images/bullet2.png"},

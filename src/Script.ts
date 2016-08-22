@@ -131,6 +131,8 @@ module Scumbag
     export function getSlot() {return StateOfGame.parameters.slot}
 
     export function getScore() {return StateOfGame.parameters.score}
+
+    export function win() {game.state.start("Credits")}
   }
 
 

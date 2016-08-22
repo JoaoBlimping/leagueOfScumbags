@@ -30,6 +30,9 @@ module Scumbag
       //flush the state of game
       StateOfGame.flush();
 
+      //stop the timer
+      StateOfGame.stopTimer();
+
       //load the script
       Script.init(this.game);
       Script.setScript(this.game.cache.getText("menuScript"));
