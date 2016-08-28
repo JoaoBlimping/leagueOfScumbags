@@ -5,14 +5,17 @@ module Scumbag
 {
   const PADDING = 40;
 
-
   let headingFont = {font:"50px Serif",fontStyle:"bold",fill:"#00f",stroke:"#f00",strokeThickness:5};
   let bodyFont = {font:"20px Serif",fill:"#ff6",align:"center",wordWrap:true,wordWrapWidth:0};
 
 
+  let outside:boolean;
+  let stop = false;
+
   function move(a:{x:number,y:number})
   {
     a.y -= 0.6;
+    if (a.y > 0) outside = false;
   }
 
 
@@ -25,7 +28,6 @@ module Scumbag
     create()
     {
       let data = this.game.cache.getJSON("credits");
-      console.log(data);
 
       this.background = this.add.sprite(0,0,data.background);
 
@@ -69,7 +71,14 @@ module Scumbag
 
     update()
     {
+      outside = true;
       this.items.forEach(move,null);
+      if (outside && !stop)
+      {
+        let tween = this.add.tween(this.background).to({alpha:0},2000,Phaser.Easing.Default,true);
+        tween.onComplete.add(function(){this.game.state.start("MainMenu",true,false)},this);
+        stop = true;
+      }
     }
   }
 }

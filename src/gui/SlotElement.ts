@@ -15,8 +15,8 @@ module Scumbag
   {
     image:        Phaser.Image;
     children:     GuiElement[];
-    x = 0;
-    y = 0;
+    x = -99999;
+    y = -99999;
     go = false;
     selection = 0;
     oldHorizontalStick:number;
@@ -26,7 +26,7 @@ module Scumbag
     constructor(game:Phaser.Game,key:string,children:GuiElement[])
     {
       super();
-      this.image = game.add.image(0,0,key);
+      this.image = game.add.image(this.x,this.y,key);
       this.children = children;
       InputManager.getInputDevice(0).addOnButtonPress(Button.a,click,this);
 

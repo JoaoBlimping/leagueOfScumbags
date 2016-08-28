@@ -1,41 +1,29 @@
-//block 0
-this.state.buildPause("Paused","Return","Save","Quit");
-~
-
-//block 1
-//cancel
-if (this.value == 1)
+while(true)
 {
-  this.setNextBlock(69);
-}
+  ctx.state.buildPause("Paused","Return","Save","Quit");
+  var value = yield;
 
-//save
-else if (this.value == 2)
-{
-  this.playSound("trogDeath");
-  this.saveGame();
-  this.setNextBlock(0);
-  this.state.buildTextbox("Saving Complete","yeah");
-}
+  //return
+  if (value == 1) return;
 
-//quit
-else if (this.value == 3)
-{
-  this.state.buildQA("are you sure you want to quit?",
-                     null,
-                     "I do not want to quit",
-                     "yeah");
-}
-~
+  //save
+  if (value == 2)
+  {
+    ctx.playSound("trogDeath");
+    ctx.saveGame();
+    ctx.state.buildTextbox("Saving Complete","yeah");
+    yield;
+  }
 
-//block2
-if (this.value == 1)
-{
-  this.setNextBlock(0);
-  this.state.buildTextbox("Ok","cool");
-}
-
-else
-{
-  this.changeState("MainMenu");
+  //quit
+  else if (value == 3)
+  {
+    ctx.state.buildQA("are you sure you want to quit?",
+                       null,
+                       "I do not want to quit",
+                       "yeah");
+    var selection = yield;
+    if (selection == 2) ctx.changeState("MainMenu");
+    yield;
+  }
 }

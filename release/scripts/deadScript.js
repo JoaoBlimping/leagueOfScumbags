@@ -1,4 +1,3 @@
-this.state.buildTextbox("Game Over","yeah, you suck\nyour score was "+this.getScore(),null);
-~
-
-this.state.game.state.start("MainMenu");
+ctx.state.buildTextbox("Game Over","yeah, you suck\nyour score was "+ctx.getScore(),null);
+yield;
+ctx.state.game.state.start("MainMenu");

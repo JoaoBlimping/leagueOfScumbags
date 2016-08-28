@@ -11,8 +11,7 @@
       "name":"Aini","key":"Aini","controller":"PlayerController",
       "gravity":1,"jump":1,"lWeapon":"bouncy","rWeapon":"blaster",
       "deathWeapon":"blood","health":10,"healthRegen":0.075,"mana":50,
-      "manaRegen":0.03,"collisionDamage":0,"directional":true,"moveSpeed":200,
-      "mass":25
+      "manaRegen":0.03,"collisionDamage":0,"directional":true,"moveSpeed":200
     },
     {
       "name":"Purple Hat Man","key":"Purple Hat Man","controller":"PlayerController",

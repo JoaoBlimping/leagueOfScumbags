@@ -1,66 +1,69 @@
-//block0
-this.state.buildQA("League of Scumbags",
-                   null,
-                   "Play",
-                   "Credits",
-                   "Delete Saves");
-~
+const creditMessage = "Greetings, I am the CREATOR of this nice game\n"+
+                      "I hope you enjoy it 8)\n"+
+                      "If not, seek help from a mental health professional immeadiately"
 
-//block 1
 
-//new game
-if (this.value == 1)
+function *load()
 {
-  this.win();
-  //this.setNextBlock(2)
-  //this.state.buildSlot();
+  ctx.state.buildSlot();
+  var slot = yield;
+
+  if (slot >= 1 && slot <= 3)
+  {
+    ctx.loadGame(slot);
+    if (ctx.getCharacters().length == 0)
+    {
+      ctx.setSlot(slot);
+      ctx.addCharacter("John Fogle");
+      ctx.setPlayerKey("fogleActor")
+      ctx.transport("map2","frontHouse1");
+    }
+    ctx.toOverworld();
+  }
 }
 
-//go to credits
-else if (this.value == 2)
+
+function *credits()
 {
-  this.setNextBlock(0);
-  this.state.buildTextbox("Dany Burton",
-                          "Greetings, I am the CREATOR of this nice game\n"+
-                          "I hope you enjoy it 8)\n"+
-                          "If not, seek help from a mental health professional immeadiately",
-                          "dany_normal");
+  ctx.state.buildTextbox("Dany Burton",creditMessage,"dany_normal");
+  yield;
 }
 
-//delete game
-else if (this.value == 3)
-{
-  this.setNextBlock(3);
-  this.state.buildSlot(true);
-}
-~
 
-//block 2 - loading / starting game
-if (this.value == 4)
+function *deleting()
 {
-  this.setNextBlock(0);
-  this.state.buildTextbox("Ok","Not loading",null);
-  return;
-}
-this.loadGame(this.value);
-if (this.getCharacters().length == 0)
-{
-  this.addCharacter("John Fogle");
-  this.setPlayerKey("fogleActor")
-  this.transport("map2","frontHouse1");
-  this.setSlot(this.value);
-}
-this.toOverworld();
-~
+  ctx.state.buildSlot(true);
+  var slot = yield;
 
-//block 3 - deleting game
-if (this.value == 1)
-{
-  this.setNextBlock(0);
-  this.state.buildTextbox("Ok","Not deleting anything",null);
-  return;
+  if (slot >= 2 && slot <= 4)
+  {
+    ctx.setSlot(slot - 1);
+    ctx.saveGame();
+    ctx.state.buildTextbox("Deleted","Slot "+ctx.getSlot()+" deleted!",null);
+    yield;
+  }
 }
-this.setNextBlock(0);
-this.setSlot(this.value - 1);
-this.saveGame();
-this.state.buildTextbox("Deleted","Slot "+this.getSlot()+" deleted!",null);
+
+
+while (true)
+{
+  ctx.state.buildQA("League of Scumbags",null,"Play","Credits","Delete Saves");
+  var value = yield;
+
+  //start new game
+  if (value == 1)
+  {
+    yield* load();
+
+  }
+  //show a pic of me!
+  else if (value == 2)
+  {
+    yield* credits();
+  }
+  //delete some saves
+  else if (value == 3)
+  {
+    yield* deleting();
+  }
+}

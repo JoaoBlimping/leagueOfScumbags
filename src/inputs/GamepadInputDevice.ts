@@ -51,16 +51,24 @@ module Scumbag
 
 
     /** extends Gamepad.addOnButtonPress */
-    addOnButtonPress(button:Button,callback:Function,context:any)
+    addOnButtonPress(button:Button,callback:Function,context?:any)
     {
       this.buttons[button].onDown.add(callback,context);
     }
 
 
     /** extends Gamepad.removeOnButtonPress */
-    removeOnButtonPress(button:Button,callback:Function)
+    removeOnButtonPress(button:Button,callback:Function,context?:any)
     {
-      this.buttons[button].onDown.remove(callback);
+      this.buttons[button].onDown.remove(callback,context);
+    }
+
+    clear()
+    {
+      for (let i = 0;i < Button.nButtons;i++)
+      {
+        this.buttons[i].onDown.removeAll();
+      }
     }
   }
 }

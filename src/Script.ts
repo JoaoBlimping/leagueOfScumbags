@@ -1,9 +1,8 @@
 module Scumbag
 {
+  const generatorConstructor = Object.getPrototypeOf(function*(){}).constructor;
   let game:Phaser.Game;
-  let nextBlock = 0;
-  let nextBlockSet = false;
-  let blocks:string[] = [];
+  let blocks:Iterator<any>;
   let paused = false;
 
 
@@ -28,7 +27,6 @@ module Scumbag
   namespace ScriptContext
   {
     export let arguments:     string;
-    export let value:         number;
     export let state:         GuiState;
 
 
@@ -59,13 +57,6 @@ module Scumbag
     export function toOverworld()
     {
       game.state.start("Overworld");
-    }
-
-
-    export function setNextBlock(newNextBlock:number):void
-    {
-      nextBlock = newNextBlock;
-      nextBlockSet = true;
     }
 
 
@@ -150,20 +141,15 @@ module Scumbag
     export function setScript(content:string)
     {
       paused = false;
-      blocks = content.split('~');
       ScriptContext.state = <GuiState>game.state.getCurrentState();
-      nextBlock = 0;
+      blocks = generatorConstructor("ctx",content)(ScriptContext);
       runScript(0);
     }
 
     /** runs the script for one block */
     export function runScript(value:number)
     {
-      ScriptContext.value = value;
-      let effect = new Function(blocks[nextBlock]);
-      effect.call(ScriptContext);
-      if (!nextBlockSet) nextBlock++;
-      else nextBlockSet = false;
+      blocks.next(value);
     }
 
     /** check if script execution was paused for a betle */

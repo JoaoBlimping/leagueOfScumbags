@@ -275,7 +275,7 @@ module Scumbag
       this.body.width = this.width / 5 * 4;
       this.body.height = this.height / 12 * 5;
       this.body.offset.x = this.width / 10;
-      this.body.offset.y = this.height / 2;
+      this.body.offset.y = this.height / 12 * 7;
 
 
       //do animation type crap

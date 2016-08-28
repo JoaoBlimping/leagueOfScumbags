@@ -10,8 +10,6 @@ module Scumbag
 
     export function init(game:Phaser.Game):void
     {
-      game.input.gamepad.start();
-
       let pad = game.input.gamepad.pad1;
 
       if (game.input.gamepad.supported && game.input.gamepad.active &&

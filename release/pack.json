@@ -10,6 +10,7 @@
     {"type": "image","key": "logo","url": "images/logo.png"},
     {"type": "image","key": "dead","url": "images/dead.png"},
     {"type": "image","key": "combatTiles","url": "images/combatTiles.png"},
+    {"type": "image","key": "testSet","url": "images/testSet.png"},
     {"type": "image","key": "panorama","url": "images/panorama.jpg"},
     {"type": "image","key": "outsideTiles","url": "images/outside.png"},
     {"type": "image","key": "healthBar","url": "images/healthBar.png"},
@@ -107,6 +108,10 @@
         "type": "tilemap","key": "par","url": "maps/par.json","data": null,
         "format": "TILED_JSON"
     },
+    {
+        "type": "tilemap","key": "test","url": "maps/test.json","data": null,
+        "format": "TILED_JSON"
+    },
 
     {
       "type": "audio","key": "shot","urls":["audio/shot.wav"],
@@ -135,6 +140,10 @@
     },
     {
       "type": "audio","key": "menuMusic","urls":["audio/menuMusic.ogg"],
+      "autoDecode": true
+    },
+    {
+      "type": "audio","key": "scumtime","urls":["audio/scumtime.ogg"],
       "autoDecode": true
     },
     {

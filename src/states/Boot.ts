@@ -19,6 +19,8 @@ module Scumbag
       this.scale.pageAlignHorizontally = true;
       this.game.stage.smoothed = false;
 
+      this.game.input.gamepad.start();
+
       //start the preloader
       this.game.state.start('Preloader', true, false);
     }

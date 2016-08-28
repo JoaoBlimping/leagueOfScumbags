@@ -47,5 +47,8 @@ module Scumbag
     /** removes a given function from getting called by a given button being
      * pressed */
     abstract removeOnButtonPress(button:Button,callback:Function):void;
+
+    /** remove all callbacks from the device */
+    abstract clear():void;
   }
 }

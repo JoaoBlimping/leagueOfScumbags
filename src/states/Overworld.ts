@@ -16,6 +16,8 @@ module Scumbag
 
     let closest = this.actors.getClosestTo(this.player,actorSelector,this);
 
+    if (closest == null) return;
+
     if ((this.player.animations.currentAnim.name == "left" &&
          closest.x >= this.player.x) ||
         (this.player.animations.currentAnim.name == "right" &&
@@ -196,6 +198,12 @@ module Scumbag
       //this.game.debug.bodyInfo(this.player,32,32);
     }
 
+    shutdown()
+    {
+      let device = InputManager.getInputDevice(0);
+      device.clear();
+    }
+
 
     /** overrides GuiState.postGuiUpdate() */
     postGuiUpdate()
@@ -282,8 +290,8 @@ module Scumbag
       this.add.tween(transitioner).to({angle:1000},700,Phaser.Easing.Default,true);
       tween.onComplete.add(function(){this.game.state.start("Fight",true,false,map);},this);
       this.game.sound.play("swish");
+      this.onGuiStart();
     }
-
   }
 
 }
