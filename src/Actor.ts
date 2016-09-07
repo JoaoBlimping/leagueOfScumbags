@@ -67,6 +67,7 @@ module Scumbag
     moveOnSpot: boolean                           = false;
     autorun:    boolean                           = false;
     immovable:  boolean                           = false;
+    spooky:     boolean                           = false;
     moveSpeed:  number                            = 100;
     path:       Movement[]                        = [];
     script:     string                            = "";
@@ -269,6 +270,8 @@ module Scumbag
     /** called when an actor first goes to a new page */
     beginPage():void
     {
+      if (this.getPage().key == "") this.kill();
+
       this.loadTexture(this.getPage().key);
 
       //set it's dimensions
@@ -287,6 +290,9 @@ module Scumbag
 
       //make it immovable if relevant
       if (this.getPage().immovable) this.body.immovable = true;
+
+      //make it look weird
+      if (this.getPage().spooky) this.blendMode = PIXI.blendModes.SCREEN;
 
       //set move mode to PermanentPath
       this.moveMode = MovementMode.PermanentPath;

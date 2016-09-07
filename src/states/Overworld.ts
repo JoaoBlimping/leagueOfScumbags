@@ -5,7 +5,20 @@ module Scumbag
 {
   function actorSelector(a:Actor,distance:number)
   {
-    return a != this.player && distance < this.player.width;
+    if (a == this.player) return false;
+
+    let deltaX = this.player.body.x - a.body.x;
+    let deltaY = this.player.body.y - a.body.y;
+    let angle = Math.atan(deltaY / deltaX);
+
+    let playerDistance = this.player.body.width / 2 * Math.cos(angle) +
+                         this.player.body.height / 2 * Math.sin(angle);
+    let otherDistance = a.body.width / 2 * Math.cos(angle) +
+                        a.body.height / 2 * Math.sin(angle);
+
+    console.log(playerDistance);
+
+    return distance <= playerDistance + otherDistance + 5;
   }
 
   /** this is run when the player presses A so we can check if they are touching
@@ -149,6 +162,7 @@ module Scumbag
       this.game.camera.follow(this.player);
       this.game.camera.focusOnXY(this.player.position.x,this.player.position.y);
 
+      /* run the script that was going before the battle */
       if (Script.checkPaused()) Script.runScript(0);
 
       //if there ain't no things then don't go there
@@ -194,8 +208,11 @@ module Scumbag
     /** overrides Phaser.State.render() */
     render()
     {
-      //this.game.debug.body(this.player);
-      //this.game.debug.bodyInfo(this.player,32,32);
+      this.actors.forEach(function(a:Actor)
+      {
+        this.game.debug.spriteBounds(a,"rgba(255,0,0,0.5)",true);
+        this.game.debug.body(a,"rgba(0,255,0,0.5)",true);
+      },this);
     }
 
     shutdown()

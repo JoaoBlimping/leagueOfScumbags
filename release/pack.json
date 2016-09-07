@@ -70,10 +70,23 @@
       "type": "spritesheet","key": "god","url": "images/god.png",
       "frameWidth": 200,"frameHeight": 200
     },
+    {
+      "type": "spritesheet","key": "robot","url": "images/robot.png",
+      "frameWidth": 32,"frameHeight": 64
+    },
+    {
+      "type": "spritesheet","key": "monkey","url": "images/monkey.png",
+      "frameWidth": 48,"frameHeight": 64
+    },
+
 
     {
       "type": "spritesheet","key": "fogleActor","url": "images/fogleActor.png",
       "frameWidth": 24,"frameHeight": 48
+    },
+    {
+      "type": "spritesheet","key": "fogleFallen","url": "images/fogleFallen.png",
+      "frameWidth": 48,"frameHeight": 24
     },
     {
       "type": "spritesheet","key": "chad","url": "images/chad.png",
@@ -84,13 +97,14 @@
       "frameWidth": 24,"frameHeight": 48
     },
     {
-      "type": "spritesheet","key": "robot","url": "images/robot.png",
-      "frameWidth": 32,"frameHeight": 64
+      "type": "spritesheet","key": "cicada","url": "images/cicada.png",
+      "frameWidth": 121,"frameHeight": 84
     },
     {
-      "type": "spritesheet","key": "monkey","url": "images/monkey.png",
-      "frameWidth": 48,"frameHeight": 64
+      "type": "spritesheet","key": "cicadaGhost","url": "images/cicadaGhost.png",
+      "frameWidth": 121,"frameHeight": 84
     },
+
 
     {
         "type": "tilemap","key": "map1","url": "maps/map1.json","data": null,

@@ -104,7 +104,11 @@ module Scumbag
 
     export function setPlayerKey(key:string)
     {
-      if (this.state instanceof Overworld) this.state.player.loadTexture(key);
+      if (this.state instanceof Overworld)
+      {
+        this.state.player.getPage().key = key;
+        this.state.player.beginPage();
+      }
       StateOfGame.parameters.playerKey = key;
     }
 

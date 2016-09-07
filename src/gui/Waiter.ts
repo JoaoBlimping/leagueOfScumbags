@@ -2,8 +2,8 @@ module Scumbag
 {
   export class Waiter extends GuiElement
   {
-    actors:Actor[] = [];
-
+    actors:           Actor[] =     [];
+    oldMoveModes: MovementMode[] =  [];
 
     constructor(game:Phaser.Game,actorPaths:{name:string,path:string}[])
     {
@@ -17,6 +17,7 @@ module Scumbag
         {
           this.actors[i] = state.getActorByName(actorPaths[i].name);
           this.actors[i].getPage().path = stringToMovements(actorPaths[i].path,state.regions);
+          this.oldMoveModes[i] = this.actors[i].moveMode;
           this.actors[i].moveMode = MovementMode.TemporaryPath;
         }
       }
@@ -69,6 +70,12 @@ module Scumbag
     }
 
 
-    destroy(){}
+    destroy()
+    {
+      for (let i = 0;i < this.actors.length;i++)
+      {
+        this.actors[i].moveMode = this.oldMoveModes[i];
+      }
+    }
   }
 }
