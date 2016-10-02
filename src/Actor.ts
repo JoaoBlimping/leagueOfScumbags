@@ -97,11 +97,11 @@ module Scumbag
   export class Actor extends Phaser.Sprite
   {
     name:     string;
-    updating: boolean = true;
-    waiting:  boolean = false;
-    waitTime: number  = 0;
-    autoran:  boolean = false;
-    moveMode: MovementMode;
+    updating: boolean       = true;
+    waiting:  boolean       = false;
+    waitTime: number        = 0;
+    autoran:  boolean       = false;
+    moveMode: MovementMode  = MovementMode.PermanentPath;
 
     pages:    Page[];
     page:     number  = -1;
@@ -140,12 +140,6 @@ module Scumbag
         return;
       }
 
-      if (this.getPage().autorun && !this.autoran)
-      {
-        Script.setScript(this.getPage().script);
-        this.autoran = true;
-      }
-
       this.evaluateNextPage();
 
       this.move();
@@ -162,6 +156,14 @@ module Scumbag
         else this.animations.play("left");
       }
       else this.animations.stop();
+
+
+      if (this.getPage().autorun && !this.autoran)
+      {
+        Script.setScript(this.getPage().script);
+        this.autoran = true;
+      }
+
     }
 
     move():void
@@ -295,7 +297,10 @@ module Scumbag
       if (this.getPage().spooky) this.blendMode = PIXI.blendModes.SCREEN;
 
       //set move mode to PermanentPath
-      this.moveMode = MovementMode.PermanentPath;
+      if (this.getPage().path.length > 0)
+      {
+        this.moveMode = MovementMode.PermanentPath;
+      }
 
       this.autoran = false;
     }

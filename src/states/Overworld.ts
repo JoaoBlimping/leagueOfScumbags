@@ -206,14 +206,7 @@ module Scumbag
 
 
     /** overrides Phaser.State.render() */
-    render()
-    {
-      this.actors.forEach(function(a:Actor)
-      {
-        this.game.debug.spriteBounds(a,"rgba(255,0,0,0.5)",true);
-        this.game.debug.body(a,"rgba(0,255,0,0.5)",true);
-      },this);
-    }
+    render() {}
 
     shutdown()
     {
@@ -225,6 +218,8 @@ module Scumbag
     /** overrides GuiState.postGuiUpdate() */
     postGuiUpdate()
     {
+      console.log(this.player.moveMode);
+
       //make it look right
       this.actors.sort('y', Phaser.Group.SORT_ASCENDING);
 

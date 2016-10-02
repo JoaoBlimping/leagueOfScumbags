@@ -3,8 +3,8 @@
 
 module Scumbag
 {
-  const headingFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#087"};
-  const questionFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0",backgroundColor:"#0cc"};
+  const headingFont = {font:"16px Serif",fontStyle:"bold",fill:"#ff0"};
+  const questionFont = {font:"16px Serif",fontStyle:"bold",fill:"#f00"};
   const bodyFont = {font:"14px Serif",fill:"#ff6"};
 
   const N_SAVES = 3;

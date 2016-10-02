@@ -35,12 +35,18 @@
     {"type": "image","key": "blood1","url": "images/blood1.png"},
     {"type": "image","key": "blood2","url": "images/blood2.png"},
 
-    {"type": "image","key": "phm_normal","url": "chips/phm_normal.png"},
-    {"type": "image","key": "phm_angry","url": "chips/phm_angry.png"},
-    {"type": "image","key": "aini_noHat","url": "chips/aini_noHat.png"},
-    {"type": "image","key": "aini_normal","url": "chips/aini_normal.png"},
-    {"type": "image","key": "aini_angry","url": "chips/aini_angry.png"},
-    {"type": "image","key": "dany_normal","url": "chips/dany_normal.png"},
+    {"type": "image","key": "fogle_n","url": "chips/fogle_n.png"},
+    {"type": "image","key": "fogle_a","url": "chips/fogle_a.png"},
+    {"type": "image","key": "phm_n","url": "chips/phm_n.png"},
+    {"type": "image","key": "phm_a","url": "chips/phm_a.png"},
+    {"type": "image","key": "aini_n","url": "chips/aini_n.png"},
+    {"type": "image","key": "aini_a","url": "chips/aini_a.png"},
+
+    {"type": "image","key": "stinkSteward_n","url": "chips/stinkSteward_n.png"},
+    {"type": "image","key": "cardinal_n","url": "chips/cardinal_n.png"},
+    {"type": "image","key": "cicada_n","url": "chips/cicada_n.png"},
+    {"type": "image","key": "chad_n","url": "chips/chad_n.png"},
+    {"type": "image","key": "dany_n","url": "chips/dany_n.png"},
 
     {
       "type": "spritesheet","key": "John Fogle","url": "images/fogle.png",

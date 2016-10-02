@@ -25,7 +25,7 @@ function *load()
 
 function *credits()
 {
-  ctx.state.buildTextbox("Dany Burton",creditMessage,"dany_normal");
+  ctx.state.buildTextbox("Dany Burton",creditMessage,"dany_n");
   yield;
 }
 
@@ -47,7 +47,9 @@ function *deleting()
 
 while (true)
 {
-  ctx.state.buildQA("League of Scumbags",null,"Play","Credits","Delete Saves");
+  ctx.state.buildQA("League of Scumbags",null,"Play",
+                                              "A game by Dany Burton",
+                                              "Delete Saves");
   var value = yield;
 
   //start new game

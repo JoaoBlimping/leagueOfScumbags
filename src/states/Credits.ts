@@ -61,6 +61,11 @@ module Scumbag
           item = this.game.add.image(this.game.width / 2,y,data.items[i].content);
         }
 
+        else if (data.items[i].type == "score")
+        {
+          item = this.game.add.text(this.game.width / 2,y,"your score is "+StateOfGame.parameters.score,bodyFont);
+        }
+
         item.anchor.setTo(0.5,0);
         this.items.add(item);
         y += item.height + PADDING;

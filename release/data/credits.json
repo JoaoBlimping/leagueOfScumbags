@@ -2,22 +2,28 @@
   "items":
   [
     {"type":"heading","content":"the End!"},
-    {"type":"image","content":"John Fogle"},
+    {"type":"score"},
+
+    {"type":"image","content":"fogle_n"},
+    {"type":"text","content":"The League of Scumbags head to the east!"},
     {"type":"text","content":"Thankyou for playing this game I hope you had a nice time, and also you did not play so much that your eyes hurt or something"},
 
+    {"type":"image","content":"aini_n"},
     {"type":"text","content":"Graphics by Dany Burton"},
     {"type":"text","content":"Story by Dany Burton"},
+    {"type":"image","content":"phm_n"},
     {"type":"text","content":"Music by Dany Burton"},
     {"type":"text","content":"Sounds by Dany Burton"},
-    {"type":"image","content":"Aini"},
+    {"type":"image","content":"stinkSteward_n"},
     {"type":"text","content":"Programming by Dany Burton, you can get the source code at https://github.com/marineorganism/leagueOfScumbags"},
     {"type":"text","content":"Tested by Chris"},
-    {"type":"image","content":"Purple Hat Man"},
+    {"type":"image","content":"cardinal_n"},
+
     {"type":"text","content":"Built upon the Phaser framework"},
 
     {"type":"text","content":"I can assure you that the league of scumbags will return in another game in the near future, and if you did not like it then beware!"},
     {"type":"image","content":"danyburton"},
-    {"type":"text","content":"A game made by Dany Burton. Go to danyburton.net for more good stuff!"}
+    {"type":"text","content":"A game made by Dany Burton. Go to danyburton.net for more high quality content!"}
   ],
   "background":"creditspage",
   "music":"music"

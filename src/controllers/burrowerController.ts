@@ -3,7 +3,7 @@
 module Scumbag
 {
 
-  const RANGE = 16;
+  const RANGE = 100;
 
   export namespace Controllers
   {
