@@ -13,6 +13,7 @@
     {"type": "image","key": "testSet","url": "images/testSet.png"},
     {"type": "image","key": "panorama","url": "images/panorama.jpg"},
     {"type": "image","key": "outsideTiles","url": "images/outside.png"},
+    {"type": "image","key": "insideTiles","url": "images/inside.png"},
     {"type": "image","key": "healthBar","url": "images/healthBar.png"},
     {"type": "image","key": "manaBar","url": "images/manaBar.png"},
     {"type": "image","key": "window","url": "images/window.png"},
@@ -125,7 +126,11 @@
         "format": "TILED_JSON"
     },
     {
-        "type": "tilemap","key": "par","url": "maps/par.json","data": null,
+        "type": "tilemap","key": "house","url": "maps/house.json","data": null,
+        "format": "TILED_JSON"
+    },
+    {
+        "type": "tilemap","key": "pub","url": "maps/pub.json","data": null,
         "format": "TILED_JSON"
     },
     {

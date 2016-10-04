@@ -16,8 +16,6 @@ module Scumbag
     let otherDistance = a.body.width / 2 * Math.cos(angle) +
                         a.body.height / 2 * Math.sin(angle);
 
-    console.log(playerDistance);
-
     return distance <= playerDistance + otherDistance + 5;
   }
 
@@ -166,34 +164,37 @@ module Scumbag
       if (Script.checkPaused()) Script.runScript(0);
 
       //if there ain't no things then don't go there
-      if (this.tilemap.properties == null) return;
-
-      //load music if there is some
-      if (this.tilemap.properties.hasOwnProperty("music"))
+      if (this.tilemap.properties != null)
       {
-        MusicManager.playSong(this.game,this.tilemap.properties.music,MusicChannel.Music);
-      }
-
-      if (this.tilemap.properties.hasOwnProperty("ambience"))
-      {
-        MusicManager.playSong(this.game,this.tilemap.properties.ambience,MusicChannel.Ambience);
-      }
-      else
-      {
-        MusicManager.stopSong(MusicChannel.Ambience);
-      }
-
-      //create the background
-      if (this.tilemap.properties.hasOwnProperty("background"))
-      {
-        if (this.tilemap.properties.background != "")
+        //load music if there is some
+        if (this.tilemap.properties.hasOwnProperty("music"))
         {
-          this.background = new Background(this.tilemap.properties.background,
-                                           this.tilemap.width * this.tilemap.tileWidth,
-                                           this.tilemap.height * this.tilemap.tileHeight,
-                                           this.game);
+          MusicManager.playSong(this.game,this.tilemap.properties.music,MusicChannel.Music);
+        }
+
+        if (this.tilemap.properties.hasOwnProperty("ambience"))
+        {
+          MusicManager.playSong(this.game,this.tilemap.properties.ambience,MusicChannel.Ambience);
+        }
+        else
+        {
+          MusicManager.stopSong(MusicChannel.Ambience);
+        }
+
+        //create the background
+        if (this.tilemap.properties.hasOwnProperty("background"))
+        {
+          if (this.tilemap.properties.background != "")
+          {
+            this.background = new Background(this.tilemap.properties.background,
+                                             this.tilemap.width * this.tilemap.tileWidth,
+                                             this.tilemap.height * this.tilemap.tileHeight,
+                                             this.game);
+          }
         }
       }
+
+
 
       //add button press callbacks
       let device = InputManager.getInputDevice(0);
@@ -218,8 +219,6 @@ module Scumbag
     /** overrides GuiState.postGuiUpdate() */
     postGuiUpdate()
     {
-      console.log(this.player.moveMode);
-
       //make it look right
       this.actors.sort('y', Phaser.Group.SORT_ASCENDING);
 
