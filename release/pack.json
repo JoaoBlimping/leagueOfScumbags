@@ -100,6 +100,10 @@
       "frameWidth": 24,"frameHeight": 48
     },
     {
+      "type": "spritesheet","key": "chad2","url": "images/chad2.png",
+      "frameWidth": 24,"frameHeight": 48
+    },
+    {
       "type": "spritesheet","key": "lad","url": "images/lad.png",
       "frameWidth": 24,"frameHeight": 48
     },

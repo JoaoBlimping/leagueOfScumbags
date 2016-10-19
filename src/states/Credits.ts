@@ -5,14 +5,15 @@ module Scumbag
 {
   const PADDING = 40;
 
-  let headingFont = {font:"50px Serif",fontStyle:"bold",fill:"#00f",stroke:"#f00",strokeThickness:5};
+  let headingFont = {font:"50px Serif",fontStyle:"bold",fill:"#f00",stroke:"#00f",strokeThickness:5};
   let bodyFont = {font:"20px Serif",fill:"#ff6",align:"center",wordWrap:true,wordWrapWidth:0};
 
 
   let outside:boolean;
   let stop = false;
 
-  function move(a:{x:number,y:number})
+
+  function move(a:{x:number,y:number}):void
   {
     a.y -= 0.6;
     if (a.y > 0) outside = false;
@@ -54,6 +55,10 @@ module Scumbag
         {
           item = this.game.add.text(this.game.width / 2,y,data.items[i].content,headingFont);
           (<Phaser.Text>item).setShadow(0,0,'rgba(0,1,0,1)',5);
+          item.update = function()
+          {
+            this.strokeThickness = Math.random()*36 + Math.sin(this.y / 8)*20;
+          }
         }
 
         else if (data.items[i].type == "image")

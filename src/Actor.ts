@@ -149,11 +149,11 @@ module Scumbag
       if (this.body.velocity.x != 0 || this.body.velocity.y != 0 ||
           this.getPage().moveOnSpot)
       {
-        if (angle < -3 * Math.PI / 4) this.animations.play("left");
-        else if (angle < -1 * Math.PI / 4) this.animations.play("up");
-        else if (angle < Math.PI / 4) this.animations.play("right");
-        else if (angle < 3 * Math.PI / 4) this.animations.play("down");
-        else this.animations.play("left");
+        if (this == (<Overworld>this.game.state.getCurrentState()).player) console.log(angle);
+        if (angle < 0) this.animations.play("back");
+        else this.animations.play("front");
+        if (Math.abs(angle) < Math.PI / 2) this.scale.x = 1;
+        else if (Math.abs(angle) > Math.PI / 2) this.scale.x = -1;
       }
       else this.animations.stop();
 
@@ -285,10 +285,8 @@ module Scumbag
 
       //do animation type crap
       this.anchor.setTo(0.5,1);
-      this.animations.add('down',[0,1,2,3],10,true);
-      this.animations.add('right',[4,5,6,7],10,true);
-      this.animations.add('left',[8,9,10,11],10,true);
-      this.animations.add('up',[12,13,14,15],10,true);
+      this.animations.add('front',[0,1,2,3],10,true);
+      this.animations.add('back',[4,5,6,7],10,true);
 
       //make it immovable if relevant
       if (this.getPage().immovable) this.body.immovable = true;
