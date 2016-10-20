@@ -43,6 +43,8 @@
     {"type": "image","key": "aini_n","url": "chips/aini_n.png"},
     {"type": "image","key": "aini_a","url": "chips/aini_a.png"},
 
+    {"type": "image","key": "hippie1_n","url": "chips/hippie1_n.png"},
+    {"type": "image","key": "hippie2_n","url": "chips/hippie2_n.png"},
     {"type": "image","key": "stinkSteward_n","url": "chips/stinkSteward_n.png"},
     {"type": "image","key": "cardinal_n","url": "chips/cardinal_n.png"},
     {"type": "image","key": "cicada_n","url": "chips/cicada_n.png"},
@@ -108,44 +110,32 @@
       "frameWidth": 24,"frameHeight": 48
     },
     {
-      "type": "spritesheet","key": "cicada","url": "images/cicada.png",
-      "frameWidth": 121,"frameHeight": 84
+      "type": "spritesheet","key": "hippie1","url": "images/hippie1.png",
+      "frameWidth": 24,"frameHeight": 48
     },
     {
-      "type": "spritesheet","key": "cicadaGhost","url": "images/cicadaGhost.png",
-      "frameWidth": 121,"frameHeight": 84
+      "type": "spritesheet","key": "hippie2","url": "images/hippie2.png",
+      "frameWidth": 24,"frameHeight": 48
+    },
+    {
+      "type":"spritesheet","key":"cicada","url":"images/cicada.png",
+      "frameWidth":121,"frameHeight":84
+    },
+    {
+      "type":"spritesheet","key":"cicadaGhost","url":"images/cicadaGhost.png",
+      "frameWidth":121,"frameHeight":84
     },
 
 
-    {
-        "type": "tilemap","key": "map1","url": "maps/map1.json","data": null,
-        "format": "TILED_JSON"
-    },
-    {
-        "type": "tilemap","key": "map2","url": "maps/map2.json","data": null,
-        "format": "TILED_JSON"
-    },
-    {
-        "type": "tilemap","key": "bongo","url": "maps/bongo.json","data": null,
-        "format": "TILED_JSON"
-    },
-    {
-        "type": "tilemap","key": "house","url": "maps/house.json","data": null,
-        "format": "TILED_JSON"
-    },
-    {
-        "type": "tilemap","key": "pub","url": "maps/pub.json","data": null,
-        "format": "TILED_JSON"
-    },
-    {
-        "type": "tilemap","key": "test","url": "maps/test.json","data": null,
-        "format": "TILED_JSON"
-    },
+    {"type":"tilemap","key":"map1","url":"maps/map1.json","format":"TILED_JSON"},
+    {"type":"tilemap","key":"map2","url":"maps/map2.json","format":"TILED_JSON"},
+    {"type":"tilemap","key":"bongo","url":"maps/bongo.json","format":"TILED_JSON"},
+    {"type":"tilemap","key":"house","url":"maps/house.json","format":"TILED_JSON"},
+    {"type":"tilemap","key":"pub","url":"maps/pub.json","format":"TILED_JSON"},
+    {"type":"tilemap","key":"test","url":"maps/test.json","format":"TILED_JSON"},
+    {"type":"tilemap","key":"stink","url":"maps/stink.json","format":"TILED_JSON"},
 
-    {
-      "type": "audio","key": "shot","urls":["audio/shot.wav"],
-      "autoDecode": true
-    },
+    {"type":"audio","key":"shot","urls":["audio/shot.wav"],"autoDecode": true},
     {
       "type": "audio","key": "bang","urls":["audio/bang.wav"],
       "autoDecode": true
@@ -180,8 +170,9 @@
       "autoDecode": true
     },
 
-    {"type":"text","key":"menuScript","url":"scripts/menuScript.js"},
-    {"type":"text","key":"deadScript","url":"scripts/deadScript.js"},
-    {"type":"text","key":"saveScript","url":"scripts/saveScript.js"}
+    {"type":"text","key":"menuScript","url":"scripts/menu.js"},
+    {"type":"text","key":"deadScript","url":"scripts/dead.js"},
+    {"type":"text","key":"saveScript","url":"scripts/save.js"},
+    {"type":"text","key":"stdScript","url":"scripts/std.js"}
   ]
 }

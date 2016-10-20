@@ -140,13 +140,13 @@ module Scumbag
     }
 
     /** sets the script up to go.
-     * content is the key for the script, and then optionally a '?' and then a
-     * string that value will be set to for the first block */
+     * content is the key for the script */
     export function setScript(content:string)
     {
       paused = false;
       ScriptContext.state = <GuiState>game.state.getCurrentState();
-      blocks = generatorConstructor("ctx",content)(ScriptContext);
+      blocks = generatorConstructor("ctx",game.cache.getText("stdScript") +
+                                    content)(ScriptContext);
       runScript(0);
     }
 
