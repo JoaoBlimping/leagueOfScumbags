@@ -4,7 +4,7 @@
 module Scumbag
 {
   /** creates a bunch of pages out of a string containing their string representation */
-  export function createPages(rawData:string,regions:{[name:string]:Region}):Page[]
+  export function createPages(rawData:string,actorName:string,mapKey:string,regions:{[name:string]:Region}):Page[]
   {
     let pages:Page[] = [];
 
@@ -24,6 +24,7 @@ module Scumbag
       {
         let parts = conditions[u].split(" ");
         if (parts[0] == "s") pages[i].switches.push(parts[1]);
+        if (parts[0] == "ss") pages[i].switches.push(mapKey+"-"+actorName+"-"+parts[1])
         if (parts[0] == "v") pages[i].variables.push({name:parts[1],threshold:parseInt(parts[2])});
       }
 
@@ -160,7 +161,7 @@ module Scumbag
 
       if (this.getPage().autorun && !this.autoran)
       {
-        Script.setScript(this.getPage().script);
+        Script.setScript(this.getPage().script,this);
         this.autoran = true;
       }
 

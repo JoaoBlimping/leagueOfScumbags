@@ -6,7 +6,8 @@ module Scumbag
   {
     constructor()
     {
-      super(864,396,Phaser.AUTO,'content',null,false,false);
+      //26 x 12.375 tiles
+      super(832,396,Phaser.AUTO,'content',null,false,false);
 
       this.state.add('Boot',Boot,false);
       this.state.add('Preloader',Preloader,false);

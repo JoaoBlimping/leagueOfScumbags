@@ -11,6 +11,18 @@ function* say(name,chip,text)
 }
 
 
+/** reads out the contents of the book property belonging to the actor denoted
+ * by name */
+function* read(book,bookName,bookChip)
+{
+  var content = ctx.state.tilemap.properties[book].split("-");
+  for (var i = 0;i < content.length;i++)
+  {
+    yield* say(bookName,bookChip,content[i].trim());
+  }
+}
+
+
 /** makes the game wait for some fellows to move about */
 function* wait()
 {
@@ -19,16 +31,17 @@ function* wait()
 }
 
 
-/** gets you the value of a switch */
-function switch(key)
+/** sets a unique switch for this actor that can hopefully not collide with
+ * any other switch in the game */
+function setSelfSwitch(name,value)
 {
-  return ctx.getSwitch(key);
+  console.log(ctx.state.tilemap.key+"-"+ctx.caller.name+"-"+name);
+  ctx.setSwitch(ctx.state.tilemap.key+"-"+ctx.caller.name+"-"+name,value);
 }
 
-
-/** turns a switch on */
-function switchOn(key)
+/** gets a unique switch for this actor that can hopefully not collide with
+ * any other switch in the game */
+function getSelfSwitch(name)
 {
-  ctx.setSwitch(key) = true;
 
 }

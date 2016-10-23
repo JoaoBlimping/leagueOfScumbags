@@ -28,6 +28,7 @@ module Scumbag
   {
     export let arguments:     string;
     export let state:         GuiState;
+    export let caller:        Actor;
 
 
     /** lets scripts change the current scene
@@ -114,6 +115,11 @@ module Scumbag
 
     export function playSound(key:string) {game.sound.play(key)}
 
+    export function playAmbience(key:string)
+    {
+      MusicManager.playSong(game,key,MusicChannel.Ambience);
+    }
+
     export function playMusic(key:string)
     {
       MusicManager.playSong(game,key,MusicChannel.Music);
@@ -141,10 +147,11 @@ module Scumbag
 
     /** sets the script up to go.
      * content is the key for the script */
-    export function setScript(content:string)
+    export function setScript(content:string,caller?:Actor)
     {
       paused = false;
       ScriptContext.state = <GuiState>game.state.getCurrentState();
+      ScriptContext.caller = caller;
       blocks = generatorConstructor("ctx",game.cache.getText("stdScript") +
                                     content)(ScriptContext);
       runScript(0);

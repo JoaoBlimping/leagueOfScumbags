@@ -41,7 +41,10 @@ module Scumbag
       return;
     }
 
-    if (!closest.getPage().autorun) Script.setScript(closest.getPage().script);
+    if (!closest.getPage().autorun)
+    {
+      Script.setScript(closest.getPage().script,closest);
+    }
   }
 
 
@@ -134,11 +137,13 @@ module Scumbag
       let actors = this.tilemap.objects["actors"];
       for (let i in actors)
       {
-        let x = actors[i].x;
-        let y = actors[i].y + this.tilemap.tileHeight;
+        let x = actors[i].x + actors[i].width / 2;
+        let y = actors[i].y + this.tilemap.tileHeight - actors[i].height / 2;
         let name = actors[i].name;
 
-        let actor = new Actor(this.game,x,y,name,createPages(actors[i].properties.pages,this.regions));
+        let actor = new Actor(this.game,x,y,name,
+                              createPages(actors[i].properties.pages,name,
+                                          this.tilemap.key,this.regions));
 
         this.actors.add(actor);
       }
