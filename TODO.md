@@ -10,3 +10,8 @@ For this release
 
 - add a thing to chuck a comprihensible error message when you put in a
   nonexistent region
+
+- make a gui thing that waits for a sound to play all the way through.
+
+- allow fade out and fade in for scenes, and give it different colours too, just
+  to be groovy, but also make them optional so I can slack off

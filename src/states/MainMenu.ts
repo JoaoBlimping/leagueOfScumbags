@@ -1,6 +1,5 @@
 ///<reference path="GuiState.ts"/>
 
-
 module Scumbag
 {
   export class MainMenu extends GuiState
@@ -50,4 +49,4 @@ module Scumbag
     /** overrides GuiState.onGuiEnd() */
     onGuiEnd() {}
   }
-}
+};

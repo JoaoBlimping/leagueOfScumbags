@@ -8,17 +8,28 @@ module Scumbag
       slot:       number;
       switches:   {[name:string]:boolean};
       variables:  {[name:string]:number};
-      characters: string[]
+      characters: string[];
       map:        string;
       playerKey:  string;
-      actors:     {name:string,x:number,y:number}[],
-      score:      number,
-      time:       number
+      actors:     {name:string,x:number,y:number}[];
+      score:      number;
+      time:       number;
     }
 
 
     /** the game's persistent state */
-    export let parameters:StateParameters;
+    export let parameters:StateParameters =
+    {
+      slot:       0,
+      switches:   {},
+      variables:  {},
+      characters: [],
+      map:        "",
+      playerKey:  "",
+      actors:     new Array<{name:string,x:number,y:number}>(),
+      score:      0,
+      time:       0
+    };
 
 
     export function flush()
@@ -35,13 +46,15 @@ module Scumbag
         score:      0,
         time:       0
       };
+      console.log(parameters);
+      console.log("flushing");
     }
 
     let timerFunction = 0;
 
     export function startTimer():void
     {
-      timerFunction = setInterval(function(){StateOfGame.parameters.time++;StateOfGame.parameters.score -= 0.135},1000);
+      timerFunction = setInterval(function(){parameters.time++;parameters.score -= 0.135},1000);
     }
 
 
@@ -82,4 +95,4 @@ module Scumbag
       parameters.slot = slot;
     }
   }
-}
+};

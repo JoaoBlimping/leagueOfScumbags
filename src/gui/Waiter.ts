@@ -1,11 +1,15 @@
 module Scumbag
 {
+  /** waits for some actors to follow some paths, and then also fades out the
+   * screen to some colour */
   export class Waiter extends GuiElement
   {
-    actors:           Actor[] =     [];
+    actors:       Actor[] = [];
     oldMoveModes: MovementMode[] =  [];
+    fadeDone:     boolean = true;
 
-    constructor(game:Phaser.Game,actorPaths:{name:string,path:string}[])
+    constructor(game:Phaser.Game,actorPaths:{name:string,path:string}[],
+                colour:number = -1,time:number = 0)
     {
       super(false);
 
@@ -19,6 +23,17 @@ module Scumbag
           this.actors[i].getPage().path = stringToMovements(actorPaths[i].path,state.regions);
           this.oldMoveModes[i] = this.actors[i].moveMode;
           this.actors[i].moveMode = MovementMode.TemporaryPath;
+        }
+
+        if (colour >= 0)
+        {
+          this.fadeDone = false;
+          game.camera.fade(colour,time);
+          game.camera.onFadeComplete.addOnce(function(waiter)
+          {
+            this.camera.flash(colour,500);
+            waiter.fadeDone = true;
+          },game,0,this);
         }
       }
     }
@@ -59,7 +74,7 @@ module Scumbag
 
     update()
     {
-      if (this.actors.length == 0) return 1;
+      if (!this.fadeDone) return 0;
 
       for (let i = 0;i < this.actors.length;i++)
       {

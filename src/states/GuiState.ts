@@ -51,7 +51,7 @@ module Scumbag
     buildTextbox(heading:string,content:string,chipKey?:string):void
     {
       let head = new TextElement(this.game,heading,headingFont);
-      let text = new TextElement(this.game,content,bodyFont);
+      let text = new TextElement(this.game,content,bodyFont,true);
       let clicker = new ClickerElement(this.game,'clicker');
 
       this.setGui(new Window(this.game,"window",new Array<GuiElement>(head,text,clicker),chipKey));
@@ -148,9 +148,10 @@ module Scumbag
     }
 
 
-    buildWaiter(...actorPaths:{name:string,path:string}[])
+    buildWaiter(actorPaths:{name:string,path:string}[],colour:number = -1,
+                time:number = 0)
     {
-      this.setGui(new Waiter(this.game,actorPaths));
+      this.setGui(new Waiter(this.game,actorPaths,colour,time));
     }
 
 
@@ -177,4 +178,4 @@ module Scumbag
      * gui is happening go */
     abstract postGuiUpdate():void;
   }
-}
+};

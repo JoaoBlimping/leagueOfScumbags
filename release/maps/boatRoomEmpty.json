@@ -102,15 +102,11 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "book":"Hello friends, my name is Aga, and I suspect that I am going to die soon.\nI breifly held the conviction to hate it all, but I can't do it anymore,\nI think that I might be insane. In fact, looking at this nightmare,\n-\n\nI must be\n-\n\nAfter so much rage and paranoia, I simply can't muster the energy to\ndisbeleive any more, there are no conspiracy, I am just an idiot, and\nthough I may have appeared to do something good I think it is not so.\n-\n\nPlease forgive me for what you find here I think I am very very sick,\nand know that whatever purported facts I may have reported are just\nramblings of a sick head.\n-\n\nI need to go into the stinkwater.\nI think it is the only place the stink of my sickness will disappear.\n-\n\nI had a wife too but I can't remember that one",
-     "music":"music",
-     "stink":"I know that the \"\"\"king\"\"\" is up to no good now, they have covered over the \ncicada I am very sure, because he is gone.\n-\n\nHowever, I have a plan, haha!\nand let me assure you that the cicada will love it so much because the stink\nwater will go on and on for so far\n-\n\nand then the church and his house and all of this will be gone because you see\nI have the key to my water tower.\nHow could I not?\n-\n\nNo matter how much those cunts made my heart bleed I STILL HAVE A KEY!!! haha\nnow I am going to kill all of those and every other leech also\nI think that the cicada will love it so much and so will I :)\n-\n\nNow you see the most important aspect of this plan is the rejuvinating effects\nof stink water, or as the \"\"\"king\"\"\" and his other fellows like to say it is PISS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n-\n\nUndoubtedly they are going to come and take this one off me too, but luckily that is\nwhy only I know about the down here world, and when I activate the three pumps\nI will return up to the world on a wave of STINK watER!! haha\n-\n\nThe key to the water tower is on the boat too, I always think two moves ahead you see\n\n"
+     "ambience":"none"
     },
  "propertytypes":
     {
-     "book":"string",
-     "music":"string",
-     "stink":"string"
+     "ambience":"string"
     },
  "renderorder":"right-down",
  "tileheight":32,

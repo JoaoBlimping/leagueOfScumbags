@@ -32,4 +32,4 @@ module Scumbag
     }
     return regions;
   }
-}
+};

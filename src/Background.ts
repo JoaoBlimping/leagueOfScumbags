@@ -19,7 +19,7 @@ module Scumbag
     {
       this.image = game.add.image(0,0,imageKey);
       this.image.sendToBack();
-      this.image.fixedToCamera = true;
+      //this.image.fixedToCamera = true;
 
       this.width = width;
       this.height = height;
@@ -38,8 +38,8 @@ module Scumbag
       let y = cameraY / (this.height - this.cameraHeight) *
               (this.height - this.image.height);
 
-      if (isFinite(x)) this.image.cameraOffset.x = x;
-      if (isFinite(y)) this.image.cameraOffset.y = y;
+      if (isFinite(x)) this.image.x = x;
+      if (isFinite(y)) this.image.y = y;
     }
   }
 }

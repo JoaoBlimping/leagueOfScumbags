@@ -57,6 +57,24 @@
       "jump":0,"lWeapon":"smoke","rWeapon":"nothing","deathWeapon":"blood",
       "health":100,"healthRegen":0,"mana":500,"manaRegen":0.05,
       "collisionDamage":0,"directional":false,"moveSpeed":0
+    },
+    {
+      "name":"stinkSpirit","key":"stinkSpirit","controller":"PacerController",
+      "gravity":1,"jump":1,"lWeapon":"piss","rWeapon":"nothing",
+      "deathWeapon":"pissSplash","health":20,"healthRegen":0.05,"mana":50,
+      "manaRegen":0.02,"collisionDamage":2,"directional":true,"moveSpeed":200
+    },
+    {
+      "name":"stinkubbus","key":"stinkubbus","controller":"RobotController","gravity":1,
+      "jump":0,"lWeapon":"piss","rWeapon":"nothing","deathWeapon":"piss",
+      "health":25,"healthRegen":0,"mana":50,"manaRegen":0.005,
+      "collisionDamage":5,"directional":false,"moveSpeed":0
+    },
+    {
+      "name":"spike","key":"spike","controller":"RobotController","gravity":1,
+      "jump":0,"lWeapon":"nothing","rWeapon":"nothing","deathWeapon":"nothing",
+      "health":100,"healthRegen":0,"mana":0,"manaRegen":0,
+      "collisionDamage":50,"directional":false,"moveSpeed":0
     }
   ]
 }

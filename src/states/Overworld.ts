@@ -79,27 +79,53 @@ module Scumbag
     actors:           Phaser.Group;
     regions:          {[name:string]:Region};
     player:           Actor;
+    overlay:          Phaser.TileSprite   = null;
+    overlayDriftX:    number;
+    overlayDriftY:    number;
+    map:              string;
+    playerRegion:     string;
+    returning:        boolean;
 
 
-    /** overrides Phaser.State.init() */
-    init(map:string,playerRegion:string)
+    init(map:string = null,playerRegion:string)
     {
-      let returning = false;
-
+      console.log(map);
+      this.playerRegion = playerRegion;
       if (map == null)
       {
-        map = StateOfGame.parameters.map;
-        returning = true;
+        this.map = StateOfGame.parameters.map;
+        this.returning = true;
       }
+      else
+      {
+        this.map = map;
+        this.returning = false;
+      }
+    }
 
+    /** overrides Phaser.State.init() */
+    preload()
+    {
+      if (!this.game.cache.checkTilemapKey(this.map))
+      {
+        this.game.load.tilemap(this.map,"maps/"+this.map+".json",null,Phaser.Tilemap.TILED_JSON);
+      }
+    }
+
+
+    /** This is where the level is actually implemented after all the data is
+     * definitely loaded */
+    create()
+    {
       //save the map name
-      StateOfGame.parameters.map = map;
+      StateOfGame.parameters.map = this.map;
 
       //turn on phyysics
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
       //create the tilemap
-      this.tilemap = this.add.tilemap(map);
+      this.tilemap = this.add.tilemap(this.map);
+
       for (let i in this.tilemap.tilesets)
       {
         this.tilemap.addTilesetImage(this.tilemap.tilesets[i].name,
@@ -118,7 +144,7 @@ module Scumbag
       this.regions = createRegions(this.tilemap.objects["regions"]);
 
       //add player and stuff
-      if (playerRegion == null)
+      if (this.playerRegion == null)
       {
         let page = new Page();
         page.key = StateOfGame.parameters.playerKey;
@@ -127,7 +153,7 @@ module Scumbag
       }
       else
       {
-        this.player = addPlayerAtRegion(this.game,this.regions[playerRegion],
+        this.player = addPlayerAtRegion(this.game,this.regions[this.playerRegion],
                                         StateOfGame.parameters.playerKey);
       }
       this.actors = this.game.add.group();
@@ -149,19 +175,16 @@ module Scumbag
       }
 
       //load actors
-      if (returning)
+      if (this.returning)
       {
+        console.log("restoring actors");
         this.restoreActors();
       }
 
       //create the top layer of the world
       this.tilemap.createLayer("overhead");
-    }
 
 
-    /** implements Phaser.State.create() */
-    create()
-    {
       this.game.camera.follow(this.player);
       this.game.camera.focusOnXY(this.player.position.x,this.player.position.y);
 
@@ -174,12 +197,14 @@ module Scumbag
         //load music if there is some
         if (this.tilemap.properties.hasOwnProperty("music"))
         {
-          MusicManager.playSong(this.game,this.tilemap.properties.music,MusicChannel.Music);
+          if (this.tilemap.properties.music == "none") MusicManager.stopSong(MusicChannel.Music);
+          else MusicManager.playSong(this.game,this.tilemap.properties.music,MusicChannel.Music);
         }
 
         if (this.tilemap.properties.hasOwnProperty("ambience"))
         {
-          MusicManager.playSong(this.game,this.tilemap.properties.ambience,MusicChannel.Ambience);
+          if (this.tilemap.properties.ambience == "none") MusicManager.stopSong(MusicChannel.Ambience);
+          else MusicManager.playSong(this.game,this.tilemap.properties.ambience,MusicChannel.Ambience);
         }
         else
         {
@@ -197,9 +222,17 @@ module Scumbag
                                              this.game);
           }
         }
+
+        if (this.tilemap.properties.hasOwnProperty("overlay"))
+        {
+          let overlayData = this.tilemap.properties.overlay.split(",");
+          this.overlayDriftX = overlayData[1];
+          this.overlayDriftY = overlayData[2];
+          this.overlay = this.game.add.tileSprite(0,0,this.game.width,this.game.height,overlayData[0]);
+          this.overlay.fixedToCamera = true;
+          this.overlay.blendMode = PIXI.blendModes.MULTIPLY;
+        }
       }
-
-
 
       //add button press callbacks
       let device = InputManager.getInputDevice(0);
@@ -231,6 +264,13 @@ module Scumbag
       if (this.background != null)
       {
         this.background.update(this.camera.x,this.camera.y);
+      }
+
+      //drift the overlay
+      if (this.overlay != null && this.overlay.tilePosition != null)
+      {
+        this.overlay.tilePosition.x += this.overlayDriftX * this.game.time.elapsedMS / 1000;
+        this.overlay.tilePosition.y += this.overlayDriftY * this.game.time.elapsedMS / 1000;
       }
 
       //check collisions between the characetrsand the level
@@ -309,5 +349,4 @@ module Scumbag
       this.onGuiStart();
     }
   }
-
-}
+};

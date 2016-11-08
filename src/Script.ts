@@ -1,3 +1,5 @@
+/// <reference path="./StateOfGame.ts"/>
+
 module Scumbag
 {
   const generatorConstructor = Object.getPrototypeOf(function*(){}).constructor;
@@ -26,7 +28,7 @@ module Scumbag
   /** this is the context in scripts are run */
   namespace ScriptContext
   {
-    export let arguments:     string;
+    export let args:          string;
     export let state:         GuiState;
     export let caller:        Actor;
 
@@ -47,7 +49,7 @@ module Scumbag
     }
 
 
-    export function startFight(map:string)
+    export function* startFight(map:string)
     {
       storeActors();
       paused = true;
@@ -105,11 +107,7 @@ module Scumbag
 
     export function setPlayerKey(key:string)
     {
-      if (this.state instanceof Overworld)
-      {
-        this.state.player.getPage().key = key;
-        this.state.player.beginPage();
-      }
+      if (this.state instanceof Overworld) this.state.player.setKey(key);
       StateOfGame.parameters.playerKey = key;
     }
 
@@ -179,4 +177,4 @@ module Scumbag
       paused = false;
     }
   }
-}
+};

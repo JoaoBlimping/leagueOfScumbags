@@ -24,10 +24,9 @@ function* read(book,bookName,bookChip)
 
 
 /** makes the game wait for some fellows to move about */
-function* wait()
+function* wait(paths,colour,time)
 {
- ctx.state.buildWaiter.apply(ctx.state,arguments);
- yield;
+  yield ctx.state.buildWaiter(paths,colour,time);
 }
 
 
@@ -35,7 +34,6 @@ function* wait()
  * any other switch in the game */
 function setSelfSwitch(name,value)
 {
-  console.log(ctx.state.tilemap.key+"-"+ctx.caller.name+"-"+name);
   ctx.setSwitch(ctx.state.tilemap.key+"-"+ctx.caller.name+"-"+name,value);
 }
 
@@ -43,5 +41,13 @@ function setSelfSwitch(name,value)
  * any other switch in the game */
 function getSelfSwitch(name)
 {
+  return ctx.getSwitch(ctx.state.tilemap.key+"-"+ctx.caller.name+"-"+name,value);
+}
 
+/** tells you if two arrays have each element equal and are of equal length */
+function compareArrays(a,b)
+{
+  if (a.length != b.length) return false;
+  for (var i = 0 ;i < a.length;i++) if (a[i] != b[i]) return false;
+  return true;
 }

@@ -15,6 +15,13 @@
       "deathWeapon":"explosion","passOnMaster":true,"deathSpawn":null
     },
     {
+      "name":"piss","speed":[575,625],"gx":[0,0],"gy":[495,800],
+      "lifespan":[4900,5100],"wait":600,"manaCost":1,"key":"pissBullet","cluster":1,
+      "accuracy":0,"nBullets":16,"sound":null,
+      "setAll":[["power",5],["tracking",true]],
+      "deathWeapon":"pissSplash","passOnMaster":true,"deathSpawn":null
+    },
+    {
       "name":"blood","speed":[395,405],"gx":[0,0],"gy":[595,605],
       "lifespan":[290,350],"wait":0,"manaCost":0,"key":"blood1","cluster":10,
       "accuracy":1,"nBullets":10,"sound":null,
@@ -33,6 +40,12 @@
       "name":"explosion","speed":[395,405],"gx":[0,0],"gy":[550,650],
       "lifespan":[1000,2000],"wait":0,"manaCost":0,"key":"bullet2","cluster":10,
       "accuracy":1,"nBullets":100,"sound":"bang","setAll":[],
+      "deathWeapon":null,"passOnMaster":true,"deathSpawn":null
+    },
+    {
+      "name":"pissSplash","speed":[395,405],"gx":[0,0],"gy":[550,650],
+      "lifespan":[1000,2000],"wait":0,"manaCost":0,"key":"pissSplash","cluster":20,
+      "accuracy":1,"nBullets":100,"sound":"pissSound","setAll":[],
       "deathWeapon":null,"passOnMaster":true,"deathSpawn":null
     },
     {

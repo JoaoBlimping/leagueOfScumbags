@@ -1,8 +1,10 @@
 ///<reference path="phaser/phaser.d.ts"/>
 
+///<reference path="states/Overworld.ts"/>
 
 module Scumbag
 {
+
   /** creates a bunch of pages out of a string containing their string representation */
   export function createPages(rawData:string,actorName:string,mapKey:string,regions:{[name:string]:Region}):Page[]
   {
@@ -233,6 +235,15 @@ module Scumbag
       }
     }
 
+    /** sets the actor's string on the current page */
+    setKey(key:string)
+    {
+      this.getPage().key = key;
+
+      if (key == "") this.alpha = 0;
+      else this.loadTexture(this.getPage().key);
+    }
+
     /** sets the actor's path from a string containing a representation of a
      * path */
     setPathFromString(newPath:string,regions:{[name:string]:Region}):void
@@ -304,4 +315,4 @@ module Scumbag
       this.autoran = false;
     }
   }
-}
+};
