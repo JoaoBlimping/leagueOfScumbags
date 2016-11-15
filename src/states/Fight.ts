@@ -13,6 +13,7 @@ module Scumbag
   {
     background:       Background            = null;
     music:            Phaser.Sound;
+    map:              string;
     tilemap:          Phaser.Tilemap;
     collisionLayer:   Phaser.TilemapLayer;
     fighters:         Phaser.Group;
@@ -28,19 +29,31 @@ module Scumbag
 
     init(map:string)
     {
+      this.map = map;
+    }
+
+
+    preload()
+    {
+      if (!this.game.cache.checkTilemapKey(this.map))
+      {
+        this.game.load.tilemap(this.map,"maps/"+this.map+".json",null,Phaser.Tilemap.TILED_JSON);
+      }
+    }
+
+
+    create()
+    {
       //create the tilemap
-      this.tilemap = this.add.tilemap(map);
+      this.tilemap = this.add.tilemap(this.map);
       this.tilemap.addTilesetImage('combatTiles','combatTiles');
       this.tilemap.createLayer("background");
       this.collisionLayer = this.tilemap.createLayer("collisions");
       this.tilemap.setLayer(this.collisionLayer);
       this.tilemap.setCollisionBetween(0, 6569);
       this.collisionLayer.resizeWorld();
-    }
 
 
-    create()
-    {
       //create the background
       if (this.tilemap.properties.hasOwnProperty("background"))
       {

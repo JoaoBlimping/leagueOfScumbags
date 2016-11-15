@@ -1,5 +1,8 @@
 For this release
 ===============
+- make it that actors can activate just by touching you
+
+
 - the way it tells if a battle is over still isn't quite right
 
 - the credits never end if you minimise them or press gamepad buttons during

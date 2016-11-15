@@ -7,6 +7,7 @@ module Scumbag
     actors:       Actor[] = [];
     oldMoveModes: MovementMode[] =  [];
     fadeDone:     boolean = true;
+    state:        Overworld;
 
     constructor(game:Phaser.Game,actorPaths:{name:string,path:string}[],
                 colour:number = -1,time:number = 0)
@@ -17,6 +18,7 @@ module Scumbag
 
       if (state instanceof Overworld)
       {
+        this.state = state;
         for (let i = 0;i < actorPaths.length;i++)
         {
           this.actors[i] = state.getActorByName(actorPaths[i].name);
@@ -35,6 +37,9 @@ module Scumbag
             waiter.fadeDone = true;
           },game,0,this);
         }
+
+        /* stop the player from moving */
+        state.player.moveMode = MovementMode.TemporaryPath;
       }
     }
 
@@ -91,6 +96,7 @@ module Scumbag
       {
         this.actors[i].moveMode = this.oldMoveModes[i];
       }
+      this.state.player.moveMode = MovementMode.PlayerControlled;
     }
   }
 }

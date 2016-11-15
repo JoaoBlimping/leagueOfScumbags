@@ -1,4 +1,4 @@
-///<reference path="../phaser/phaser.d.ts"/>
+``///<reference path="../phaser/phaser.d.ts"/>
 
 
 module Scumbag

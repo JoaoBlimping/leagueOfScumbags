@@ -24,7 +24,7 @@
     {
       "name":"blood","speed":[395,405],"gx":[0,0],"gy":[595,605],
       "lifespan":[290,350],"wait":0,"manaCost":0,"key":"blood1","cluster":10,
-      "accuracy":1,"nBullets":10,"sound":null,
+      "accuracy":1,"nBullets":10,"sound":"pissSound",
       "setAll":[["collide",false]],
       "deathWeapon":null,"passOnMaster":true,"deathSpawn":null
     },

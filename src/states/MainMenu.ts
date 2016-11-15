@@ -15,13 +15,15 @@ module Scumbag
 
       this.logo = this.add.sprite(this.game.width / 2,-300,'logo');
       this.logo.anchor.setTo(0.5,0.5);
+      this.logo.animations.add("play",[0,1,2,3],10,true);
+      this.logo.animations.play("play");
 
       this.add.tween(this.background).to({alpha:1},500,Phaser.Easing.Default,true);
       this.add.tween(this.logo).to({y:this.game.height / 2 - this.logo.height / 3},700,Phaser.Easing.Elastic.In,true,500);
 
       //chuck on a sweet beat
       MusicManager.stopSong(MusicChannel.Ambience);
-      MusicManager.playSong(this.game,"menuMusic",MusicChannel.Music);
+      MusicManager.playSong(this.game,"scumtime",MusicChannel.Music);
 
       //initialise the controls
       InputManager.init(this.game);

@@ -35,6 +35,13 @@
       "deathSound":"trogDeath"
     },
     {
+      "name":"snake","key":"snake","controller":"BouncerController","gravity":2,
+      "jump":1.5,"lWeapon":"nothing","rWeapon":"nothing",
+      "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":0,
+      "manaRegen":0,"collisionDamage":2,"directional":false,"moveSpeed":200,
+      "deathSound":"hiss"
+    },
+    {
       "name":"burrower","key":"burrower","controller":"BurrowerController",
       "gravity":1,"jump":0,"lWeapon":"minigun","rWeapon":"nothing",
       "deathWeapon":"nothing","health":5,"healthRegen":0.05,"mana":100,

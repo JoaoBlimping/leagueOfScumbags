@@ -1,7 +1,5 @@
 ///<reference path="phaser/phaser.d.ts"/>
 
-///<reference path="states/Overworld.ts"/>
-
 module Scumbag
 {
 
@@ -68,6 +66,7 @@ module Scumbag
 
     key:        string                            = "";
     moveOnSpot: boolean                           = false;
+    touch:      boolean                           = false;
     autorun:    boolean                           = false;
     immovable:  boolean                           = false;
     spooky:     boolean                           = false;
@@ -134,8 +133,7 @@ module Scumbag
     /** overrides Phaser.Sprite.update() */
     update()
     {
-      this.body.velocity.x = 0;
-      this.body.velocity.y = 0;
+      Util.slow(this.body.velocity);
 
       if (!this.updating)
       {
@@ -152,7 +150,6 @@ module Scumbag
       if (this.body.velocity.x != 0 || this.body.velocity.y != 0 ||
           this.getPage().moveOnSpot)
       {
-        if (this == (<Overworld>this.game.state.getCurrentState()).player) console.log(angle);
         if (angle < 0) this.animations.play("back");
         else this.animations.play("front");
         if (Math.abs(angle) < Math.PI / 2) this.scale.x = 1;

@@ -48,6 +48,13 @@ module Scumbag
   }
 
 
+  function touches(a:Actor,b:Actor)
+  {
+    if (a == this.player && b.getPage().touch) Script.setScript(b.getPage().script,b);
+    if (b == this.player && a.getPage().touch) Script.setScript(a.getPage().script,a);
+  }
+
+
   function pause()
   {
     if (this.gui != null) return;
@@ -86,10 +93,9 @@ module Scumbag
     playerRegion:     string;
     returning:        boolean;
 
-
+    /** overrides Phaser.State.init() */
     init(map:string = null,playerRegion:string)
     {
-      console.log(map);
       this.playerRegion = playerRegion;
       if (map == null)
       {
@@ -103,7 +109,7 @@ module Scumbag
       }
     }
 
-    /** overrides Phaser.State.init() */
+    /** overrides Phaser.State.preload() */
     preload()
     {
       if (!this.game.cache.checkTilemapKey(this.map))
@@ -245,7 +251,16 @@ module Scumbag
 
 
     /** overrides Phaser.State.render() */
-    render() {}
+    render()
+    {
+      /*
+      this.actors.forEach(function(actor)
+      {
+        this.game.debug.body(actor,"#FF0000AA");
+        this.game.debug.spriteBounds(actor);
+      },this);
+      */
+    }
 
     shutdown()
     {
@@ -277,7 +292,7 @@ module Scumbag
       this.game.physics.arcade.collide(this.actors,this.collisionLayer);
 
        //check collisions between the actors and each other
-       this.game.physics.arcade.collide(this.actors,this.actors);
+       this.game.physics.arcade.collide(this.actors,this.actors,touches,null,this);
 
        //check if the player is in a region with a script
        for (let i in this.regions)

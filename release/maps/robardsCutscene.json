@@ -93,7 +93,7 @@
                  "name":"controller",
                  "properties":
                     {
-                     "pages":"@\nautorun true\n$\n\nvar richPath = [{\"name\":\"player\",\"path\":\"richIntersection,schoolIntersection,churchIntersection,besideDave\"}];\nvar personPath = [{\"name\":\"person\",\"path\":\"churchIntersection,besideDave\"}];\nvar bothPath = [{\"name\":\"person\",\"path\":\"churchExit\"},{\"name\":\"player\",\"path\":\"churchExit\"}];\n\nyield* wait(richPath);\nyield* say(\"Dave\",\"chad_n\",\"Gday Bro, come on in!\");\nyield* wait(personPath);\nyield* say(\"Trevongle\",\"hippie1_n\",\"Hello Dave :)\");\nyield* say(\"Dave\",\"chad_n\",\"hi\");\nyield* say(\"Dave\",\"chad_n\",\"Come in guys, everyone's inside!\");\nyield* wait(bothPath,0,3000);\nctx.setPlayerKey(\"fogleActor\");\nctx.transport(\"johnRoom\",\"bed\");"
+                     "pages":"@\nautorun true\n$\n\nvar richPath = [{\"name\":\"player\",\"path\":\"richIntersection,schoolIntersection,churchIntersection,besideDave\"}];\nvar personPath = [{\"name\":\"person\",\"path\":\"churchIntersection,besideDave\"}];\nvar bothPath = [{\"name\":\"person\",\"path\":\"churchExit\"},{\"name\":\"player\",\"path\":\"churchExit\"}];\n\nyield* wait(richPath);\nyield* say(\"Dave\",\"chad_n\",\"Gday Bro, come on in!\");\nyield* wait(personPath);\nyield* say(\"Trevongle\",\"hippie1_n\",\"Hello Dave :)\");\nyield* say(\"Dave\",\"chad_n\",\"hi\");\nyield* say(\"Dave\",\"chad_n\",\"Come in guys, everyone's inside!\");\nyield* wait(bothPath,0,3000);\n\n\n\n\n\nctx.setPlayerKey(\"\");\nctx.transport(\"title\",\"middle\");"
                     },
                  "propertytypes":
                     {
@@ -244,7 +244,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "music":"none"
+     "music":"townMusic"
     },
  "propertytypes":
     {

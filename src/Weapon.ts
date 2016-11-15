@@ -78,12 +78,12 @@ module Scumbag
     /** fire bullets */
     fire(source:Phaser.Sprite):void
     {
+      if (this.sound != null) this.game.sound.play(this.sound);
       for (let i = 0;i < this.cluster;i++)
       {
         let bullet = this.getFirstExists(false);
         if (bullet != null)
         {
-          if (this.sound != null) this.game.sound.play(this.sound);
           let angle = source.angle + (Math.random() * Math.PI * 2 - Math.PI) * this.accuracy;
           let speed = inRange(this.speed[0],this.speed[1]);
           let gx = inRange(this.gx[0],this.gx[1]);

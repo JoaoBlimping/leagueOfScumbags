@@ -1,6 +1,6 @@
 module Scumbag
 {
-  export namespace StateOfGame
+  export module StateOfGame
   {
     /** structure of a saved game's parameteres */
     export interface StateParameters
@@ -18,18 +18,8 @@ module Scumbag
 
 
     /** the game's persistent state */
-    export let parameters:StateParameters =
-    {
-      slot:       0,
-      switches:   {},
-      variables:  {},
-      characters: [],
-      map:        "",
-      playerKey:  "",
-      actors:     new Array<{name:string,x:number,y:number}>(),
-      score:      0,
-      time:       0
-    };
+    export let parameters:StateOfGame.StateParameters;
+
 
 
     export function flush()
@@ -46,8 +36,7 @@ module Scumbag
         score:      0,
         time:       0
       };
-      console.log(parameters);
-      console.log("flushing");
+
     }
 
     let timerFunction = 0;
@@ -86,7 +75,14 @@ module Scumbag
     {
       if (typeof(Storage) !== "undefined")
       {
-        parameters = JSON.parse(localStorage.getItem("save"+slot));
+        let data = localStorage.getItem("save"+slot);
+        if (data != null) parameters = JSON.parse(data);
+        else
+        {
+          console.log("oing the other way")
+          flush();
+          parameters.slot = slot;
+        }
       }
       else
       {
@@ -95,4 +91,5 @@ module Scumbag
       parameters.slot = slot;
     }
   }
+
 };

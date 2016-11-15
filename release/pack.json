@@ -7,15 +7,17 @@
 
     {"type": "image","key": "titlepage","url": "images/menu.jpg"},
     {"type": "image","key": "creditspage","url": "images/creditsBackground.jpg"},
-    {"type": "image","key": "logo","url": "images/logo.png"},
+    {"type":"spritesheet","key":"logo","url":"images/logo.png","frameWidth":169,"frameHeight":200},
     {"type": "image","key": "dead","url": "images/dead.png"},
     {"type": "image","key": "combatTiles","url": "images/combatTiles.png"},
     {"type": "image","key": "testSet","url": "images/testSet.png"},
 
     {"type": "image","key": "panorama","url": "images/panorama.jpg"},
     {"type": "image","key": "piss","url": "images/piss.png"},
+    {"type": "image","key": "river","url": "images/river.jpg"},
 
     {"type": "image","key": "fog","url": "images/fog.png"},
+    {"type": "image","key": "forestFog","url": "images/forestFog.png"},
 
     {"type": "image","key": "outsideTiles","url": "images/outside.png"},
     {"type": "image","key": "insideTiles","url": "images/inside.png"},
@@ -59,6 +61,12 @@
     {"type": "image","key": "cicada_n","url": "chips/cicada_n.png"},
     {"type": "image","key": "chad_n","url": "chips/chad_n.png"},
     {"type": "image","key": "book_n","url": "chips/book_n.png"},
+    {"type": "image","key": "ast_n","url": "chips/ast_n.png"},
+    {"type": "image","key": "sharret_n","url": "chips/sharret_n.png"},
+    {"type": "image","key": "dirk_n","url": "chips/dirk_n.png"},
+    {"type": "image","key": "pete_n","url": "chips/pete_n.png"},
+    {"type": "image","key": "gun_n","url": "chips/gun_n.png"},
+    {"type": "image","key": "space_n","url": "chips/space_n.png"},
     {"type": "image","key": "dany_n","url": "chips/dany_n.png"},
 
     {
@@ -100,12 +108,11 @@
     {"type":"spritesheet","key":"stinkSpirit","url":"images/stinkSpirit.png","frameWidth":32,"frameHeight":48},
     {"type":"spritesheet","key":"stinkubbus","url":"images/stinkubbus.png","frameWidth":24,"frameHeight":32},
     {"type":"spritesheet","key":"spike","url":"images/spike.png","frameWidth":24,"frameHeight":24},
+    {"type":"spritesheet","key":"snake","url":"images/snake.png","frameWidth":48,"frameHeight":24},
 
 
-    {
-      "type": "spritesheet","key": "fogleActor","url": "images/fogleActor.png",
-      "frameWidth": 24,"frameHeight": 48
-    },
+    {"type":"spritesheet","key":"fogleActor","url":"images/fogleActor.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"phmActor","url":"images/phmActor.png","frameWidth":24,"frameHeight":48},
     {
       "type": "spritesheet","key": "fogleFallen","url": "images/fogleFallen.png",
       "frameWidth": 48,"frameHeight": 24
@@ -122,19 +129,18 @@
       "type": "spritesheet","key": "lad","url": "images/lad.png",
       "frameWidth": 24,"frameHeight": 48
     },
-    {
-      "type": "spritesheet","key": "hippie1","url": "images/hippie1.png",
-      "frameWidth": 24,"frameHeight": 48
-    },
-    {
-      "type": "spritesheet","key": "hippie2","url": "images/hippie2.png",
-      "frameWidth": 24,"frameHeight": 48
-    },
+    {"type":"spritesheet","key":"hippie1","url":"images/hippie1.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"hippie2","url":"images/hippie2.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"dad","url":"images/dad.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"ast","url":"images/ast.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"sharret","url":"images/sharret.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"book","url":"images/book.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"pump","url":"images/pump.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"switchOff","url":"images/switchOff.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"switchOn","url":"images/switchOn.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"stinkSpiritActor","url":"images/stinkSpiritActor.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"sign","url":"images/sign.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"snakeActor","url":"images/snakeActor.png","frameWidth":48,"frameHeight":24},
     {
       "type":"spritesheet","key":"cicada","url":"images/cicada.png",
       "frameWidth":121,"frameHeight":84
@@ -144,14 +150,8 @@
       "frameWidth":121,"frameHeight":84
     },
 
-
-    {"type":"tilemap","key":"map1","url":"maps/map1.json","format":"TILED_JSON"},
-    {"type":"tilemap","key":"stinkFight","url":"maps/stinkBattle.json","format":"TILED_JSON"},
-    {"type":"tilemap","key":"stinkFight2","url":"maps/stinkBattle2.json","format":"TILED_JSON"},
-    {"type":"tilemap","key":"stinkFight3","url":"maps/stinkBattle3.json","format":"TILED_JSON"},
-
     {"type":"audio","key":"tick","urls":["audio/tick.ogg"],"autoDecode": true},
-    {"type":"audio","key":"shot","urls":["audio/shot.wav"],"autoDecode": true},
+    {"type":"audio","key":"shot","urls":["audio/shot.ogg"],"autoDecode": true},
     {"type":"audio","key":"bang","urls":["audio/bang.ogg"],"autoDecode": true},
     {"type":"audio","key":"throw","urls":["audio/throw.wav"],"autoDecode": true},
     {"type":"audio","key":"trogDeath","urls":["audio/trogDeath.wav"],"autoDecode":true},
@@ -159,10 +159,15 @@
     {"type":"audio","key":"click","urls":["audio/click.ogg"],"autoDecode":true},
     {"type":"audio","key":"pissSound","urls":["audio/pissSound.ogg"],"autoDecode":true},
     {"type":"audio","key":"bigPiss","urls":["audio/bigPiss.ogg"],"autoDecode":true},
+    {"type":"audio","key":"hiss","urls":["audio/hiss.ogg"],"autoDecode":true},
 
     {"type":"audio","key":"music","urls":["audio/music.ogg"],"autoDecode":true},
     {"type":"audio","key":"menuMusic","urls":["audio/menuMusic.ogg"],"autoDecode":true},
     {"type":"audio","key":"scumtime","urls":["audio/scumtime.ogg"],"autoDecode":true},
+    {"type":"audio","key":"townMusic","urls":["audio/townMusic.ogg"],"autoDecode":true},
+    {"type":"audio","key":"weirdMusic","urls":["audio/weirdMusic.ogg"],"autoDecode":true},
+    {"type":"audio","key":"forest","urls":["audio/forest.ogg"],"autoDecode":true},
+    {"type":"audio","key":"battle","urls":["audio/battle.ogg"],"autoDecode":true},
     {"type":"audio","key":"wind","urls":["audio/wind.ogg"],"autoDecode":true},
     {"type":"audio","key":"pumping","urls":["audio/pumping.ogg"],"autoDecode":true},
 
