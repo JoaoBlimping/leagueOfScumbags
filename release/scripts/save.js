@@ -1,22 +1,13 @@
 while(true)
 {
-  ctx.state.buildPause("Paused","Return","Save","Quit");
+  ctx.state.buildPause("Paused","Return","Quit");
   var value = yield;
 
   //return
   if (value == 1) return;
 
-  //save
-  if (value == 2)
-  {
-    ctx.playSound("trogDeath");
-    ctx.saveGame();
-    ctx.state.buildTextbox("Saving Complete","yeah");
-    yield;
-  }
-
   //quit
-  else if (value == 3)
+  else if (value == 2)
   {
     ctx.state.buildQA("are you sure you want to quit?",
                        null,

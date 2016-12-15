@@ -25,6 +25,12 @@ module Scumbag
   {
     gui:  GuiElement  = null;
 
+    create()
+    {
+      this.gui = null;
+    }
+
+
     update()
     {
       if (this.gui == null || !this.gui.blocking)

@@ -158,6 +158,7 @@ module Scumbag
     /** runs the script for one block */
     export function runScript(value:number)
     {
+      //if (paused) return;
       blocks.next(value);
     }
 

@@ -68,7 +68,6 @@ module Scumbag
     moveOnSpot: boolean                           = false;
     touch:      boolean                           = false;
     autorun:    boolean                           = false;
-    immovable:  boolean                           = false;
     spooky:     boolean                           = false;
     moveSpeed:  number                            = 100;
     path:       Movement[]                        = [];
@@ -121,6 +120,7 @@ module Scumbag
       //turn on physics
       this.game.physics.arcade.enable(this);
       this.body.collideWorldBounds = true;
+      this.body.
 
       //add it to the scene
       game.add.existing(this);
@@ -186,13 +186,55 @@ module Scumbag
       //control via some sort of path
       else
       {
-        if (this.getPage().path[0].type == MovementType.Wait)
+        let move = this.getPage().path[0];
+
+        if (move.type == MovementType.Wait)
         {
           this.waitTime -= this.game.time.elapsedMS;
           if (this.waitTime <= 0) this.nextMovement();
         }
+
+        else if (move.type == MovementType.Towards)
+        {
+          this.waitTime -= this.game.time.elapsedMS;
+          if (this.waitTime <= 0) this.nextMovement();
+          else
+          {
+            let state = this.game.state.getCurrentState();
+            if (state instanceof Overworld)
+            {
+              let actor = state.getActorByName(move.actorName);
+              this.moveTowardPoint(actor.position);
+            }
+          }
+        }
+
+
+        else if (move.type == MovementType.Angle)
+        {
+          this.waitTime -= this.game.time.elapsedMS;
+          if (this.waitTime <= 0) this.nextMovement();
+          else
+          {
+            this.body.velocity.x = this.getPage().moveSpeed * Math.cos(move.angle);
+            this.body.velocity.y = this.getPage().moveSpeed * Math.sin(move.angle);
+          }
+
+
+        }
+
+
+
         else if (this.getPage().path[0].type == MovementType.Walk) this.pathMove();
       }
+    }
+
+
+    moveTowardPoint(point:{x:number,y:number}):void
+    {
+      let angle = Math.atan2(point.y - this.y,point.x - this.x);
+      this.body.velocity.x = this.getPage().moveSpeed * Math.cos(angle);
+      this.body.velocity.y = this.getPage().moveSpeed * Math.sin(angle);
     }
 
     pathMove():void
@@ -206,13 +248,10 @@ module Scumbag
         return;
       }
 
-      //set angle to the target destination
-      let deltaX = (this.getPage().path[0].region.x + this.getPage().path[0].region.width / 2) - this.x;
-      let deltaY = (this.getPage().path[0].region.y + this.getPage().path[0].region.height / 2) - this.y;
-      let angle = Math.atan2(deltaY,deltaX);
+      let targetX = this.getPage().path[0].region.x + this.getPage().path[0].region.width / 2;
+      let targetY = (this.getPage().path[0].region.y + this.getPage().path[0].region.height / 2);
 
-      this.body.velocity.x = this.getPage().moveSpeed * Math.cos(angle);
-      this.body.velocity.y = this.getPage().moveSpeed * Math.sin(angle);
+      this.moveTowardPoint({x:targetX,y:targetY});
     }
 
     /** goes to the next movement that the actor has to do */
@@ -225,11 +264,7 @@ module Scumbag
       this.getPage().path.splice(0,1);
 
       if (this.getPage().path.length == 0) return;
-
-      if (this.getPage().path[0].type == MovementType.Wait)
-      {
-        this.waitTime = this.getPage().path[0].waitTime;
-      }
+      this.waitTime = this.getPage().path[0].waitTime;
     }
 
     /** sets the actor's string on the current page */
@@ -298,7 +333,7 @@ module Scumbag
       this.animations.add('back',[4,5,6,7],10,true);
 
       //make it immovable if relevant
-      if (this.getPage().immovable) this.body.immovable = true;
+      this.body.immovable = true;
 
       //make it look weird
       if (this.getPage().spooky) this.blendMode = PIXI.blendModes.SCREEN;

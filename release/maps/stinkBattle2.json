@@ -314,7 +314,7 @@
  "properties":
     {
      "background":"piss",
-     "music":"music"
+     "music":"battle"
     },
  "propertytypes":
     {
@@ -328,12 +328,12 @@
          "columns":9,
          "firstgid":1,
          "image":"..\/images\/combatTiles.png",
-         "imageheight":16,
+         "imageheight":32,
          "imagewidth":144,
          "margin":0,
          "name":"combatTiles",
          "spacing":0,
-         "tilecount":9,
+         "tilecount":18,
          "tileheight":16,
          "tileproperties":
             {

@@ -35,6 +35,13 @@
       "deathSound":"trogDeath"
     },
     {
+      "name":"nightweird","key":"nightweird","controller":"NightweirdController","gravity":0,
+      "jump":0.2,"lWeapon":"nothing","rWeapon":"nothing",
+      "deathWeapon":"radioactivity","health":5,"healthRegen":0.05,"mana":0,
+      "manaRegen":0,"collisionDamage":10,"directional":true,"moveSpeed":100,
+      "deathSound":"nightweirdSound"
+    },
+    {
       "name":"snake","key":"snake","controller":"BouncerController","gravity":2,
       "jump":1.5,"lWeapon":"nothing","rWeapon":"nothing",
       "deathWeapon":"blood","health":20,"healthRegen":0.05,"mana":0,
@@ -49,15 +56,33 @@
     },
     {
       "name":"god","key":"god","controller":"StationaryController","gravity":0,
-      "jump":0,"lWeapon":"blaster","rWeapon":"minigun","deathWeapon":"blood",
-      "health":30,"healthRegen":0,"mana":500,"manaRegen":0.05,
-      "collisionDamage":5,"directional":false,"moveSpeed":300
+      "jump":0,"lWeapon":"pissBabby","rWeapon":"minigun","deathWeapon":"blood",
+      "health":1000,"healthRegen":0,"mana":500,"manaRegen":0.05,
+      "collisionDamage":5,"directional":false,"moveSpeed":0
     },
     {
       "name":"robot","key":"robot","controller":"RobotController","gravity":1,
       "jump":0,"lWeapon":"smoke","rWeapon":"nothing","deathWeapon":"blood",
       "health":25,"healthRegen":0,"mana":500,"manaRegen":0.05,
       "collisionDamage":5,"directional":false,"moveSpeed":0
+    },
+    {
+      "name":"bean","key":"bean","controller":"KubusController","gravity":1.5,
+      "jump":1,"lWeapon":"beanGun","rWeapon":"explosion","deathWeapon":"blood",
+      "health":40,"healthRegen":0,"mana":50,"manaRegen":0.05,
+      "collisionDamage":1,"directional":false,"moveSpeed":250,"deathSound":"beanNoise"
+    },
+    {
+      "name":"snakeNest","key":"snakeNest","controller":"PacerController","gravity":1,
+      "jump":0,"lWeapon":"snakeGun","rWeapon":"nothing","deathWeapon":"nothing",
+      "health":100,"healthRegen":0,"mana":500,"manaRegen":0.05,
+      "collisionDamage":0,"directional":false,"moveSpeed":0
+    },
+    {
+      "name":"police","key":"police","controller":"RobotController","gravity":1,
+      "jump":0,"lWeapon":"bomb","rWeapon":"nothing","deathWeapon":"blood",
+      "health":100,"healthRegen":0,"mana":5,"manaRegen":0.05,
+      "collisionDamage":5,"directional":true,"moveSpeed":100
     },
     {
       "name":"monkey","key":"monkey","controller":"MonkeyController","gravity":0.001,

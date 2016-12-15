@@ -15,8 +15,11 @@
     {"type": "image","key": "panorama","url": "images/panorama.jpg"},
     {"type": "image","key": "piss","url": "images/piss.png"},
     {"type": "image","key": "river","url": "images/river.jpg"},
+    {"type": "image","key": "lantana","url": "images/lantana.jpg"},
+    {"type": "image","key": "doggo","url": "images/doggo.jpg"},
 
     {"type": "image","key": "fog","url": "images/fog.png"},
+    {"type": "image","key": "rain","url": "images/rain.jpg"},
     {"type": "image","key": "forestFog","url": "images/forestFog.png"},
 
     {"type": "image","key": "outsideTiles","url": "images/outside.png"},
@@ -41,6 +44,9 @@
     {"type": "image","key": "bullet8","url": "images/bullet8.png"},
     {"type":"image","key":"pissBullet","url":"images/pissBullet.png"},
     {"type":"image","key":"pissSplash","url":"images/pissSplash.png"},
+    {"type":"image","key":"bomb","url":"images/bomb.png"},
+    {"type":"image","key":"snakeBullet","url":"images/snakeBullet.png"},
+    {"type": "image","key": "beanBullet","url": "images/beanBullet.png"},
 
     {"type": "image","key": "blood1","url": "images/blood1.png"},
     {"type": "image","key": "blood2","url": "images/blood2.png"},
@@ -53,11 +59,14 @@
     {"type": "image","key": "aini_a","url": "chips/aini_a.png"},
     {"type": "image","key": "dad_n","url": "chips/dad_n.png"},
     {"type": "image","key": "dad_a","url": "chips/dad_a.png"},
+    {"type": "image","key": "bean_n","url": "chips/bean_n.png"},
+    {"type": "image","key": "bean_a","url": "chips/bean_a.png"},
 
     {"type": "image","key": "hippie1_n","url": "chips/hippie1_n.png"},
     {"type": "image","key": "hippie2_n","url": "chips/hippie2_n.png"},
     {"type": "image","key": "stinkSteward_n","url": "chips/stinkSteward_n.png"},
     {"type": "image","key": "cardinal_n","url": "chips/cardinal_n.png"},
+    {"type": "image","key": "police_n","url": "chips/police_n.png"},
     {"type": "image","key": "cicada_n","url": "chips/cicada_n.png"},
     {"type": "image","key": "chad_n","url": "chips/chad_n.png"},
     {"type": "image","key": "book_n","url": "chips/book_n.png"},
@@ -66,7 +75,9 @@
     {"type": "image","key": "dirk_n","url": "chips/dirk_n.png"},
     {"type": "image","key": "pete_n","url": "chips/pete_n.png"},
     {"type": "image","key": "gun_n","url": "chips/gun_n.png"},
+    {"type": "image","key": "sign_n","url": "chips/sign_n.png"},
     {"type": "image","key": "space_n","url": "chips/space_n.png"},
+    {"type": "image","key": "alain_n","url": "chips/alain_n.png"},
     {"type": "image","key": "dany_n","url": "chips/dany_n.png"},
 
     {
@@ -77,6 +88,7 @@
       "type": "spritesheet","key": "Aini","url": "images/aini.png",
       "frameWidth": 32,"frameHeight": 48
     },
+    {"type":"spritesheet","key":"police","url":"images/police.png","frameWidth":24,"frameHeight":48},
     {
       "type": "spritesheet","key": "Purple Hat Man","url": "images/purple.png",
       "frameWidth": 32,"frameHeight": 48
@@ -109,10 +121,14 @@
     {"type":"spritesheet","key":"stinkubbus","url":"images/stinkubbus.png","frameWidth":24,"frameHeight":32},
     {"type":"spritesheet","key":"spike","url":"images/spike.png","frameWidth":24,"frameHeight":24},
     {"type":"spritesheet","key":"snake","url":"images/snake.png","frameWidth":48,"frameHeight":24},
+    {"type":"spritesheet","key":"snakeNest","url":"images/snakeNestBattle.png","frameWidth":64,"frameHeight":64},
+    {"type":"spritesheet","key":"nightweird","url":"images/nightweird.png","frameWidth":48,"frameHeight":32},
+    {"type":"spritesheet","key":"bean","url":"images/bean.png","frameWidth":32,"frameHeight":48},
 
 
     {"type":"spritesheet","key":"fogleActor","url":"images/fogleActor.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"phmActor","url":"images/phmActor.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"ainiActor","url":"images/ainiActor.png","frameWidth":24,"frameHeight":48},
     {
       "type": "spritesheet","key": "fogleFallen","url": "images/fogleFallen.png",
       "frameWidth": 48,"frameHeight": 24
@@ -132,15 +148,25 @@
     {"type":"spritesheet","key":"hippie1","url":"images/hippie1.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"hippie2","url":"images/hippie2.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"dad","url":"images/dad.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"policeman","url":"images/policeman.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"ast","url":"images/ast.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"sharret","url":"images/sharret.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"book","url":"images/book.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"bloodActor","url":"images/bloodActor.png","frameWidth":32,"frameHeight":32},
     {"type":"spritesheet","key":"pump","url":"images/pump.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"switchOff","url":"images/switchOff.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"switchOn","url":"images/switchOn.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"stinkSpiritActor","url":"images/stinkSpiritActor.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"sign","url":"images/sign.png","frameWidth":24,"frameHeight":48},
     {"type":"spritesheet","key":"snakeActor","url":"images/snakeActor.png","frameWidth":48,"frameHeight":24},
+    {"type":"spritesheet","key":"snakeNestActor","url":"images/snakeNest.png","frameWidth":64,"frameHeight":64},
+    {"type":"spritesheet","key":"save","url":"images/save.png","frameWidth":32,"frameHeight":24},
+    {"type":"spritesheet","key":"beanActor","url":"images/beanActor.png","frameWidth":32,"frameHeight":48},
+    {"type":"spritesheet","key":"compass","url":"images/compass.png","frameWidth":32,"frameHeight":64},
+    {"type":"spritesheet","key":"alain","url":"images/alain.png","frameWidth":24,"frameHeight":48},
+    {"type":"spritesheet","key":"toilet","url":"images/toilet.png","frameWidth":32,"frameHeight":64},
+    {"type":"spritesheet","key":"stinkSteward","url":"images/stinkSteward.png","frameWidth":24,"frameHeight":48},
+
     {
       "type":"spritesheet","key":"cicada","url":"images/cicada.png",
       "frameWidth":121,"frameHeight":84
@@ -160,14 +186,19 @@
     {"type":"audio","key":"pissSound","urls":["audio/pissSound.ogg"],"autoDecode":true},
     {"type":"audio","key":"bigPiss","urls":["audio/bigPiss.ogg"],"autoDecode":true},
     {"type":"audio","key":"hiss","urls":["audio/hiss.ogg"],"autoDecode":true},
+    {"type":"audio","key":"nightweirdSound","urls":["audio/nightweird.ogg"],"autoDecode":true},
+    {"type":"audio","key":"beanNoise","urls":["audio/beanNoise.ogg"],"autoDecode":true},
 
     {"type":"audio","key":"music","urls":["audio/music.ogg"],"autoDecode":true},
     {"type":"audio","key":"menuMusic","urls":["audio/menuMusic.ogg"],"autoDecode":true},
     {"type":"audio","key":"scumtime","urls":["audio/scumtime.ogg"],"autoDecode":true},
     {"type":"audio","key":"townMusic","urls":["audio/townMusic.ogg"],"autoDecode":true},
     {"type":"audio","key":"weirdMusic","urls":["audio/weirdMusic.ogg"],"autoDecode":true},
+    {"type":"audio","key":"finalBattle","urls":["audio/finalBattle.ogg"],"autoDecode":true},
+    {"type":"audio","key":"stinkMusic","urls":["audio/stinkMusic.ogg"],"autoDecode":true},
     {"type":"audio","key":"forest","urls":["audio/forest.ogg"],"autoDecode":true},
     {"type":"audio","key":"battle","urls":["audio/battle.ogg"],"autoDecode":true},
+    {"type":"audio","key":"trogBattle","urls":["audio/trogBattle.ogg"],"autoDecode":true},
     {"type":"audio","key":"wind","urls":["audio/wind.ogg"],"autoDecode":true},
     {"type":"audio","key":"pumping","urls":["audio/pumping.ogg"],"autoDecode":true},
 

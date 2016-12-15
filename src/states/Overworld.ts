@@ -3,58 +3,33 @@
 
 module Scumbag
 {
-  function actorSelector(a:Actor,distance:number)
-  {
-    if (a == this.player) return false;
-
-    let deltaX = this.player.body.x - a.body.x;
-    let deltaY = this.player.body.y - a.body.y;
-    let angle = Math.atan(deltaY / deltaX);
-
-    let playerDistance = this.player.body.width / 2 * Math.cos(angle) +
-                         this.player.body.height / 2 * Math.sin(angle);
-    let otherDistance = a.body.width / 2 * Math.cos(angle) +
-                        a.body.height / 2 * Math.sin(angle);
-
-    return distance <= playerDistance + otherDistance + 5;
-  }
-
-  /** this is run when the player presses A so we can check if they are touching
-   * another actor which can be activated */
-  function actorCollide()
-  {
-    if (!this.player.updating) return;
-
-    let closest = this.actors.getClosestTo(this.player,actorSelector,this);
-
-    if (closest == null) return;
-
-    if ((this.player.animations.currentAnim.name == "left" &&
-         closest.x >= this.player.x) ||
-        (this.player.animations.currentAnim.name == "right" &&
-         closest.x <= this.player.x) ||
-        (this.player.animations.currentAnim.name == "up" &&
-         closest.y >= this.player.y) ||
-        (this.player.animations.currentAnim.name == "down" &&
-         closest.y <= this.player.y))
-    {
-      return;
-    }
-
-    if (!closest.getPage().autorun)
-    {
-      Script.setScript(closest.getPage().script,closest);
-    }
-  }
-
-
+  /** detects if it's time to run a script or yeah or nah or whatever and that */
   function touches(a:Actor,b:Actor)
   {
-    if (a == this.player && b.getPage().touch) Script.setScript(b.getPage().script,b);
-    if (b == this.player && a.getPage().touch) Script.setScript(a.getPage().script,a);
+    if (a.moveMode == MovementMode.TemporaryPath ||
+        b.moveMode == MovementMode.TemporaryPath ||
+        a.getPage().autorun || b.getPage().autorun || this.collideCooldown > 0)
+    {
+      return true;
+    }
+
+    if (a == this.player && b.getPage().script != "")
+    {
+      this.player.body.immovable = false;
+      this.collideCooldown = 1.0;
+      Script.setScript(b.getPage().script,b);
+    }
+    else if (b == this.player && a.getPage().script != "")
+    {
+      this.player.body.immovable = false;
+      this.collideCooldown = 1.0;
+      Script.setScript(a.getPage().script,a);
+    }
+    return true;
   }
 
 
+  /** gets run when the player presses the pause button */
   function pause()
   {
     if (this.gui != null) return;
@@ -92,6 +67,7 @@ module Scumbag
     map:              string;
     playerRegion:     string;
     returning:        boolean;
+    collideCooldown:  number = 0.0;
 
     /** overrides Phaser.State.init() */
     init(map:string = null,playerRegion:string)
@@ -123,6 +99,8 @@ module Scumbag
      * definitely loaded */
     create()
     {
+      super.create();
+
       //save the map name
       StateOfGame.parameters.map = this.map;
 
@@ -137,7 +115,7 @@ module Scumbag
         this.tilemap.addTilesetImage(this.tilemap.tilesets[i].name,
                                      this.tilemap.tilesets[i].name);
       }
-      this.collisionLayer = this.tilemap.createLayer('collisions');
+      this.collisionLayer = this.tilemap.createLayer("collisions");
       this.tilemap.setLayer(this.collisionLayer);
       this.tilemap.setCollisionBetween(0,6569);
       this.collisionLayer.resizeWorld();
@@ -156,6 +134,7 @@ module Scumbag
         page.key = StateOfGame.parameters.playerKey;
         this.player = new Actor(this.game,0,0,"player",[page]);
         this.player.moveMode = MovementMode.PlayerControlled;
+        this.player.body.immovable = false;
       }
       else
       {
@@ -183,7 +162,6 @@ module Scumbag
       //load actors
       if (this.returning)
       {
-        console.log("restoring actors");
         this.restoreActors();
       }
 
@@ -226,6 +204,8 @@ module Scumbag
                                              this.tilemap.width * this.tilemap.tileWidth,
                                              this.tilemap.height * this.tilemap.tileHeight,
                                              this.game);
+            this.background.update(this.camera.x,this.camera.y);
+
           }
         }
 
@@ -242,7 +222,7 @@ module Scumbag
 
       //add button press callbacks
       let device = InputManager.getInputDevice(0);
-      device.addOnButtonPress(Button.a,actorCollide,this);
+      //device.addOnButtonPress(Button.a,actorCollide,this);
       device.addOnButtonPress(Button.b,pause,this);
 
       //start a play time counter
@@ -291,8 +271,9 @@ module Scumbag
       //check collisions between the characetrsand the level
       this.game.physics.arcade.collide(this.actors,this.collisionLayer);
 
-       //check collisions between the actors and each other
-       this.game.physics.arcade.collide(this.actors,this.actors,touches,null,this);
+      //check collisions between the actors and each other
+      this.collideCooldown -= this.game.time.elapsedMS / 1000;
+      this.game.physics.arcade.collide(this.actors,this.actors,touches,null,this);
 
        //check if the player is in a region with a script
        for (let i in this.regions)
@@ -353,6 +334,7 @@ module Scumbag
 
     transition(map:string):void
     {
+      this.onGuiStart();
       let transitioner = this.add.image(this.camera.x + this.game.width / 2,
                                         this.camera.y + this.game.height / 2,
                                         "transition");
@@ -361,7 +343,7 @@ module Scumbag
       this.add.tween(transitioner).to({angle:1000},700,Phaser.Easing.Default,true);
       tween.onComplete.add(function(){this.game.state.start("Fight",true,false,map);},this);
       this.game.sound.play("swish");
-      this.onGuiStart();
+
     }
   }
 };

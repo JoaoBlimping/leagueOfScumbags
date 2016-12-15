@@ -15,11 +15,25 @@
       "deathWeapon":"explosion","passOnMaster":true,"deathSpawn":null
     },
     {
+      "name":"bomb","speed":[50,250],"gx":[-15,15],"gy":[0,50],
+      "lifespan":[4900,5100],"wait":800,"manaCost":1,"key":"bomb","cluster":1,
+      "accuracy":0,"nBullets":32,"sound":null,
+      "setAll":[["power",8]],
+      "deathWeapon":"explosion","passOnMaster":true,"deathSpawn":null
+    },
+    {
       "name":"piss","speed":[575,625],"gx":[0,0],"gy":[495,800],
       "lifespan":[4900,5100],"wait":600,"manaCost":1,"key":"pissBullet","cluster":1,
       "accuracy":0,"nBullets":16,"sound":null,
       "setAll":[["power",5],["tracking",true]],
       "deathWeapon":"pissSplash","passOnMaster":true,"deathSpawn":null
+    },
+    {
+      "name":"pissBabby","speed":[-10,10],"gx":[-800,800],"gy":[-800,800],
+      "lifespan":[4900,5100],"wait":2000,"manaCost":1,"key":"pissBullet","cluster":1,
+      "accuracy":0,"nBullets":16,"sound":null,
+      "setAll":[["power",0],["tracking",true]],
+      "deathWeapon":"pissSplash","passOnMaster":true,"deathSpawn": "stinkubbus"
     },
     {
       "name":"blood","speed":[395,405],"gx":[0,0],"gy":[595,605],
@@ -56,6 +70,13 @@
       "deathWeapon":null,"passOnMaster":true,"deathSpawn":"trog"
     },
     {
+      "name":"snakeGun","speed":[80,80],"gx":[0,0],"gy":[495,505],
+      "lifespan":[4900,5100],"wait":1700,"manaCost":1.5,"key":"snakeBullet","cluster":1,
+      "accuracy":0,"nBullets":8,"sound":null,
+      "setAll":[["power",0],["tracking",true]],
+      "deathWeapon":null,"passOnMaster":true,"deathSpawn":"snake"
+    },
+    {
       "name":"monkeyLauncher","speed":[575,625],"gx":[0,0],"gy":[495,505],
       "lifespan":[4900,5100],"wait":400,"manaCost":2.7,"key":"bullet1","cluster":1,
       "accuracy":0,"nBullets":8,"sound":null,
@@ -66,6 +87,13 @@
       "name":"smoke","speed":[575,625],"gx":[0,0],"gy":[0,0],
       "lifespan":[4900,5100],"wait":200,"manaCost":1,"key":"bullet8","cluster":1,
       "accuracy":0,"nBullets":32,"sound":null,
+      "setAll":[["power",5],["tracking",true]],
+      "deathWeapon":null,"passOnMaster":true,"deathSpawn":null
+    },
+    {
+      "name":"beanGun","speed":[0,700],"gx":[-200,200],"gy":[-200,200],
+      "lifespan":[4900,5100],"wait":500,"manaCost":1,"key":"beanBullet","cluster":3,
+      "accuracy":1,"nBullets":32,"sound":"throw",
       "setAll":[["power",5],["tracking",true]],
       "deathWeapon":null,"passOnMaster":true,"deathSpawn":null
     },

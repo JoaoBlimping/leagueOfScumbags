@@ -11,8 +11,7 @@ module Scumbag
     preload()
     {
       //Set up our preloader sprites
-      this.preloadBar = this.add.sprite(200, 250, 'preloadBar');
-      this.background = this.add.sprite(0,0,'preloadBackground');
+      this.preloadBar = this.add.sprite(0,0,'preloadBar');
 
       //set the preload bar as a preload bar
       this.load.setPreloadSprite(this.preloadBar);

@@ -32,6 +32,8 @@ module Scumbag
     fighter.jumpHeight = BASE_GRAVITY * data.jump;
     fighter.moveSpeed = data.moveSpeed;
 
+    if (fighter.moveSpeed == 0) fighter.body.immovable = true;
+
     fighter.deathWeapon = new Weapon(game,bulletGroup,fighter,data.deathWeapon);
     fighter.deathSound = data.deathSound;
 
@@ -77,7 +79,11 @@ module Scumbag
 
       //turn on physics
       this.game.physics.arcade.enable(this);
+
+      //make it that it dies if it leaves the world
       this.body.collideWorldBounds = true;
+      this.body.onWorldBounds = new Phaser.Signal()
+      this.body.onWorldBounds.add(function(){this.kill()},this);
 
       //do animation type crap
       if (directional)
@@ -114,7 +120,7 @@ module Scumbag
 
     update()
     {
-      if (!this.alive) return;
+      if (!(this.alive && this.inCamera)) return;
 
       //mana and health regen
       let newTime = this.game.time.time;

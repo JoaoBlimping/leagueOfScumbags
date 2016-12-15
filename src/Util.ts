@@ -14,6 +14,17 @@ module Scumbag
       else value.y = 0;
     }
 
+    /** takes either an angle in degrees or a direction like left and turns it into
+     * radians */
+    export function evaluateDirection(direction:string):number
+    {
+      if (direction == "up") return Math.PI / 2;
+      else if (direction == "left") return Math.PI;
+      else if (direction == "down") return -1 * Math.PI / 2;
+      else if (direction == "right") return 0;
+      else return parseInt(direction);
+    }
+
   };
 
 };

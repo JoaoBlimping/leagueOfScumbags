@@ -123,7 +123,7 @@ module Scumbag
       }
 
       //check collisions between the fighters and the level
-      this.game.physics.arcade.collide(this.fighters,this.collisionLayer);
+      this.game.physics.arcade.collide(this.fighters,this.collisionLayer,fighterHitLevel,null,this);
 
       //check collisions between bullets and the level and also fighters
       for (let child of this.bullets.children)
@@ -162,16 +162,14 @@ module Scumbag
 
       //if all fighters except the player are dead we leave the fight
       let stay = false;
+
+      //this.fighters.checkProperty
+
       for (let fighter of this.fighters.children)
       {
         if (fighter instanceof Fighter)
         {
-          if (!fighter.alive)
-          {
-            fighter.destroy();
-            this.fighters.remove(fighter);
-          }
-          else if (fighter.mandatory) stay = true;
+          if (fighter.alive && fighter.mandatory) stay = true;
         }
       }
 
@@ -223,6 +221,17 @@ module Scumbag
   }
 
 
+  function fighterHitLevel(actor:Actor,tile:Phaser.Tile)
+  {
+    if (tile.properties.damage > 0)
+    {
+      actor.damage(tile.properties.damage);
+      return false;
+    }
+    return true;
+  }
+
+
 
   /** this gets called when a bullet hits the level */
   function hitLevel(bullet:Bullet,tile:Phaser.Tile)
@@ -234,7 +243,6 @@ module Scumbag
       if (tile.properties.destructible == 1)
       {
         this.tilemap.removeTile(tile.x,tile.y,this.collisionLayer);
-        //tile.layer.dirty = true;
       }
       return false;
     }

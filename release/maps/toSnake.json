@@ -55,7 +55,7 @@
                  "name":"stinkSpirit2",
                  "properties":
                     {
-                     "pages":"@\nkey \"snakeActor\"\nimmovable true\nmoveOnSpot true\n$\nyield* say(\"John Fogle\",\"fogle_a\",\"An actual snake?\\nI thought it was just a cute name\");\nyield* ctx.startFight(\"snakeBattle\");\nsetSelfSwitch(\"dead\",true);\n\n\n@ss dead\n$"
+                     "pages":"@\nkey \"snakeActor\"\nimmovable true\nmoveOnSpot true\npath \"^left#500,^right#500\"\n$\nyield* say(\"John Fogle\",\"fogle_a\",\"An actual snake?\\nI thought it was just a cute name\");\nyield* ctx.startFight(\"snakeBattle\");\nsetSelfSwitch(\"dead\",true);\n\n@ss dead\n$"
                     },
                  "propertytypes":
                     {
@@ -65,8 +65,8 @@
                  "type":"actor",
                  "visible":true,
                  "width":48,
-                 "x":1051.17062634989,
-                 "y":513.474601690395
+                 "x":1047.66620157113,
+                 "y":513.085221159422
                 }],
          "opacity":1,
          "type":"objectgroup",

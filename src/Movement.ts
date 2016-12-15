@@ -2,17 +2,24 @@ module Scumbag
 {
   /** the different types of movement that there can be
    * Walk is for where they are walking to a region
-   * Wait is where they are doing nothing for a period of time */
+   * Wait is where they are doing nothing for a period of time
+   * Towards is where they walk toward a certain actor for a certain time
+   * angle is where they walk at a certain angle for a certain time */
   export enum MovementType
   {
     Walk,
-    Wait
+    Wait,
+    Towards,
+    Angle
   }
 
+  /** outputs to the console what movememnt type it is given */
   export function printMovementType(move:MovementType):void
   {
     if (move == MovementType.Walk) console.log("walk");
     else if (move == MovementType.Wait) console.log("wait");
+    else if (move == MovementType.Towards) console.log("towards");
+    else if (move == MovementType.Angle) console.log("angle");
   }
 
   /** a movememnt that can tell an actor to move about the place */
@@ -21,6 +28,8 @@ module Scumbag
     type:     MovementType;
     waitTime: number;
     region:   Region;
+    actorName:string;
+    angle:    number;
   }
 
   /** converts a string to a movement */
@@ -30,9 +39,23 @@ module Scumbag
     if (data.charAt(0) == '#')
     {
       return {type:MovementType.Wait,waitTime:parseInt(data.substring(1)),
-              region:regions[0]};
+              region:regions[0],actorName:"",angle:0};
     }
-    else return {type:MovementType.Walk,waitTime:0,region:regions[data]};
+    else if (data.charAt(0) == '&')
+    {
+      var tokens = data.substring(1).split('#');
+      return {type:MovementType.Towards,waitTime:parseInt(tokens[1]),
+              region:regions[0],actorName:tokens[0],angle:0};
+    }
+    else if (data.charAt(0) == '^')
+    {
+      var tokens = data.substring(1).split('#');
+      return {type:MovementType.Angle,waitTime:parseInt(tokens[1]),
+              region:regions[0],actorName:"",angle:Util.evaluateDirection(tokens[0])};
+    }
+
+    else return {type:MovementType.Walk,waitTime:0,region:regions[data],actorName:"",
+                 angle:0};
   }
 
 

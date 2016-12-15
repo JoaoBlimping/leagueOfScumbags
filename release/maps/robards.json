@@ -74,7 +74,7 @@
                  "name":"sign",
                  "properties":
                     {
-                     "pages":"@\nkey \"sign\"\nimmovable true\n$\n\nyield* say(\"John Fogle\",\"fogle_n\",\"This way to Snake Parade\");"
+                     "pages":"@\nkey \"sign\"\nimmovable true\n$\n\nyield* say(\"Sign\",\"sign_n\",\"East to Snake Parade\");"
                     },
                  "propertytypes":
                     {
@@ -112,7 +112,7 @@
                  "name":"phm",
                  "properties":
                     {
-                     "pages":"@\n$\n@s visitCicada\nkey \"phmActor\"\nimmovable true\n$\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Hahha you look a bit different to the rest of the fellows around here!\");\nyield* say(\"John Fogle\",\"fogle_n\",\"What are you hanging around here for?\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Don't tell anyone, but I've been tracking some godly energies, and they seemed to be here a second ago.\\nThey move about pretty quick though, or they get shut down\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Anyway, I've got to keep a low profile my dude.\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Yeah but..\");\nyield* say(\"Purple Hat Man\",\"phm_a\",\"...\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Is there a cicada involved?\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Yeah, why?\");\nyield* say(\"John Fogle\",\"fogle_n\",\"well\");\nyield* say(\"John Fogle\",\"fogle_n\",\"I hit my head here just a minute ago and then I saw a Cicada\");\nyield* say(\"Purple Hat Man\",\"phm_a\",\"Bloody hell. Do you think anybody knows?\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Kind of...\\nDavid knows\\nHe's a bit of a fuckhead\");\nyield* say(\"Purple Hat Man\",\"phm_a\",\"Well you're going to be in for quite a bit of attention unless you get the hell out of here.\\nI need to go right now, but meet me in Snake Parade very soon if you know what's good for you.\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Just take the eastern road to get there,\\nand by the way, hold onto this!\");\nyield* say(\"Gun\",\"gun_n\",\"Aquired Purple Machine Gun!\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"It's easy enough to use.\\nPress C to fire, D to use the nuclear bomb attachment, and CTRL to stay still.\\nHave fun!\");\nyield* wait([{\"name\":\"phm\",\"path\":\"besideRock,churchIntersection,snakeIntersection\"}]);\nsetSelfSwitch(\"left\",true);\n\n\n@ss left\n$"
+                     "pages":"@\n$\n@s visitCicada\nkey \"phmActor\"\nmoveSpeed 150\n$\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Hahha you look a bit different to the rest of the fellows around here!\");\nyield* say(\"John Fogle\",\"fogle_n\",\"What are you hanging around here for?\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Don't tell anyone, but I've been tracking some godly energies, and they seemed to be here a second ago.\\nThey move about pretty quick though, or they get shut down\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Anyway, I've got to keep a low profile my dude.\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Yeah but..\");\nyield* say(\"Purple Hat Man\",\"phm_a\",\"...\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Is there a cicada involved?\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Yeah, why?\");\nyield* say(\"John Fogle\",\"fogle_n\",\"well\");\nyield* say(\"John Fogle\",\"fogle_n\",\"I hit my head here just a minute ago and then I saw a Cicada\");\nyield* say(\"Purple Hat Man\",\"phm_a\",\"Bloody hell. Do you think anybody knows?\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Kind of...\\nDavid knows\\nHe's a bit of a fuckhead\");\nyield* say(\"Purple Hat Man\",\"phm_a\",\"Well you're going to be in for quite a bit of attention unless you get the hell out of here.\\nI need to go right now, but meet me in Snake Parade very soon if you know what's good for you.\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"Just take the eastern road to get there,\\nand by the way, hold onto this!\");\nyield* say(\"Gun\",\"gun_n\",\"Aquired Purple Machine Gun!\");\nyield* say(\"Purple Hat Man\",\"phm_n\",\"It's easy enough to use.\\nPress C to fire, D to use the nuclear bomb attachment, and CTRL to stay still.\\nHave fun!\");\nyield* wait([{\"name\":\"phm\",\"path\":\"besideRock,churchIntersection,snakeIntersection\"}]);\nsetSelfSwitch(\"left\",true);\n\n\n@ss left\n$"
                     },
                  "propertytypes":
                     {
@@ -162,6 +162,25 @@
                  "width":0,
                  "x":850,
                  "y":1187
+                }, 
+                {
+                 "height":24,
+                 "id":55,
+                 "name":"savePoint",
+                 "properties":
+                    {
+                     "pages":"@\n$\n@s visitCicada\nkey \"save\"\nmoveOnSpot true\n$\n\nctx.state.buildPause(\"Savepoint\",\"Save\",\"Don't Save\");\nvar value = yield;\nif (value == 1)\n{\n  ctx.saveGame();\n  ctx.playSound(\"trogDeath\");\n}"
+                    },
+                 "propertytypes":
+                    {
+                     "pages":"string"
+                    },
+                 "rotation":0,
+                 "type":"actor",
+                 "visible":true,
+                 "width":32,
+                 "x":943,
+                 "y":713
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -286,7 +305,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":55,
+ "nextobjectid":56,
  "orientation":"orthogonal",
  "properties":
     {

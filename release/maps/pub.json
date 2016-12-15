@@ -12,7 +12,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0, 124, 124, 124, 124, 0, 0, 125, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 181, 0, 0, 125, 136, 135, 137, 127, 0, 125, 136, 134, 134, 0, 0, 182, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 124, 124, 124, 124, 0, 0, 0, 0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0, 124, 124, 124, 124, 0, 0, 125, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 136, 135, 137, 127, 0, 125, 136, 134, 134, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 124, 124, 124, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":13,
          "name":"things",
          "opacity":1,
@@ -86,6 +86,44 @@
                  "width":23.3333333333333,
                  "x":127.333333333333,
                  "y":201.333333333333
+                }, 
+                {
+                 "height":17.3333,
+                 "id":13,
+                 "name":"Angroin",
+                 "properties":
+                    {
+                     "pages":"@\nkey \"hippie2\"\n$"
+                    },
+                 "propertytypes":
+                    {
+                     "pages":"string"
+                    },
+                 "rotation":0,
+                 "type":"actor",
+                 "visible":true,
+                 "width":21.3333,
+                 "x":499.33335,
+                 "y":167.33335
+                }, 
+                {
+                 "height":17.3333,
+                 "id":17,
+                 "name":"Dog",
+                 "properties":
+                    {
+                     "pages":"@\nkey \"hippie1\"\n$\nyield* say(\"Dog\",\"hippie1_n\",\"Have you ever noticed that all of these people who claim to be about freedom from the repressions are repressing too\\nand they only hate what repression that there is at the moment, and they want\\nto have their own style of repressions\");\nyield* say(\"Dog\",\"hippie1_n\",\"I think that it is some kind of trick to make sure anybody who cares enough the hate the repressions\\nends up being one of the repressions too, and they make sure to put a\\nstop to anybody who wants to be truly free from repressions like these ones say they are trying to be\");\nyield* say(\"Dog\",\"hippie1_n\",\"I need more branch water\");"
+                    },
+                 "propertytypes":
+                    {
+                     "pages":"string"
+                    },
+                 "rotation":0,
+                 "type":"actor",
+                 "visible":true,
+                 "width":21.3333,
+                 "x":250.33335,
+                 "y":169.33335
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -116,7 +154,7 @@
                  "name":"exit",
                  "properties":
                     {
-                     "script":"ctx.transport(\"map2\",\"pubExit\");"
+                     "script":"ctx.transport(\"snakeParade\",\"pubExit\");"
                     },
                  "propertytypes":
                     {
@@ -126,8 +164,8 @@
                  "type":"region",
                  "visible":true,
                  "width":64.5,
-                 "x":337.333333333333,
-                 "y":360
+                 "x":338.666666666666,
+                 "y":361.333333333333
                 }, 
                 {
                  "height":26.6666666666667,
@@ -183,6 +221,55 @@
                  "width":26.6666666666667,
                  "x":102,
                  "y":324
+                }, 
+                {
+                 "height":25.5,
+                 "id":12,
+                 "name":"bar",
+                 "properties":
+                    {
+                     "script":"if (ctx.getSwitch(\"talkedToBar\")) return;\n\nyield* say(\"Barkeeper Angroin\",\"hippie2_n\",\"What's up dude?\\nWould you like some branch water?\");\nyield* say(\"John Fogle\",\"fogle_n\",\"Yeah ok\");\nctx.setSwitch(\"talkedToBar\",true);"
+                    },
+                 "propertytypes":
+                    {
+                     "script":"string"
+                    },
+                 "rotation":0,
+                 "type":"region",
+                 "visible":true,
+                 "width":58,
+                 "x":485.5,
+                 "y":220.5
+                }, 
+                {
+                 "height":31,
+                 "id":15,
+                 "name":"pubOutsideEntrance",
+                 "properties":
+                    {
+                     "script":"ctx.transport(\"pubOutside\",\"entrance\");"
+                    },
+                 "propertytypes":
+                    {
+                     "script":"string"
+                    },
+                 "rotation":0,
+                 "type":"region",
+                 "visible":true,
+                 "width":70.3333333333333,
+                 "x":605,
+                 "y":62.3333333333333
+                }, 
+                {
+                 "height":26.3333333333333,
+                 "id":16,
+                 "name":"pubOutsideExit",
+                 "rotation":0,
+                 "type":"region",
+                 "visible":true,
+                 "width":39.6666666666667,
+                 "x":617.333333333333,
+                 "y":95.3333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -191,7 +278,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":12,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "properties":
     {
@@ -208,7 +295,7 @@
          "columns":10,
          "firstgid":1,
          "image":"..\/images\/inside.png",
-         "imageheight":960,
+         "imageheight":1152,
          "imagewidth":320,
          "margin":0,
          "name":"insideTiles",
@@ -234,7 +321,7 @@
                  "name":"water",
                  "tile":-1
                 }],
-         "tilecount":300,
+         "tilecount":360,
          "tileheight":32,
          "tiles":
             {
